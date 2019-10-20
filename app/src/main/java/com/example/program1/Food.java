@@ -6,21 +6,21 @@ import androidx.room.PrimaryKey;
 
 @Entity(tableName = "Food")
 public class Food {
-    @PrimaryKey
-    private String id;
+    @PrimaryKey(autoGenerate = true)
+    private int id;
     @ColumnInfo
     private String name;
     @ColumnInfo
     private int price;
 
-    public Food(String id, String name, int price)
+    public Food(int id, String name, int price)
     {
         this.id = id;
         this.name = name;
         this.price = price;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -32,7 +32,7 @@ public class Food {
         this.price = price;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 

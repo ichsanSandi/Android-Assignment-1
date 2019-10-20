@@ -23,7 +23,6 @@ public class AppTierModule extends AppCompatActivity {
         TextView textView;
         Intent intent = new Intent(this, SecondTierModule.class);
         textView = findViewById(R.id.testButton);
-        textView.setText("Haha hihi");
         startActivity(intent);
 
         EditText name = (EditText) findViewById(R.id.nameText);
