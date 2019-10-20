@@ -4,13 +4,28 @@
     android:layout_height="match_parent">
 
     <Button
-        android:id="@+id/backButton"
+        android:id="@+id/getDataButton"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        android:layout_marginTop="50mm"
-        android:layout_marginLeft="25mm"
-        android:text="back"
+        android:text="get data" />
+
+    <TextView
+        android:id="@+id/progressTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Progress" />
+
+    <ListView
+        android:id="@+id/myListView"
+        android:layout_width="match_parent"
+        android:layout_height="288dp" />
+
+    <Button
+        android:id="@+id/backButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="0dp"
         android:onClick="previousButton"
-    />
+        android:text="back" />
 
 </LinearLayout>

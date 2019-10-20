@@ -1,3 +1,24 @@
 <resources>
     <string name="app_name">iResT</string>
+    <string name="welcome_message">Hello, World!</string>
+    <string name="price_textView">Price</string>
+    <string name="itemName_textView">Name</string>
+    <string-array name="foods">
+        <item>rice</item>
+        <item>potato</item>
+        <item>fish</item>
+        <item>chicken</item>
+    </string-array>
+    <string-array name="prices">
+        <item>2000</item>
+        <item>6000</item>
+        <item>15000</item>
+        <item>18000</item>
+    </string-array>
+    <string-array name="descriptions">
+        <item>Usual rice</item>
+        <item>fresh from the farm</item>
+        <item>can be grilled or fried</item>
+        <item>like you</item>
+    </string-array>
 </resources>
