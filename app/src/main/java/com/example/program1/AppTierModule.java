@@ -9,6 +9,8 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.program1.view.HalamanMasuk;
+
 public class AppTierModule extends AppCompatActivity {
 
 
@@ -26,5 +28,12 @@ public class AppTierModule extends AppCompatActivity {
         startActivity(intent);
 
         EditText name = (EditText) findViewById(R.id.nameText);
+    }
+    public void loginAkun (View view)
+    {
+        Intent intent = new Intent(this, HalamanMasuk.class);
+
+        startActivity(intent);
+
     }
 }

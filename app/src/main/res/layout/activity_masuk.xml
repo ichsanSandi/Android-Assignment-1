@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/root_layout_masuk"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/style_gradasi_1"
+    tools:context=".view.HalamanMasuk">
+
+    <ImageView
+        android:id="@+id/imgBackground"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:scaleType="centerCrop" />
+
+    <ImageView
+        android:id="@+id/imgBackground2"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="#33ffffff"
+
+        android:scaleType="centerCrop" />
+
+    <TextView
+        android:id="@+id/teks_masuk"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/layout_masuk"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="32dp"
+        android:text=""
+        android:textColor="@color/warnaPutih"
+        android:textSize="32sp" />
+
+
+    <LinearLayout
+        android:id="@+id/layout_masuk"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_marginLeft="48dp"
+        android:layout_marginRight="48dp"
+        android:orientation="vertical">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            app:errorEnabled="true">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/input_masukEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Masukkan Email"
+                android:inputType="textEmailAddress"
+
+                android:textColor="@color/warnaPutih"
+                android:textColorHint="@color/warnaGray"
+                android:textSize="16sp" />
+
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            app:errorEnabled="true"
+            app:passwordToggleEnabled="true">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/input_masukPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Masukkan password"
+                android:inputType="textPassword"
+                android:textColor="@color/warnaPutih"
+                android:textColorHint="@color/warnaGray"
+                android:textSize="16sp" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:id="@+id/btn_masuk"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_below="@id/layout_masuk"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="40dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginRight="40dp"
+            android:background="@drawable/bg_oval_white"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:text="Masuk"
+            android:textAllCaps="false"
+            android:textColor="@color/warnaTerang"
+            android:textSize="24sp" />
+
+        <Button
+            android:id="@+id/btn_daftar"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="40dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginRight="40dp"
+            android:background="@drawable/bg_oval_white"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:text="Daftar"
+            android:textAllCaps="false"
+            android:textColor="@color/warnaTerang"
+            android:textSize="24sp" />
+
+
+    </LinearLayout>
+
+
+
+
+
+
+</RelativeLayout>
