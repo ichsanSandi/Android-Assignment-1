@@ -1,19 +1,20 @@
 package com.example.program1;
 
-import androidx.room.ColumnInfo;
-import androidx.room.Entity;
-import androidx.room.PrimaryKey;
+import androidx.annotation.NonNull;
 
-@Entity(tableName = "Food")
 public class Food {
-    @PrimaryKey(autoGenerate = true)
-    private int id;
-    @ColumnInfo
-    private String name;
-    @ColumnInfo
-    private int price;
 
-    public Food(int id, String name, int price)
+    private int id;
+    private String name;
+    private int price;
+    private String key;
+
+    public Food()
+    {
+
+    }
+
+    public Food(String name, int id, int price)
     {
         this.id = id;
         this.name = name;
@@ -42,5 +43,20 @@ public class Food {
 
     public int getPrice() {
         return price;
+    }
+
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
+    }
+
+    @NonNull
+    @Override
+    public String toString() {
+        return " " + name + "\n" +
+                " " + price + "\n";
     }
 }

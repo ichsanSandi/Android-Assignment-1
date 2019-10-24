@@ -23,9 +23,9 @@ public class AppTierModule extends AppCompatActivity {
     public void sendMessage (View view)
     {
         TextView textView;
-        Intent intent = new Intent(this, SecondTierModule.class);
+//        Intent intent = new Intent(this, SecondTierModule.class);
         textView = findViewById(R.id.testButton);
-        startActivity(intent);
+        startActivity(SecondTierModule.getActiveIntent(AppTierModule.this));
 
         EditText name = (EditText) findViewById(R.id.nameText);
     }
