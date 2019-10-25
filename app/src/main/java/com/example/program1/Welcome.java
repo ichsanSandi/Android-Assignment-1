@@ -28,7 +28,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.internal.Util;
 
-//import com.example.myapplication.view.Perusahaan.HomePerusahaan;
+//import com.example.program1.view.Perusahaan.HomePerusahaan;
 
 public class Welcome extends AppCompatActivity {
 
@@ -60,7 +60,7 @@ public class Welcome extends AppCompatActivity {
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        SharedPreferences pref = getApplicationContext().getSharedPreferences("com.example.myapplication", 0);
+                        SharedPreferences pref = getApplicationContext().getSharedPreferences("com.example.program1", 0);
                         if (pref.getBoolean("first_launch", false)) {
                             pref.edit().putBoolean("first_lauch", false).commit();
                             startActivity(new Intent(Welcome.this, HalamanAwal.class));

@@ -1,6 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:id="@+id/root_layout_admin">
+    <Button
+        android:id="@+id/btn_membuat_makanan"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_below="@id/layout_masuk"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginRight="40dp"
+        android:background="@drawable/bg_oval_white"
+        android:foreground="?android:attr/selectableItemBackground"
+        android:text="Buat Makanan"
+        android:textAllCaps="false"
+        android:textColor="@color/warnaTerang"
+        android:textSize="24sp" />
 
 </LinearLayout>

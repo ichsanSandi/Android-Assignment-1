@@ -1,22 +1,16 @@
 package com.example.program1.view;
 
-import android.annotation.SuppressLint;
+
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.BitmapFactory;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
-import android.view.View.OnTouchListener;
-import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,6 +22,7 @@ import com.example.program1.R;
 import com.example.program1.Welcome;
 import com.example.program1.model.Pengguna;
 import com.example.program1.view.admin.HomeAdmin;
+import com.example.program1.view.admin.MemasukanMakanan;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.Snackbar;
@@ -41,42 +36,24 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-//importan gambar bergerak
-
 public class HalamanMasuk extends AppCompatActivity {
 
     private static String TAG = "HalamanMasuk";
-
     private TextInputEditText email, password;
     private Button masuk;
     private TextView daftar;
-    private Button tutorial;
-    private Button paham;
     private String strEmail, strPassword;
-
-
-
-
-
     private FirebaseAuth auth;
     private FirebaseUser user;
     private DatabaseReference dbRef;
-
-
-
-    private int xDelta;
-    private int yDelta;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_masuk);
 
-
         auth = FirebaseAuth.getInstance();
-
         dbRef = FirebaseDatabase.getInstance().getReference();
-
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
         email = (TextInputEditText) findViewById(R.id.input_masukEmail);
         password = (TextInputEditText) findViewById(R.id.input_masukPassword);
@@ -126,7 +103,7 @@ public class HalamanMasuk extends AppCompatActivity {
 
                                         @Override
                                         public void onCancelled(@NonNull DatabaseError databaseError) {
-                                            Toast.makeText(HalamanMasuk.this, "Username Atau Email Salah", Toast.LENGTH_LONG).show();
+                                            Toast.makeText(HalamanMasuk.this, "hargaMakanan Atau Email Salah", Toast.LENGTH_LONG).show();
                                             Log.w(TAG, "Login ERROR : " + databaseError.getDetails());
                                         }
                                     });
@@ -156,7 +133,10 @@ public class HalamanMasuk extends AppCompatActivity {
     private void cekLevel(String level) {
         switch (level) {
             case Pengguna.Admin:
-                startActivity(new Intent(HalamanMasuk.this, HomeAdmin.class));
+                startActivity(new Intent(HalamanMasuk.this, MemasukanMakanan.class));
+                break;
+            case Pengguna.Konsumen:
+                startActivity(new Intent(HalamanMasuk.this, HalamanMasuk.class));
                 break;
             default:
                 Toast.makeText(HalamanMasuk.this, "Tidak Diketahui", Toast.LENGTH_LONG).show();
@@ -171,7 +151,7 @@ public class HalamanMasuk extends AppCompatActivity {
     public void onBackPressed() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setCancelable(false);
-        builder.setMessage("Tutup aplikasi BUANG.IN?");
+        builder.setMessage("Tutup aplikasi Resto.in?");
         builder.setPositiveButton("Ya", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -199,53 +179,6 @@ public class HalamanMasuk extends AppCompatActivity {
         NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
         return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
-    //ontouch gambar bergerak
 
-    private OnTouchListener onTouchListener() {
-        return new OnTouchListener() {
-
-            @SuppressLint("ClickableViewAccessibility")
-            @Override
-            public boolean onTouch(View view, MotionEvent event) {
-
-
-
-
-
-                final int x = (int) event.getRawX();
-                final int y = (int) event.getRawY();
-
-                switch (event.getAction() & MotionEvent.ACTION_MASK) {
-
-                    case MotionEvent.ACTION_DOWN:
-                        RelativeLayout.LayoutParams lParams = (RelativeLayout.LayoutParams)
-                                view.getLayoutParams();
-
-                        xDelta = x - lParams.leftMargin;
-                        yDelta = y - lParams.topMargin;
-                        break;
-
-                    case MotionEvent.ACTION_UP:
-                        Toast.makeText(HalamanMasuk.this,
-                                "HALO AKU TONG! AKU BISA DIGESER LOH", Toast.LENGTH_SHORT)
-                                .show();
-                        break;
-
-                    case MotionEvent.ACTION_MOVE:
-                        RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) view
-                                .getLayoutParams();
-                        layoutParams.leftMargin = x - xDelta;
-                        layoutParams.topMargin = y - yDelta;
-                        layoutParams.rightMargin = 0;
-                        layoutParams.bottomMargin = 0;
-                        view.setLayoutParams(layoutParams);
-                        break;
-                }
-
-
-                return true;
-            }
-        };
-    }
 }
 

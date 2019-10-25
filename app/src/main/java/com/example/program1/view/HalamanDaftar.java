@@ -138,9 +138,7 @@ public class HalamanDaftar extends AppCompatActivity {
 
                                         Toast.makeText(HalamanDaftar.this, "email : " + email, Toast.LENGTH_LONG).show();
                                         Pengguna daftar = new Pengguna(uid, strNama, email, Pengguna.Konsumen,strPassword);
-//                                        ModelAdmin dataPengajuan= new ModelAdmin();
                                         dbRef.child("pengguna").child(uid).push().setValue(daftar);
-//                                        dbRef.child("dataAdmin").child(uid).setValue(dataPengajuan);
 
                                         Toast.makeText(HalamanDaftar.this, "Pendaftaran Berhasil", Toast.LENGTH_LONG).show();
                                         startActivity(new Intent(HalamanDaftar.this, HalamanMasuk.class));
