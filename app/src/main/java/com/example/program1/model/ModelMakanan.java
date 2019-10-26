@@ -58,5 +58,8 @@ public class ModelMakanan {
         this.fotoMakanan = fotoMakanan;
     }
 
+    public void setKey(String key) {
+        this.key = key;
+    }
 
 }

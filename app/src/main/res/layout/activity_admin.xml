@@ -18,5 +18,23 @@
         android:textAllCaps="false"
         android:textColor="@color/warnaTerang"
         android:textSize="24sp" />
+    <Button
+        android:id="@+id/btn_memasukan_makanan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Memasukan Makanan"/>
+
+
+    <Button
+        android:id="@+id/btn_memasukan_minuman"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Memasukan Minuman"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/foodRecyclerViewAdmin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="vertical"/>
 
 </LinearLayout>

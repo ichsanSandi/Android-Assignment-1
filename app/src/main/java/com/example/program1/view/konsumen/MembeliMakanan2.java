@@ -1,4 +1,4 @@
-package com.example.program1.view.admin;
+package com.example.program1.view.konsumen;
 
 
 import android.Manifest;
@@ -59,12 +59,12 @@ import com.google.firebase.storage.UploadTask;
 import java.io.ByteArrayOutputStream;
 import com.squareup.picasso.Picasso;
 
-public class MemasukanMakanan extends AppCompatActivity {
+public class MembeliMakanan2 extends AppCompatActivity {
 
     public static final int WRITE_EXTERNAL = 101;
     public static final int REQUEST_IMAGE_CAPTURE = 102;
 
-    private final String TAG = MemasukanMakanan.class.getSimpleName();
+    private final String TAG = MembeliMakanan2.class.getSimpleName();
 
     private EditText namaMakanan, hargaMakanan;
     private ImageView fotoMakanan;
@@ -90,7 +90,7 @@ public class MemasukanMakanan extends AppCompatActivity {
 
     public static final String DIR_FOTO_MAKANAN = "FOTO_MAKANAN";
 
-    public MemasukanMakanan() {
+    public MembeliMakanan2() {
 
     }
 

@@ -23,6 +23,8 @@ import com.example.program1.Welcome;
 import com.example.program1.model.Pengguna;
 import com.example.program1.view.admin.HomeAdmin;
 import com.example.program1.view.admin.MemasukanMakanan;
+import com.example.program1.view.konsumen.HomeKonsumen;
+import com.example.program1.view.konsumen.MembeliMakanan;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.Snackbar;
@@ -133,10 +135,10 @@ public class HalamanMasuk extends AppCompatActivity {
     private void cekLevel(String level) {
         switch (level) {
             case Pengguna.Admin:
-                startActivity(new Intent(HalamanMasuk.this, MemasukanMakanan.class));
+                startActivity(new Intent(HalamanMasuk.this, HomeAdmin.class));
                 break;
             case Pengguna.Konsumen:
-                startActivity(new Intent(HalamanMasuk.this, HalamanMasuk.class));
+                startActivity(new Intent(HalamanMasuk.this, HomeKonsumen.class));
                 break;
             default:
                 Toast.makeText(HalamanMasuk.this, "Tidak Diketahui", Toast.LENGTH_LONG).show();

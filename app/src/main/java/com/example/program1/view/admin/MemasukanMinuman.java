@@ -35,7 +35,7 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import com.example.program1.R;
-import com.example.program1.model.ModelMakanan;
+import com.example.program1.model.ModelMinuman;
 import com.example.program1.model.Pengguna;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -59,15 +59,15 @@ import com.google.firebase.storage.UploadTask;
 import java.io.ByteArrayOutputStream;
 import com.squareup.picasso.Picasso;
 
-public class MemasukanMakanan extends AppCompatActivity {
+public class MemasukanMinuman extends AppCompatActivity {
 
     public static final int WRITE_EXTERNAL = 101;
     public static final int REQUEST_IMAGE_CAPTURE = 102;
 
-    private final String TAG = MemasukanMakanan.class.getSimpleName();
+    private final String TAG = MemasukanMinuman.class.getSimpleName();
 
-    private EditText namaMakanan, hargaMakanan;
-    private ImageView fotoMakanan;
+    private EditText namaMinuman, hargaMinuman;
+    private ImageView fotoMinuman;
     private Button tambah, batal;
 
     //
@@ -88,9 +88,9 @@ public class MemasukanMakanan extends AppCompatActivity {
     private String uid;
     private String urlDownload;
 
-    public static final String DIR_FOTO_MAKANAN = "FOTO_MAKANAN";
+    public static final String DIR_FOTO_Minuman = "FOTO_Minuman";
 
-    public MemasukanMakanan() {
+    public MemasukanMinuman() {
 
     }
 
@@ -99,14 +99,14 @@ public class MemasukanMakanan extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_memasukan_makanan);
+        setContentView(R.layout.activity_memasukan_minuman);
         auth = FirebaseAuth.getInstance();
         dbRef = FirebaseDatabase.getInstance().getReference();
         mStorageRef = FirebaseStorage.getInstance().getReference();
 
-        namaMakanan = findViewById(R.id.input_namaMakanan);
-        hargaMakanan = findViewById(R.id.input_hargaMakanan);
-        fotoMakanan = findViewById(R.id.foto_admin_fotoMakanan);
+        namaMinuman = findViewById(R.id.input_namaMinuman);
+        hargaMinuman = findViewById(R.id.input_hargaMinuman);
+        fotoMinuman = findViewById(R.id.foto_admin_fotoMinuman);
 //
 
         mProgressBar = findViewById(R.id.progress_bar);
@@ -114,7 +114,7 @@ public class MemasukanMakanan extends AppCompatActivity {
         batal = findViewById(R.id.btn_batal);
         tambah = findViewById(R.id.btn_tambah);
 //
-        fotoMakanan.setOnClickListener(new View.OnClickListener() {
+        fotoMinuman.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 openFileChooser();
@@ -127,14 +127,14 @@ public class MemasukanMakanan extends AppCompatActivity {
             @Override
             public void onClick(View v)
             {
-                final String strnamaMakanan = namaMakanan.getText().toString().trim();
-                final String strhargaMakanan = hargaMakanan.getText().toString().trim();
+                final String strnamaMinuman = namaMinuman.getText().toString().trim();
+                final String strhargaMinuman = hargaMinuman.getText().toString().trim();
                 boolean kirim = false;
 
-                if (strnamaMakanan.isEmpty())
+                if (strnamaMinuman.isEmpty())
                 {
-                    namaMakanan.requestFocus();
-                    namaMakanan.setError("Isi terlebih dahulu");
+                    namaMinuman.requestFocus();
+                    namaMinuman.setError("Isi terlebih dahulu");
                     kirim = false;
                 }
                 else
@@ -142,10 +142,10 @@ public class MemasukanMakanan extends AppCompatActivity {
                     kirim = true;
                 }
 
-                if (strhargaMakanan.isEmpty())
+                if (strhargaMinuman.isEmpty())
                 {
-                    hargaMakanan.requestFocus();
-                    hargaMakanan.setError("Isi terlebih dahulu");
+                    hargaMinuman.requestFocus();
+                    hargaMinuman.setError("Isi terlebih dahulu");
                     kirim = false;
                 }
                 else
@@ -176,21 +176,21 @@ public class MemasukanMakanan extends AppCompatActivity {
                                     String urlDownload = task.getResult().toString();
                                     System.out.println(mImageUri.toString());
                                     //                            String uploadId = dbRef.push().getKey();
-                                    ModelMakanan dataMakanan = new ModelMakanan(uid, strnamaMakanan, strhargaMakanan, urlDownload);
+                                    ModelMinuman dataMinuman = new ModelMinuman(uid, strnamaMinuman, strhargaMinuman, urlDownload);
                                     System.out.println(urlDownload + "coba2");
-                                    final DatabaseReference pushId = dbRef.child("foods");
-                                    pushId.push().setValue(dataMakanan);
-                                    DatabaseReference getId = FirebaseDatabase.getInstance().getReference().child("foods");
+                                    final DatabaseReference pushId = dbRef.child("drinks");
+                                    pushId.push().setValue(dataMinuman);
+                                    DatabaseReference getId = FirebaseDatabase.getInstance().getReference().child("drinks");
                                     getId.addValueEventListener(new ValueEventListener() {
                                         @Override
                                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                             for (DataSnapshot perData : dataSnapshot.getChildren()) {
-                                                ModelMakanan model = perData.getValue(ModelMakanan.class);
-                                                if (model.getNamaMakanan() != null) {
-                                                    if (model.getNamaMakanan().equalsIgnoreCase(strnamaMakanan)) {
-                                                        System.out.println(model.getNamaMakanan());
+                                                ModelMinuman model = perData.getValue(ModelMinuman.class);
+                                                if (model.getNamaMinuman() != null) {
+                                                    if (model.getNamaMinuman().equalsIgnoreCase(strnamaMinuman)) {
+                                                        System.out.println(model.getNamaMinuman());
                                                         String key = perData.getKey();
-                                                        pushId.child(key).child("idMakanan").setValue(key);
+                                                        pushId.child(key).child("idMinuman").setValue(key);
                                                     }
                                                 }
                                             }
@@ -225,17 +225,17 @@ public class MemasukanMakanan extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(getApplicationContext());
-                builder.setTitle("ModelMakanan");
+                builder.setTitle("ModelMinuman");
                 builder.setMessage("Batal menambahkan admin?");
                 builder.setCancelable(false);
                 builder.setPositiveButton("Ya", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.cancel();
-                        namaMakanan.setText("");
-                        hargaMakanan.setText("");
+                        namaMinuman.setText("");
+                        hargaMinuman.setText("");
 
-                        fotoMakanan.setImageResource(R.drawable.bg_img_voucher);
+                        fotoMinuman.setImageResource(R.drawable.bg_img_voucher);
                     }
                 });
             }
@@ -258,7 +258,7 @@ public class MemasukanMakanan extends AppCompatActivity {
                 && data != null && data.getData() != null) {
             mImageUri = data.getData();
 
-            Picasso.with(this).load(mImageUri).into(fotoMakanan);
+            Picasso.with(this).load(mImageUri).into(fotoMinuman);
         }
     }
 
