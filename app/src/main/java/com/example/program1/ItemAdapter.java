@@ -1,9 +1,11 @@
 package com.example.program1;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -39,12 +41,14 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
       TextView name;
       TextView price;
       TextView description;
+      Button orderButton;
 
       public ViewHolder(@NonNull View itemView) {
         super(itemView);
         name = (TextView) itemView.findViewById(R.id.nameTextView);
         price = (TextView) itemView.findViewById(R.id.priceTextView);
         description = (TextView) itemView.findViewById(R.id.descriptionTextView);
+        orderButton = (Button) itemView.findViewById(R.id.orderButton);
       }
     }
 
@@ -60,11 +64,21 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
       final String name = foodArrayList.get(position).getName();
       final String price = String.valueOf(foodArrayList.get(position).getPrice());
       final String description = String.valueOf(foodArrayList.get(position).getId());
+      final Button orderButton = viewHolder.orderButton;
 
       viewHolder.name.setText(name);
       viewHolder.description.setText(description);
       viewHolder.price.setText(price);
 
+      orderButton.setOnClickListener(new View.OnClickListener() {
+          @Override
+          public void onClick(View v) {
+              AlertDialog.Builder alertDialog = new AlertDialog.Builder(c);
+              alertDialog.setMessage("Tested");
+              AlertDialog alert11 = alertDialog.create();
+              alert11.show();
+          }
+      });
     }
 
     @Override
