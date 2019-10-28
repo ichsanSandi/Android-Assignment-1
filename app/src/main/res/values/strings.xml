@@ -3,6 +3,7 @@
     <string name="welcome_message">Hello, World!</string>
     <string name="price_textView">Price</string>
     <string name="itemName_textView">Name</string>
+    <string name="amounText">Banyaknya</string>
     <string-array name="foods">
         <item>rice</item>
         <item>potato</item>

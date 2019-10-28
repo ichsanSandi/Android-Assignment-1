@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -42,6 +43,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
       TextView price;
       TextView description;
       Button orderButton;
+      EditText orderAmount;
 
       public ViewHolder(@NonNull View itemView) {
         super(itemView);
@@ -49,6 +51,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
         price = (TextView) itemView.findViewById(R.id.priceTextView);
         description = (TextView) itemView.findViewById(R.id.descriptionTextView);
         orderButton = (Button) itemView.findViewById(R.id.orderButton);
+        orderAmount = (EditText) itemView.findViewById(R.id.orderAmount);
       }
     }
 
@@ -59,13 +62,15 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
       return viewHolder;
     }
 
-    public void onBindViewHolder(ViewHolder viewHolder, final int position)
+    public void onBindViewHolder(final ViewHolder viewHolder, final int position)
     {
       final String name = foodArrayList.get(position).getName();
       final String price = String.valueOf(foodArrayList.get(position).getPrice());
       final String description = String.valueOf(foodArrayList.get(position).getId());
       final Button orderButton = viewHolder.orderButton;
+      final String orderAmountText = viewHolder.orderAmount.getText().toString();
 
+//      viewHolder.orderAmount.setText(orderAmountText);
       viewHolder.name.setText(name);
       viewHolder.description.setText(description);
       viewHolder.price.setText(price);
@@ -74,7 +79,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
           @Override
           public void onClick(View v) {
               AlertDialog.Builder alertDialog = new AlertDialog.Builder(c);
-              alertDialog.setMessage("Tested");
+              alertDialog.setMessage("Total Order: " + (Integer.valueOf(price) * Integer.valueOf(viewHolder.orderAmount.getText().toString())) );
               AlertDialog alert11 = alertDialog.create();
               alert11.show();
           }
@@ -87,7 +92,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
       return foodArrayList.size();
     }
 
-//  @Override
+  //  @Override
 //    public View getView(int i, View view, ViewGroup viewGroup) {
 //        View v = mInflator.inflate(R.layout.item_layout, null);
 //        TextView nameTextView = (TextView) v.findViewById(R.id.nameTextView);
