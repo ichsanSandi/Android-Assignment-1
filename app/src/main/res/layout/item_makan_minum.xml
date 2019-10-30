@@ -31,20 +31,20 @@
                     android:layout_width="64dp"
                     android:layout_height="wrap_content"
                     android:text="Nama"
-                    android:textSize="16sp" />
+                    android:textSize="20sp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text=":"
-                    android:textSize="16sp" />
+                    android:textSize="20sp" />
 
                 <TextView
                     android:id="@+id/melihat_nama_makan_minum"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="8dp"
-                    android:textSize="16sp" />
+                    android:textSize="20sp" />
             </LinearLayout>
 
             <LinearLayout
@@ -56,22 +56,50 @@
                 android:layout_width="64dp"
                 android:layout_height="wrap_content"
                 android:text="Harga"
-                android:textSize="16sp" />
+                android:textSize="20sp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text=":"
-                android:textSize="16sp" />
+                android:textSize="20sp" />
 
             <TextView
                 android:id="@+id/melihat_harga_makan_minum"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="8dp"
-                android:textSize="16sp" />
-        </LinearLayout>
+                android:textSize="20sp" />
+            </LinearLayout>
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/amountText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="20dp"
+                    android:text="@string/amounText" />
+                <EditText
+                    android:id="@+id/orderAmount"
+                    android:layout_width="70dp"
+                    android:layout_height="wrap_content"
+                    android:ems="20"
+                    android:inputType="number"
+                    android:textSize="20dp" />
+
+                <Button
+                    android:id="@+id/orderButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Order"
+                    android:textSize="20dp" />
+
+
+            </LinearLayout>
 
 
 

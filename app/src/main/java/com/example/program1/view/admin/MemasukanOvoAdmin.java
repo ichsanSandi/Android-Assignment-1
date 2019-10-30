@@ -1,48 +1,24 @@
-package com.example.program1.view.konsumen;
+package com.example.program1.view.admin;
 
 
-import android.Manifest;
 import android.app.AlertDialog;
-import android.content.ContentResolver;
-import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
-import android.provider.MediaStore;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.webkit.MimeTypeMap;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-import androidx.fragment.app.Fragment;
 
 import com.example.program1.R;
-import com.example.program1.model.ModelMakanan;
 import com.example.program1.model.Pengguna;
-import com.google.android.gms.tasks.Continuation;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -51,21 +27,16 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.StorageTask;
-import com.google.firebase.storage.UploadTask;
 
-import java.io.ByteArrayOutputStream;
-import com.squareup.picasso.Picasso;
-
-public class MemasukanOvo extends AppCompatActivity {
+public class MemasukanOvoAdmin extends AppCompatActivity {
 
 
-    private final String TAG = MemasukanOvo.class.getSimpleName();
+    private final String TAG = MemasukanOvoAdmin.class.getSimpleName();
 
     private EditText poin, namaPengguna;
-   private Button tambah, batal;
+    private Button tambah, batal;
 
     //
     private static final int PICK_IMAGE_REQUEST = 1;
@@ -87,7 +58,7 @@ public class MemasukanOvo extends AppCompatActivity {
 
     public static final String DIR_FOTO_Makanan = "FOTO_Makanan";
 
-    public MemasukanOvo() {
+    public MemasukanOvoAdmin() {
 
     }
 
@@ -104,8 +75,8 @@ public class MemasukanOvo extends AppCompatActivity {
         dbRef = FirebaseDatabase.getInstance().getReference();
         mStorageRef = FirebaseStorage.getInstance().getReference();
 
+        namaPengguna = findViewById(R.id.input_pengguna_ovo);
         poin = findViewById(R.id.input_poinOvo);
-        poin = findViewById(R.id.input_pengguna_ovo);
 
         batal = findViewById(R.id.btn_batal);
         tambah = findViewById(R.id.btn_tambah);
@@ -140,7 +111,6 @@ public class MemasukanOvo extends AppCompatActivity {
                 } else {
                     kirim = true;
                 }
-
                 if (kirim) {
                     DatabaseReference getId = FirebaseDatabase.getInstance().getReference().child("pengguna");
                     getId.addValueEventListener(new ValueEventListener() {
@@ -149,11 +119,10 @@ public class MemasukanOvo extends AppCompatActivity {
                             for (DataSnapshot perData : dataSnapshot.getChildren()) {
                                 Pengguna model = perData.getValue(Pengguna.class);
                                 if (model.getNama().equalsIgnoreCase(strNamaPengguna) ) {
-                                    dbRef.child("pengguna").child(model.getId()).getRef().child("poin").setValue(strPoin).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    dbRef.child("pengguna").child(model.getId()).child("ovo").setValue(strPoin).addOnSuccessListener(new OnSuccessListener<Void>() {
                                         @Override
                                         public void onSuccess(Void aVoid) {
                                             Toast.makeText(getApplicationContext(), "Data Poin Ditambah", Toast.LENGTH_LONG).show();
-
                                         }
                                     });
                                 }

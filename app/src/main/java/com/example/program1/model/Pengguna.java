@@ -15,17 +15,19 @@ public class Pengguna {
     private String email;
     private String level;
     private String password;
+    private String ovo;
 
     public Pengguna() {
-        // Konstruktor default dibutuhkan untuk dapat dipanggil oleh DataSnapshot.getValue(User.class)
+
     }
 
-    public Pengguna(String id, String nama, String email, String level, String password) {
+    public Pengguna(String id, String nama, String email, String level, String password, String ovo) {
         this.id = id;
         this.nama = nama;
         this.email = email;
         this.level = level;
         this.password = password;
+        this.ovo = ovo;
 
     }
 
@@ -67,6 +69,13 @@ public class Pengguna {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+    public String getOvo() {
+        return ovo;
+    }
+
+    public void setOvo(String ovo) {
+        this.ovo = ovo;
     }
 
 }

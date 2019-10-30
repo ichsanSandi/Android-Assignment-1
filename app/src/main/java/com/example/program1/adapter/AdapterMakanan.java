@@ -61,7 +61,7 @@ public class AdapterMakanan extends RecyclerView.Adapter<AdapterMakanan.ViewHold
             final String name1 = model.getNamaMakanan();
             final String price1 = model.getHargaMakanan();
 
-            Glide.with(context).load(model.getFotoMakanan()).into(foto);
+//            Glide.with(context).load(model.getFotoMakanan()).into(foto);
             name.setText(name1);
             price.setText(price1);
             detail.setOnClickListener(new View.OnClickListener() {

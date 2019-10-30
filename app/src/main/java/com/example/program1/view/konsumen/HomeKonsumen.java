@@ -31,7 +31,7 @@ public class HomeKonsumen extends AppCompatActivity
 
         final FragmentTransaction ft = getFragmentManager().beginTransaction();
 
-        butMakanan = findViewById(R.id.btn_membuat_makanan);
+        butMakanan = findViewById(R.id.konsumen_beli_makanan);
         fm = getSupportFragmentManager();
 
     }

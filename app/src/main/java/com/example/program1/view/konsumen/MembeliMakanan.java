@@ -15,8 +15,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.program1.Food;
 import com.example.program1.ItemAdapter;
 import com.example.program1.R;
+import com.example.program1.adapter.AdapterKonsumen;
 import com.example.program1.adapter.AdapterMakanan;
-import com.example.program1.model.ModelMakanan;
+import com.example.program1.Food;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -32,7 +33,8 @@ public class MembeliMakanan extends AppCompatActivity {
     RecyclerView myRecyclerView;
     RecyclerView.Adapter myRecyclerViewAdapter;
     RecyclerView.LayoutManager myRecyclerViewLayoutMgr;
-    ArrayList<ModelMakanan> foodArrayList;
+    ArrayList<Food> foodArrayList;
+    Button but_pesan;
 
 
     @Override
@@ -44,7 +46,7 @@ public class MembeliMakanan extends AppCompatActivity {
         myRecyclerView.setHasFixedSize(true);
         myRecyclerViewLayoutMgr = new LinearLayoutManager(this);
         myRecyclerView.setLayoutManager(myRecyclerViewLayoutMgr);
-
+        but_pesan = findViewById(R.id.btn_pesan_makanan);
         databaseReference = FirebaseDatabase.getInstance().getReference();
         databaseReference.child("foods").addValueEventListener(new ValueEventListener() {
             @Override
@@ -54,19 +56,21 @@ public class MembeliMakanan extends AppCompatActivity {
                 for (DataSnapshot dataSnapshotIter : dataSnapshot.getChildren())
                 {
                     System.out.println(dataSnapshotIter.getValue());
-                    ModelMakanan makanan = (ModelMakanan) dataSnapshotIter.getValue(ModelMakanan.class);
+                    Food makanan = (Food) dataSnapshotIter.getValue(Food.class);
                     makanan.setKey(dataSnapshotIter.getKey());
                     foodArrayList.add(makanan);
                 }
-                myRecyclerViewAdapter = new AdapterMakanan(foodArrayList, MembeliMakanan.this, new AdapterMakanan.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(ModelMakanan model) {
-                        Intent data = new Intent(getApplicationContext(), MembeliMakanan.class);
-                        data.putExtra("namaMakanan", model.getNamaMakanan());
-                        data.putExtra("hargaMakanan", model.getHargaMakanan());
-                        getApplicationContext().startActivity(data);
-                    }
-                });
+//                myRecyclerViewAdapter = new AdapterMakanan(foodArrayList, MembeliMakanan.this, new AdapterMakanan.OnItemClickListener() {
+//                    @Override
+//                    public void onItemClick(ModelMakanan model) {
+//                        Intent data = new Intent(getApplicationContext(), MembeliMakanan2.class);
+//                        data.putExtra("namaMakanan", model.getNamaMakanan());
+//                        data.putExtra("hargaMakanan", model.getHargaMakanan());
+//                        getApplicationContext().startActivity(data);
+//                    }
+//                });
+                myRecyclerViewAdapter = new AdapterKonsumen(foodArrayList, MembeliMakanan.this);
+
                 myRecyclerView.setAdapter(myRecyclerViewAdapter);
             }
 
@@ -76,14 +80,13 @@ public class MembeliMakanan extends AppCompatActivity {
             }
         });
 
-
-        Button backButton = (Button) findViewById(R.id.backButton);
-        backButton.setOnClickListener(new View.OnClickListener() {
+        but_pesan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onBackPressed();
+                startActivity(new Intent(MembeliMakanan.this, MembeliMakanan2.class));
             }
         });
+
 
 //
     }

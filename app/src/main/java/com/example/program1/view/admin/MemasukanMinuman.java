@@ -157,7 +157,8 @@ public class MemasukanMinuman extends AppCompatActivity {
                 {
                     if (mImageUri != null)
                     {
-                        final StorageReference fileReference = mStorageRef.child(System.currentTimeMillis() + "." + getFileExtension(mImageUri));
+//                        final StorageReference fileReference = mStorageRef.child(System.currentTimeMillis() + "." + getFileExtension(mImageUri));
+                        final StorageReference fileReference = FirebaseStorage.getInstance().getReference("fotoMakananMinuman").child(uriFoto.getLastPathSegment());
 
                         UploadTask uploadFoto = fileReference.putFile(mImageUri);
 

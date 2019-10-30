@@ -36,9 +36,10 @@
         <activity android:name=".HalamanAwal" />
         <activity android:name=".view.HalamanMasuk" />
         <activity android:name=".view.HalamanDaftar" />
-        <activity android:name=".view.admin.MemasukanMakanan"/>
         <activity android:name=".view.admin.HomeAdmin"/>
+        <activity android:name=".view.admin.MemasukanMakanan"/>
         <activity android:name=".view.admin.MemasukanMinuman"/>
+        <activity android:name=".view.admin.MemasukanOvoAdmin"/>
         <activity android:name=".view.konsumen.HomeKonsumen"/>
         <activity android:name=".view.konsumen.MembeliMakanan"/>
         <activity android:name=".view.konsumen.MembeliMakanan2"/>
