@@ -23,6 +23,7 @@ import com.example.program1.Welcome;
 import com.example.program1.model.Pengguna;
 import com.example.program1.view.admin.HomeAdmin;
 import com.example.program1.view.admin.MemasukanMakanan;
+import com.example.program1.view.koki.HomeKoki;
 import com.example.program1.view.konsumen.HomeKonsumen;
 import com.example.program1.view.konsumen.MembeliMakanan;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -139,6 +140,9 @@ public class HalamanMasuk extends AppCompatActivity {
                 break;
             case Pengguna.Konsumen:
                 startActivity(new Intent(HalamanMasuk.this, HomeKonsumen.class));
+                break;
+            case Pengguna.Koki:
+                startActivity(new Intent(HalamanMasuk.this, HomeKoki.class));
                 break;
             default:
                 Toast.makeText(HalamanMasuk.this, "Tidak Diketahui", Toast.LENGTH_LONG).show();

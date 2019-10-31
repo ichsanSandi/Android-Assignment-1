@@ -30,6 +30,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Memasukan Minuman"/>
+    <Button
+        android:id="@+id/btn_bayar_pesanan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Bayar Makanan Minuman"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/foodRecyclerViewAdmin"

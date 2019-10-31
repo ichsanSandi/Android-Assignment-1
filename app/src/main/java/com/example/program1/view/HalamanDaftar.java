@@ -129,29 +129,29 @@ public class HalamanDaftar extends AppCompatActivity {
                             auth.createUserWithEmailAndPassword(strEmail, strPassword).addOnCompleteListener(HalamanDaftar.this, new OnCompleteListener<AuthResult>() {
                                 @Override
                                 public void onComplete(@NonNull Task<AuthResult> task) {
-                                    if (task.isSuccessful()) {
-                                        Log.d(TAG, "createUserWithEmail:success");
+                                if (task.isSuccessful()) {
+                                    Log.d(TAG, "createUserWithEmail:success");
 
-                                        FirebaseUser user = auth.getCurrentUser();
-                                        String email = user.getEmail();
-                                        final String uid = user.getUid();
+                                    FirebaseUser user = auth.getCurrentUser();
+                                    String email = user.getEmail();
+                                    final String uid = user.getUid();
 
-                                        Toast.makeText(HalamanDaftar.this, "email : " + email, Toast.LENGTH_LONG).show();
-                                        Pengguna daftar = new Pengguna(uid, strNama, email, Pengguna.Konsumen,strPassword,"0");
-                                        dbRef.child("pengguna").child(uid).push().setValue(daftar);
+                                    Toast.makeText(HalamanDaftar.this, "email : " + email, Toast.LENGTH_LONG).show();
+                                    Pengguna daftar = new Pengguna(uid, strNama, email, Pengguna.Koki,strPassword,"0");
+                                    dbRef.child("pengguna").child(uid).push().setValue(daftar);
 
-                                        Toast.makeText(HalamanDaftar.this, "Pendaftaran Berhasil", Toast.LENGTH_LONG).show();
-                                        startActivity(new Intent(HalamanDaftar.this, HalamanMasuk.class));
-                                    } else if (!task.isSuccessful()) {
-                                        overlay.setVisibility(View.GONE);
-                                        btnDaftar.setEnabled(true);
-                                        if (!cekJaringan()) {
-                                            Toast.makeText(HalamanDaftar.this, "Tidak Ada Koneksi Internet", Toast.LENGTH_LONG).show();
-                                        } else {
-                                            Toast.makeText(HalamanDaftar.this, "Pendaftaran Gagal", Toast.LENGTH_LONG).show();
-                                            Log.w(TAG, "createUserWithEmail:failure", task.getException());
-                                        }
+                                    Toast.makeText(HalamanDaftar.this, "Pendaftaran Berhasil", Toast.LENGTH_LONG).show();
+                                    startActivity(new Intent(HalamanDaftar.this, HalamanMasuk.class));
+                                } else if (!task.isSuccessful()) {
+                                    overlay.setVisibility(View.GONE);
+                                    btnDaftar.setEnabled(true);
+                                    if (!cekJaringan()) {
+                                        Toast.makeText(HalamanDaftar.this, "Tidak Ada Koneksi Internet", Toast.LENGTH_LONG).show();
+                                    } else {
+                                        Toast.makeText(HalamanDaftar.this, "Pendaftaran Gagal", Toast.LENGTH_LONG).show();
+                                        Log.w(TAG, "createUserWithEmail:failure", task.getException());
                                     }
+                                }
 
                                 }
                             });

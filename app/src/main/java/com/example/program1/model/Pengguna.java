@@ -7,6 +7,7 @@ public class Pengguna {
 
     public static final String Admin = "admin";
     public static final String Konsumen = "konsumen";
+    public static final String Koki = "koki";
 
 
 

@@ -1,4 +1,4 @@
-package com.example.program1.view.konsumen;
+package com.example.program1.view.koki;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -30,7 +30,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-public class MembeliMakanan2 extends AppCompatActivity {
+public class HomeKoki extends AppCompatActivity {
 
     private FirebaseAuth auth;
     private FirebaseUser user;
@@ -67,7 +67,7 @@ public class MembeliMakanan2 extends AppCompatActivity {
                     String user = dataSnapshotIter.getValue(ModelTransaksiMakanan.class).getNamaKonsumen();
                     ModelTransaksiMakanan makanan = dataSnapshotIter.getValue(ModelTransaksiMakanan.class);
                     if (user.equalsIgnoreCase(emailUser)) {
-                        if((dataSnapshotIter.getValue(ModelTransaksiMakanan.class).getNamaKonsumen()).equalsIgnoreCase("pesan")) {
+                        if((dataSnapshotIter.getValue(ModelTransaksiMakanan.class).getStatusMakanan()).equalsIgnoreCase("beli")) {
                             foodArrayList.add(makanan);
                         }
                     }
@@ -81,7 +81,7 @@ public class MembeliMakanan2 extends AppCompatActivity {
 //                        getApplicationContext().startActivity(data);
 //                    }
 //                });
-                myRecyclerViewAdapter = new AdapterTransaksiMakanan(foodArrayList, MembeliMakanan2.this);
+                myRecyclerViewAdapter = new AdapterTransaksiMakanan(foodArrayList, HomeKoki.this);
 
                 myRecyclerView.setAdapter(myRecyclerViewAdapter);
             }
@@ -95,33 +95,31 @@ public class MembeliMakanan2 extends AppCompatActivity {
         but_pesan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-            DatabaseReference getId = FirebaseDatabase.getInstance().getReference().child("transaksiMakanan");
-            final DatabaseReference pushId = dbRef.child("transaksiMakanan");
-            getId.addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    for (DataSnapshot perData : dataSnapshot.getChildren()) {
-                        ModelTransaksiMakanan model = perData.getValue(ModelTransaksiMakanan.class);
-                        if (model.getStatusMakanan() != null) {
-                            if (model.getNamaKonsumen().equalsIgnoreCase(emailUser))
-                            {
-                                if (model.getStatusMakanan().equalsIgnoreCase("pesan"))
+                DatabaseReference getId = FirebaseDatabase.getInstance().getReference().child("transaksiMakanan");
+                final DatabaseReference pushId = dbRef.child("transaksiMakanan");
+                getId.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        for (DataSnapshot perData : dataSnapshot.getChildren()) {
+                            ModelTransaksiMakanan model = perData.getValue(ModelTransaksiMakanan.class);
+                            if (model.getStatusMakanan() != null) {
+                                if (model.getStatusMakanan().equalsIgnoreCase("beli"))
                                 {
                                     System.out.println(model.getNamaMakanan());
                                     String key = perData.getKey();
-                                    pushId.child(key).child("statusMakanan").setValue("beli");
+                                    pushId.child(key).child("statusMakanan").setValue("bayar");
+
                                 }
                             }
                         }
                     }
-                }
 
-                @Override
-                public void onCancelled(@NonNull DatabaseError databaseError) {
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
 
-                }
-            });
-            startActivity(new Intent(MembeliMakanan2.this, MembeliMakanan2.class));
+                    }
+                });
+                startActivity(new Intent(HomeKoki.this, HomeKoki.class));
             }
         });
 
@@ -131,6 +129,6 @@ public class MembeliMakanan2 extends AppCompatActivity {
 
     public static Intent getActiveIntent(Activity activity)
     {
-        return new Intent(activity, MembeliMakanan.class);
+        return new Intent(activity, HomeKoki.class);
     }
 }

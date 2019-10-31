@@ -37,7 +37,7 @@ public class HomeAdmin extends AppCompatActivity
     RecyclerView.Adapter myRecyclerViewAdapter;
     RecyclerView.LayoutManager myRecyclerViewLayoutMgr;
     ArrayList<Food> foodArrayList;
-    private Button butMakanan, butMinuman, butOvo;
+    private Button butMakanan, butMinuman, butOvo, butBayar;
     private FragmentManager fm;
 
     @Override
@@ -51,6 +51,7 @@ public class HomeAdmin extends AppCompatActivity
         butMakanan = findViewById(R.id.btn_memasukan_makanan);
         butMinuman = findViewById(R.id.btn_memasukan_minuman);
         butOvo = findViewById(R.id.btn_memasukan_poin);
+        butBayar = findViewById(R.id.btn_bayar_pesanan);
         fm = getSupportFragmentManager();
 
         myRecyclerView = (RecyclerView) findViewById(R.id.foodRecyclerViewAdmin);
@@ -98,7 +99,12 @@ public class HomeAdmin extends AppCompatActivity
                 startActivity(new Intent(HomeAdmin.this, MemasukanOvoAdmin.class));
             }
         });
-
+        butBayar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(HomeAdmin.this, MemasukanOvoAdmin.class));
+            }
+        });
 
     }
 
