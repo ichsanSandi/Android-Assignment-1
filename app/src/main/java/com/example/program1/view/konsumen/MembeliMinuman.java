@@ -12,9 +12,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.program1.Food;
+import com.example.program1.Drink;
 import com.example.program1.R;
 import com.example.program1.adapter.AdapterKonsumenMakanan;
+import com.example.program1.adapter.AdapterKonsumenMinuman;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -23,50 +24,49 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-public class MembeliMakanan extends AppCompatActivity {
+public class MembeliMinuman extends AppCompatActivity {
 
 
     DatabaseReference databaseReference;
     RecyclerView myRecyclerView;
     RecyclerView.Adapter myRecyclerViewAdapter;
     RecyclerView.LayoutManager myRecyclerViewLayoutMgr;
-    ArrayList<Food> foodArrayList;
+    ArrayList<Drink> drinkArrayList;
     Button but_pesan;
-
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_membeli_makanan);
+        setContentView(R.layout.activity_membeli_minuman);
 
-        myRecyclerView = (RecyclerView) findViewById(R.id.foodRecyclerView);
+        myRecyclerView = (RecyclerView) findViewById(R.id.drinkRecyclerView);
         myRecyclerView.setHasFixedSize(true);
         myRecyclerViewLayoutMgr = new LinearLayoutManager(this);
         myRecyclerView.setLayoutManager(myRecyclerViewLayoutMgr);
-        but_pesan = findViewById(R.id.btn_pesan_makanan);
+        but_pesan = findViewById(R.id.btn_pesan_minuman);
         databaseReference = FirebaseDatabase.getInstance().getReference();
-        databaseReference.child("foods").addValueEventListener(new ValueEventListener() {
+        databaseReference.child("drinks").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                foodArrayList = new ArrayList<>();
+                drinkArrayList = new ArrayList<>();
                 System.out.println(dataSnapshot.getChildren());
                 for (DataSnapshot dataSnapshotIter : dataSnapshot.getChildren())
                 {
                     System.out.println(dataSnapshotIter.getValue());
-                    Food makanan = (Food) dataSnapshotIter.getValue(Food.class);
-                    makanan.setKey(dataSnapshotIter.getKey());
-                    foodArrayList.add(makanan);
+                    Drink minuman = (Drink) dataSnapshotIter.getValue(Drink.class);
+                    minuman.setKey(dataSnapshotIter.getKey());
+                    drinkArrayList.add(minuman);
                 }
-//                myRecyclerViewAdapter = new AdapterMakanan(foodArrayList, MembeliMakanan.this, new AdapterMakanan.OnItemClickListener() {
+//                myRecyclerViewAdapter = new AdapterMakanan(drinkArrayList, MembeliMinuman.this, new AdapterMakanan.OnItemClickListener() {
 //                    @Override
 //                    public void onItemClick(ModelMakanan model) {
-//                        Intent data = new Intent(getApplicationContext(), MembeliMakanan2.class);
+//                        Intent data = new Intent(getApplicationContext(), MembeliMinuman2.class);
 //                        data.putExtra("namaMakanan", model.getNamaMakanan());
 //                        data.putExtra("hargaMakanan", model.getHargaMakanan());
 //                        getApplicationContext().startActivity(data);
 //                    }
 //                });
-                myRecyclerViewAdapter = new AdapterKonsumenMakanan(foodArrayList, MembeliMakanan.this);
+                myRecyclerViewAdapter = new AdapterKonsumenMinuman(drinkArrayList, MembeliMinuman.this);
 
                 myRecyclerView.setAdapter(myRecyclerViewAdapter);
             }
@@ -80,16 +80,14 @@ public class MembeliMakanan extends AppCompatActivity {
         but_pesan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MembeliMakanan.this, MembeliMakanan2.class));
+                startActivity(new Intent(MembeliMinuman.this, MembeliMinuman2.class));
             }
         });
-
-
 //
     }
 
     public static Intent getActiveIntent(Activity activity)
     {
-        return new Intent(activity, MembeliMakanan.class);
+        return new Intent(activity, MembeliMinuman.class);
     }
 }

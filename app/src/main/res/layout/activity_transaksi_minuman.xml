@@ -3,22 +3,6 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <Button
-        android:id="@+id/konsumen_beli_makanan"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Beli Makanan"/>
-    <Button
-        android:id="@+id/konsumen_beli_minuman"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Beli Makanan"/>
-
-    <Button
-        android:id="@+id/konsumen_isi_ovo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Isi Ovo"/>
     <LinearLayout
         android:id="@+id/item_selected_makan_minum"
         android:layout_width="match_parent"
@@ -30,7 +14,7 @@
             android:layout_width="100dp"
             android:layout_height="30dp"
             android:textSize="20sp"
-            android:text="Pesanan"
+            android:text="Makanan"
             />
 
         <TextView
@@ -56,8 +40,16 @@
 
 
     </LinearLayout>
+
+
+    <TextView
+        android:id="@+id/progressTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Progress" />
+
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/transaksi_recyclerView_pesanan"
+        android:id="@+id/transaksi_recyclerView_minuman"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:clipToPadding="false"
@@ -80,10 +72,11 @@
             android:text="TOTAL" />
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/konsumen_status"
+    <Button
+        android:id="@+id/btn_beli_minuman"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Status" />
+        android:layout_marginBottom="0dp"
+        android:text="Pesan" />
 
 </LinearLayout>

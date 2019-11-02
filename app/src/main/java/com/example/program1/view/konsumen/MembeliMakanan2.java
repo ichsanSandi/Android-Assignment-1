@@ -12,12 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.program1.Food;
-import com.example.program1.ItemAdapter;
 import com.example.program1.R;
-import com.example.program1.adapter.AdapterKonsumen;
-import com.example.program1.adapter.AdapterMakanan;
-import com.example.program1.Food;
 import com.example.program1.adapter.AdapterTransaksiMakanan;
 import com.example.program1.model.ModelTransaksiMakanan;
 import com.google.firebase.auth.FirebaseAuth;
@@ -67,7 +62,7 @@ public class MembeliMakanan2 extends AppCompatActivity {
                     String user = dataSnapshotIter.getValue(ModelTransaksiMakanan.class).getNamaKonsumen();
                     ModelTransaksiMakanan makanan = dataSnapshotIter.getValue(ModelTransaksiMakanan.class);
                     if (user.equalsIgnoreCase(emailUser)) {
-                        if((dataSnapshotIter.getValue(ModelTransaksiMakanan.class).getNamaKonsumen()).equalsIgnoreCase("pesan")) {
+                        if((dataSnapshotIter.getValue(ModelTransaksiMakanan.class).getStatusMakanan()).equalsIgnoreCase("pesan")) {
                             foodArrayList.add(makanan);
                         }
                     }
@@ -121,7 +116,7 @@ public class MembeliMakanan2 extends AppCompatActivity {
 
                 }
             });
-            startActivity(new Intent(MembeliMakanan2.this, MembeliMakanan2.class));
+            startActivity(new Intent(MembeliMakanan2.this, HomeKonsumen.class));
             }
         });
 

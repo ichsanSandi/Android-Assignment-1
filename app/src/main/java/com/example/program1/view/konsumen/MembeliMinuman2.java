@@ -1,4 +1,4 @@
-package com.example.program1.view.admin;
+package com.example.program1.view.konsumen;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -13,8 +13,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.program1.R;
-import com.example.program1.adapter.AdapterTransaksiMakanan;
-import com.example.program1.model.ModelTransaksiMakanan;
+import com.example.program1.adapter.AdapterTransaksiMinuman;
+import com.example.program1.model.ModelTransaksiMinuman;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -25,7 +25,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-public class BayarPesanan extends AppCompatActivity {
+public class MembeliMinuman2 extends AppCompatActivity {
 
     private FirebaseAuth auth;
     private FirebaseUser user;
@@ -35,48 +35,48 @@ public class BayarPesanan extends AppCompatActivity {
     RecyclerView myRecyclerView;
     RecyclerView.Adapter myRecyclerViewAdapter;
     RecyclerView.LayoutManager myRecyclerViewLayoutMgr;
-    ArrayList<ModelTransaksiMakanan> foodArrayList;
+    ArrayList<ModelTransaksiMinuman> foodArrayList;
     Button but_pesan;
 
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_transaksi_makanan);
+        setContentView(R.layout.activity_transaksi_minuman);
         auth = FirebaseAuth.getInstance();
         final String emailUser = auth.getCurrentUser().getEmail();
         dbRef = FirebaseDatabase.getInstance().getReference();
 
-        myRecyclerView = (RecyclerView) findViewById(R.id.transaksi_recyclerView_makanan);
+        myRecyclerView = (RecyclerView) findViewById(R.id.transaksi_recyclerView_minuman);
         myRecyclerView.setHasFixedSize(true);
         myRecyclerViewLayoutMgr = new LinearLayoutManager(this);
         myRecyclerView.setLayoutManager(myRecyclerViewLayoutMgr);
-        but_pesan = findViewById(R.id.btn_beli_makanan);
+        but_pesan = findViewById(R.id.btn_beli_minuman);
         databaseReference = FirebaseDatabase.getInstance().getReference();
-        databaseReference.child("transaksiMakanan").addValueEventListener(new ValueEventListener() {
+        databaseReference.child("transaksiMinuman").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 foodArrayList = new ArrayList<>();
                 System.out.println(dataSnapshot.getChildren());
                 for (DataSnapshot dataSnapshotIter : dataSnapshot.getChildren()) {
-                    String user = dataSnapshotIter.getValue(ModelTransaksiMakanan.class).getNamaKonsumen();
-                    ModelTransaksiMakanan makanan = dataSnapshotIter.getValue(ModelTransaksiMakanan.class);
+                    String user = dataSnapshotIter.getValue(ModelTransaksiMinuman.class).getNamaKonsumen();
+                    ModelTransaksiMinuman minuman = dataSnapshotIter.getValue(ModelTransaksiMinuman.class);
                     if (user.equalsIgnoreCase(emailUser)) {
-                        if((dataSnapshotIter.getValue(ModelTransaksiMakanan.class).getNamaKonsumen()).equalsIgnoreCase("bayar")) {
-                            foodArrayList.add(makanan);
+                        if((dataSnapshotIter.getValue(ModelTransaksiMinuman.class).getStatusMinuman()).equalsIgnoreCase("pesan")) {
+                            foodArrayList.add(minuman);
                         }
                     }
                 }
-//                myRecyclerViewAdapter = new AdapterMakanan(foodArrayList, MembeliMakanan.this, new AdapterMakanan.OnItemClickListener() {
+//                myRecyclerViewAdapter = new AdapterMinuman(foodArrayList, MembeliMinuman.this, new AdapterMinuman.OnItemClickListener() {
 //                    @Override
-//                    public void onItemClick(ModelMakanan model) {
-//                        Intent data = new Intent(getApplicationContext(), MembeliMakanan2.class);
-//                        data.putExtra("namaMakanan", model.getNamaMakanan());
-//                        data.putExtra("hargaMakanan", model.getHargaMakanan());
+//                    public void onItemClick(ModelMinuman model) {
+//                        Intent data = new Intent(getApplicationContext(), MembeliMinuman2.class);
+//                        data.putExtra("namaMinuman", model.getNamaMinuman());
+//                        data.putExtra("hargaMinuman", model.getHargaMinuman());
 //                        getApplicationContext().startActivity(data);
 //                    }
 //                });
-                myRecyclerViewAdapter = new AdapterTransaksiMakanan(foodArrayList, BayarPesanan.this);
+                myRecyclerViewAdapter = new AdapterTransaksiMinuman(foodArrayList, MembeliMinuman2.this);
 
                 myRecyclerView.setAdapter(myRecyclerViewAdapter);
             }
@@ -90,21 +90,21 @@ public class BayarPesanan extends AppCompatActivity {
         but_pesan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DatabaseReference getId = FirebaseDatabase.getInstance().getReference().child("transaksiMakanan");
-                final DatabaseReference pushId = dbRef.child("transaksiMakanan");
+                DatabaseReference getId = FirebaseDatabase.getInstance().getReference().child("transaksiMinuman");
+                final DatabaseReference pushId = dbRef.child("transaksiMinuman");
                 getId.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         for (DataSnapshot perData : dataSnapshot.getChildren()) {
-                            ModelTransaksiMakanan model = perData.getValue(ModelTransaksiMakanan.class);
-                            if (model.getStatusMakanan() != null) {
+                            ModelTransaksiMinuman model = perData.getValue(ModelTransaksiMinuman.class);
+                            if (model.getStatusMinuman() != null) {
                                 if (model.getNamaKonsumen().equalsIgnoreCase(emailUser))
                                 {
-                                    if (model.getStatusMakanan().equalsIgnoreCase("bayar"))
+                                    if (model.getStatusMinuman().equalsIgnoreCase("pesan"))
                                     {
-                                        System.out.println(model.getNamaMakanan());
+                                        System.out.println(model.getNamaMinuman());
                                         String key = perData.getKey();
-                                        pushId.child(key).child("statusMakanan").setValue("lunas");
+                                        pushId.child(key).child("statusMinuman").setValue("beli");
                                     }
                                 }
                             }
@@ -116,7 +116,7 @@ public class BayarPesanan extends AppCompatActivity {
 
                     }
                 });
-                startActivity(new Intent(BayarPesanan.this, BayarPesanan.class));
+                startActivity(new Intent(MembeliMinuman2.this, MembeliMinuman2.class));
             }
         });
 
@@ -126,6 +126,6 @@ public class BayarPesanan extends AppCompatActivity {
 
     public static Intent getActiveIntent(Activity activity)
     {
-        return new Intent(activity, BayarPesanan.class);
+        return new Intent(activity, MembeliMinuman.class);
     }
 }

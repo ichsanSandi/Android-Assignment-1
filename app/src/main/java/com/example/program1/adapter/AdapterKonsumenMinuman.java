@@ -12,28 +12,27 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.program1.Food;
+import com.example.program1.Drink;
 import com.example.program1.R;
-import com.example.program1.model.ModelMakanan;
-import com.example.program1.model.ModelTransaksiMakanan;
+import com.example.program1.model.ModelTransaksiMinuman;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 
-public class AdapterKonsumen extends RecyclerView.Adapter<AdapterKonsumen.ViewHolder> {
+public class AdapterKonsumenMinuman extends RecyclerView.Adapter<AdapterKonsumenMinuman.ViewHolder> {
 
     LayoutInflater mInflator;
-    String[] foods;
+    String[] Drinks;
     String[] prices;
     String[] descriptions;
-    ArrayList<Food> foodArrayList = new ArrayList<>();
+    ArrayList<Drink> DrinkArrayList = new ArrayList<>();
     Context c;
 
-    public AdapterKonsumen (ArrayList<Food> foodArrayList, Context c)
+    public AdapterKonsumenMinuman(ArrayList<Drink> DrinkArrayList, Context c)
     {
-        this.foodArrayList = foodArrayList;
+        this.DrinkArrayList = DrinkArrayList;
         this.c = c;
     }
 
@@ -67,8 +66,8 @@ public class AdapterKonsumen extends RecyclerView.Adapter<AdapterKonsumen.ViewHo
     {
         FirebaseAuth auth;
         auth = FirebaseAuth.getInstance();
-        final String name = foodArrayList.get(position).getName();
-        final String price = String.valueOf(foodArrayList.get(position).getPrice());
+        final String name = DrinkArrayList.get(position).getName();
+        final String price = String.valueOf(DrinkArrayList.get(position).getPrice());
         final String uid = "";
         final String emailUser = auth.getCurrentUser().getEmail();
         final Button orderButton = viewHolder.orderButton;
@@ -87,9 +86,9 @@ public class AdapterKonsumen extends RecyclerView.Adapter<AdapterKonsumen.ViewHo
                 alertDialog.setMessage("Total Order: " + (Integer.valueOf(price) * Integer.valueOf(viewHolder.orderAmount.getText().toString())) );
                 AlertDialog alert11 = alertDialog.create();
                 String jumlah = viewHolder.orderAmount.getText().toString();
-                ModelTransaksiMakanan dataMakanan = new ModelTransaksiMakanan(uid, name, price, emailUser, jumlah,"pesan" );
-                DatabaseReference pushId = dbRef.child("transaksiMakanan");
-                pushId.push().setValue(dataMakanan);
+                ModelTransaksiMinuman dataMinuman = new ModelTransaksiMinuman(uid, name, price, emailUser, jumlah,"pesan" );
+                DatabaseReference pushId = dbRef.child("transaksiMinuman");
+                pushId.push().setValue(dataMinuman);
 
                 alert11.show();
             }
@@ -99,7 +98,7 @@ public class AdapterKonsumen extends RecyclerView.Adapter<AdapterKonsumen.ViewHo
     @Override
     public int getItemCount()
     {
-        return foodArrayList.size();
+        return DrinkArrayList.size();
     }
 
 }

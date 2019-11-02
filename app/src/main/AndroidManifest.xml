@@ -44,6 +44,8 @@
         <activity android:name=".view.konsumen.HomeKonsumen"/>
         <activity android:name=".view.konsumen.MembeliMakanan"/>
         <activity android:name=".view.konsumen.MembeliMakanan2"/>
+        <activity android:name=".view.konsumen.MembeliMinuman"/>
+        <activity android:name=".view.konsumen.MembeliMinuman2"/>
         <activity android:name=".view.koki.HomeKoki"/>
     </application>
 

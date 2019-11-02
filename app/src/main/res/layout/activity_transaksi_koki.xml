@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="100dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="8dp"
+            android:textSize="20sp"
+            android:text="Meja" />
+
+        <TextView
+            android:layout_width="100dp"
+            android:layout_height="30dp"
+            android:textSize="20sp"
+            android:text="Makanan"
+            />
+
+        <TextView
+            android:layout_width="80dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="8dp"
+            android:textSize="20sp"
+            android:text="Jumlah" />
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:orientation="horizontal">
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/transaksi_recyclerView_makanan"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:clipToPadding="false"
+        android:scrollbars="vertical"/>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/transaksi_recyclerView_meja"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clipToPadding="false"
+        android:scrollbars="vertical"/>
+    </LinearLayout>
+
+
+    <Button
+        android:id="@+id/btn_beli_makanan"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="0dp"
+        android:text="Pesan" />
+
+</LinearLayout>
