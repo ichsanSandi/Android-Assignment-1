@@ -4,7 +4,7 @@ import androidx.annotation.NonNull;
 
 public class Food {
 
-    private int id;
+    private String id;
     private String name;
     private int price;
     private String key;
@@ -14,14 +14,14 @@ public class Food {
 
     }
 
-    public Food(String name, int id, int price)
+    public Food(String name, String id, int price)
     {
         this.id = id;
         this.name = name;
         this.price = price;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -33,7 +33,7 @@ public class Food {
         this.price = price;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 

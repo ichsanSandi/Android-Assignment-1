@@ -71,74 +71,10 @@ public class SecondTierModule extends AppCompatActivity {
         }
       });
 
-
-//        Resources res = getResources();
-//        myListView = (ListView) findViewById(R.id.myListView);
-//        foods = res.getStringArray(R.array.foods);
-//        prices = res.getStringArray(R.array.prices);
-//        descriptions = res.getStringArray(R.array.descriptions);
-
-
-
-
-//      ChildEventListener childEventListener = new ChildEventListener() {
-//        @Override
-//        public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-////          Log.d(TAG, "onChildAdded:" + dataSnapshot.getKey());
-//
-//          Food food = dataSnapshot.getValue(Food.class);
-//          System.out.println(food.getId());
-//
-//
-//        }
-//
-//        @Override
-//        public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-//
-//        }
-//
-//        @Override
-//        public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
-//
-//        }
-//
-//        @Override
-//        public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-//
-//        }
-//
-//        @Override
-//        public void onCancelled(@NonNull DatabaseError databaseError) {
-//
-//        }
-//      };
-//      databaseReference.addChildEventListener(childEventListener);
-
-//        ItemAdapter itemAdapter = new ItemAdapter(this, foods, prices, descriptions);
-//        myListView.setAdapter(itemAdapter);
-
-//        myListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                Intent showImage = new Intent(getApplicationContext(), ImageItem.class);
-//                showImage.putExtra("com.example.program1.ITEM_INDEX",position);
-//                startActivity(showImage);
-//            }
-//        });
-
-//        myListView.setAdapter(new ArrayAdapter<String>(this, R.layout.item_list, foods));
-
-//        progressTextView = (TextView) findViewById(R.id.progressTextView);
-//        thisContext = this;
-
-//        progressTextView.setText("");
-
         Button backButton = (Button) findViewById(R.id.backButton);
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Intent secondTierIntent = new Intent(getApplicationContext(), AppTierModule.class);
-//                startActivity(secondTierIntent);
                 onBackPressed();
             }
         });
@@ -148,11 +84,4 @@ public class SecondTierModule extends AppCompatActivity {
     {
       return new Intent(activity, SecondTierModule.class);
     }
-//
-//    public void previousButton(){
-//        TextView textView;
-//        textView = findViewById(R.id.backButton);
-//        Intent backIntent = new Intent(getApplicationContext(), AppTierModule.class);
-//        startActivity(backIntent);
-//    }
 }

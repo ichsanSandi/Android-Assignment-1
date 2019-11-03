@@ -16,11 +16,8 @@ import com.example.program1.Food;
 import com.example.program1.R;
 import com.example.program1.model.ModelTransaksiMakanan;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
@@ -93,39 +90,41 @@ public class AdapterKonsumenMakanan extends RecyclerView.Adapter<AdapterKonsumen
                 final Boolean[] ada = new Boolean[1];
                 ada[0] = true;
                 DatabaseReference getId = FirebaseDatabase.getInstance().getReference().child("transaksiMakanan");
-                getId.addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        for (DataSnapshot perData : dataSnapshot.getChildren()) {
-                            ModelTransaksiMakanan model = perData.getValue(ModelTransaksiMakanan.class);
-                            if (model.getStatusMakanan() != null && model.getNamaKonsumen().equalsIgnoreCase(emailUser) &&
-                                    model.getStatusMakanan().equalsIgnoreCase("pesan")&& model.getNamaMakanan().equalsIgnoreCase(name))
-                            {
-                                String key = perData.getKey();
-                                System.out.println(key + "key");
-                                pushId.child(key).child("jumlahMakanan").setValue(jumlah);
-                                System.out.println("merubah nilai");
-                                ada[0] = true;
-                                break;
-                            }
-                            else
-                            {
-                                ada[0] = false;
-                            }
-
-                        }
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                    }
-                });
-                if (ada[0] == false)
-                {
-                    pushId.push().setValue(dataMakanan);
-                    System.out.println("membuat baru");
-                }
+                getId.push().setValue(dataMakanan);
+//                getId.addValueEventListener(new ValueEventListener() {
+//                    @Override
+//                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//                        for (DataSnapshot perData : dataSnapshot.getChildren()) {
+//                            ModelTransaksiMakanan model = perData.getValue(ModelTransaksiMakanan.class);
+//                            if (model.getStatusMakanan() != null && model.getNamaKonsumen().equalsIgnoreCase(emailUser) &&
+//                                    model.getStatusMakanan().equalsIgnoreCase("pesan")&& model.getNamaMakanan().equalsIgnoreCase(name))
+//                            {
+//                                String key = perData.getKey();
+//                                System.out.println(key + "key");
+//                                pushId.child(key).child("jumlahMakanan").setValue(jumlah);
+//                                System.out.println("merubah nilai");
+////                                ada[0] = true;
+//                                break;
+//                            }
+//                            else
+//                            {
+//                                ada[0] = false;
+//                                dbRef.child("transaksiMakanan").push().setValue(dataMakanan);
+//                            }
+//
+//                        }
+//                    }
+//
+//                    @Override
+//                    public void onCancelled(@NonNull DatabaseError databaseError) {
+//
+//                    }
+//                });
+//                if (ada[0] == false)
+//                {
+//                    pushId.push().setValue(dataMakanan);
+//                    System.out.println("membuat baru");
+//                }
 
                 alert11.show();
             }
