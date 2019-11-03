@@ -9,6 +9,7 @@ import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -37,8 +38,7 @@ public class HomeAdmin extends AppCompatActivity
     RecyclerView.Adapter myRecyclerViewAdapter;
     RecyclerView.LayoutManager myRecyclerViewLayoutMgr;
     ArrayList<Food> foodArrayList;
-    private Button butMakanan, butMinuman, butOvo, butBayar;
-    private FragmentManager fm;
+    private CardView butMakanan, butMinuman, butBayar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,55 +50,22 @@ public class HomeAdmin extends AppCompatActivity
 
         butMakanan = findViewById(R.id.btn_memasukan_makanan);
         butMinuman = findViewById(R.id.btn_memasukan_minuman);
-        butOvo = findViewById(R.id.btn_memasukan_poin);
         butBayar = findViewById(R.id.btn_bayar_pesanan);
-        fm = getSupportFragmentManager();
 
-        myRecyclerView = (RecyclerView) findViewById(R.id.foodRecyclerViewAdmin);
-        myRecyclerView.setHasFixedSize(true);
-        myRecyclerViewLayoutMgr = new LinearLayoutManager(this);
-        myRecyclerView.setLayoutManager(myRecyclerViewLayoutMgr);
 
-        databaseReference = FirebaseDatabase.getInstance().getReference();
-        databaseReference.child("foods").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                foodArrayList = new ArrayList<>();
-                System.out.println(dataSnapshot.getChildren());
-                for (DataSnapshot dataSnapshotIter : dataSnapshot.getChildren())
-                {
-                    System.out.println(dataSnapshotIter.getValue());
-                    Food food = (Food) dataSnapshotIter.getValue(Food.class);
-                    food.setKey(dataSnapshotIter.getKey());
-                    foodArrayList.add(food);
-                }
-                myRecyclerViewAdapter = new ItemAdapter(foodArrayList, HomeAdmin.this);
-                myRecyclerView.setAdapter(myRecyclerViewAdapter);
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                System.out.println(databaseError.getDetails()+" "+databaseError.getMessage());
-            }
-        });
         butMakanan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(HomeAdmin.this, MemasukanMakanan.class));
+                startActivity(new Intent(HomeAdmin.this, LihatMenuMakanan.class));
             }
         });
         butMinuman.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(HomeAdmin.this, MemasukanMinuman.class));
+                startActivity(new Intent(HomeAdmin.this, LihatMenuMinuman.class));
             }
         });
-        butOvo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(HomeAdmin.this, MemasukanOvoAdmin.class));
-            }
-        });
+
         butBayar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

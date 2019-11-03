@@ -38,7 +38,6 @@ public class MembeliMakanan2 extends AppCompatActivity {
     ArrayList<ModelTransaksiMakanan> foodArrayList;
     Button but_pesan;
 
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

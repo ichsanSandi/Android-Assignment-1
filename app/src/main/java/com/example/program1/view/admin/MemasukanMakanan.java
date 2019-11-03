@@ -87,6 +87,7 @@ public class MemasukanMakanan extends AppCompatActivity {
     private Uri uriFoto;
     private String uid;
     private String urlDownload;
+    private String namaMakanan1 = "", hargaMakanan1 = "";
 
     public static final String DIR_FOTO_MAKANAN = "FOTO_MAKANAN";
 
@@ -108,11 +109,16 @@ public class MemasukanMakanan extends AppCompatActivity {
         hargaMakanan = findViewById(R.id.input_hargaMakanan);
         fotoMakanan = findViewById(R.id.foto_admin_fotoMakanan);
 //
+        namaMakanan1 = getIntent().getStringExtra("namaMakanan");
+        hargaMakanan1 = getIntent().getStringExtra("hargaMakanan");
 
         mProgressBar = findViewById(R.id.progress_bar);
 //
         batal = findViewById(R.id.btn_batal);
         tambah = findViewById(R.id.btn_tambah);
+
+        namaMakanan.setText(namaMakanan1);
+        hargaMakanan.setText(hargaMakanan1);
 //
         fotoMakanan.setOnClickListener(new View.OnClickListener() {
             @Override

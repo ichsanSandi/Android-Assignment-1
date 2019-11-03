@@ -7,7 +7,6 @@
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
@@ -39,6 +38,8 @@
         <activity android:name=".view.admin.HomeAdmin"/>
         <activity android:name=".view.admin.MemasukanMakanan"/>
         <activity android:name=".view.admin.MemasukanMinuman"/>
+        <activity android:name=".view.admin.LihatMenuMakanan"/>
+        <activity android:name=".view.admin.LihatMenuMinuman"/>
         <activity android:name=".view.admin.MemasukanOvoAdmin"/>
         <activity android:name=".view.admin.BayarPesanan"/>
         <activity android:name=".view.konsumen.HomeKonsumen"/>

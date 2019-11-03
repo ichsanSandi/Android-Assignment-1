@@ -82,11 +82,11 @@ public class HomeKonsumen extends AppCompatActivity
                     String user = dataSnapshotIter.getValue(ModelTransaksiMakanan.class).getNamaKonsumen();
                     ModelTransaksiMakanan makanan = dataSnapshotIter.getValue(ModelTransaksiMakanan.class);
 
-                        if (user.equalsIgnoreCase(emailUser)) {
-                            if ((dataSnapshotIter.getValue(ModelTransaksiMakanan.class).getStatusMakanan()).equalsIgnoreCase("beli") || (dataSnapshotIter.getValue(ModelTransaksiMakanan.class).getStatusMakanan()).equalsIgnoreCase("bayar")) {
-                                foodArrayList.add(makanan);
-                            }
+                    if (user.equalsIgnoreCase(emailUser)) {
+                        if ((dataSnapshotIter.getValue(ModelTransaksiMakanan.class).getStatusMakanan()).equalsIgnoreCase("beli") || (dataSnapshotIter.getValue(ModelTransaksiMakanan.class).getStatusMakanan()).equalsIgnoreCase("bayar")) {
+                            foodArrayList.add(makanan);
                         }
+                    }
 
                 }
 //                myRecyclerViewAdapter = new AdapterMakanan(foodArrayList, MembeliMakanan.this, new AdapterMakanan.OnItemClickListener() {
