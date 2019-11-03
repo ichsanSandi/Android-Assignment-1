@@ -1,6 +1,5 @@
 package com.example.program1.view.konsumen;
 
-import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -15,7 +14,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.program1.R;
 import com.example.program1.adapter.AdapterTransaksiMakanan;
 import com.example.program1.model.ModelTransaksiMakanan;
-import com.example.program1.view.HalamanMasuk;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -30,8 +28,6 @@ import java.util.ArrayList;
 
 public class HomeKonsumen extends AppCompatActivity
 {
-
-
     private Button butMakanan, butMinuman;
     private FragmentManager fm;
     private FirebaseAuth auth;
@@ -80,12 +76,13 @@ public class HomeKonsumen extends AppCompatActivity
                 System.out.println(dataSnapshot.getChildren());
                 for (DataSnapshot dataSnapshotIter : dataSnapshot.getChildren()) {
                     String user = dataSnapshotIter.getValue(ModelTransaksiMakanan.class).getNamaKonsumen();
-                    ModelTransaksiMakanan makanan = dataSnapshotIter.getValue(ModelTransaksiMakanan.class);
+                    ModelTransaksiMakanan makanan = (ModelTransaksiMakanan) dataSnapshotIter.getValue(ModelTransaksiMakanan.class);
 
                     if (user.equalsIgnoreCase(emailUser)) {
                         if ((dataSnapshotIter.getValue(ModelTransaksiMakanan.class).getStatusMakanan()).equalsIgnoreCase("beli") || (dataSnapshotIter.getValue(ModelTransaksiMakanan.class).getStatusMakanan()).equalsIgnoreCase("bayar")) {
                             foodArrayList.add(makanan);
                         }
+
                     }
 
                 }

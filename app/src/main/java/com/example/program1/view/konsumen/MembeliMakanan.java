@@ -25,7 +25,6 @@ import java.util.ArrayList;
 
 public class MembeliMakanan extends AppCompatActivity {
 
-
     DatabaseReference databaseReference;
     RecyclerView myRecyclerView;
     RecyclerView.Adapter myRecyclerViewAdapter;
@@ -33,13 +32,12 @@ public class MembeliMakanan extends AppCompatActivity {
     ArrayList<Food> foodArrayList;
     Button but_pesan;
 
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_membeli_makanan);
 
-        myRecyclerView = (RecyclerView) findViewById(R.id.foodRecyclerView);
+        myRecyclerView = (RecyclerView) findViewById(R.id.myFoodRecyclerView);
         myRecyclerView.setHasFixedSize(true);
         myRecyclerViewLayoutMgr = new LinearLayoutManager(this);
         myRecyclerView.setLayoutManager(myRecyclerViewLayoutMgr);

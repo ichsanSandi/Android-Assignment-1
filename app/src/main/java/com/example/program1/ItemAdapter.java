@@ -66,7 +66,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
     {
       final String name = foodArrayList.get(position).getName();
       final String price = String.valueOf(foodArrayList.get(position).getPrice());
-      final String description = String.valueOf(foodArrayList.get(position).getId());
+      final String description = foodArrayList.get(position).getId();
       final Button orderButton = viewHolder.orderButton;
       final String orderAmountText = viewHolder.orderAmount.getText().toString();
 
