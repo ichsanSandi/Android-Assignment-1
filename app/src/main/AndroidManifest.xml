@@ -9,31 +9,19 @@
         android:icon="@mipmap/ic_launcher"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/Theme.Design.Light.NoActionBar">
         <activity android:name=".ImageItem"></activity>
-        <activity android:name=".AppTierModule">
+        <activity android:name=".AppTierModule"/>
+        <activity android:name=".SecondTierModule"/>
+        <activity android:name=".Welcome"/>
+        <activity android:name=".HalamanAwal" />
+        <activity android:name=".view.HalamanMasuk">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SecondTierModule">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-<!--                <category android:name="android.intent.category.LAUNCHER" />-->
-            </intent-filter>
-        </activity>
-        <activity android:name=".Welcome">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-<!--                <category android:name="android.intent.category.LAUNCHER" />-->
-            </intent-filter>
-        </activity>
-        <activity android:name=".HalamanAwal" />
-        <activity android:name=".view.HalamanMasuk" />
         <activity android:name=".view.HalamanDaftar" />
         <activity android:name=".view.admin.HomeAdmin"/>
         <activity android:name=".view.admin.MemasukanMakanan"/>

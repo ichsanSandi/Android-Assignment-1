@@ -22,10 +22,8 @@ import com.example.program1.R;
 import com.example.program1.Welcome;
 import com.example.program1.model.Pengguna;
 import com.example.program1.view.admin.HomeAdmin;
-import com.example.program1.view.admin.MemasukanMakanan;
 import com.example.program1.view.koki.HomeKoki;
 import com.example.program1.view.konsumen.HomeKonsumen;
-import com.example.program1.view.konsumen.MembeliMakanan;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.Snackbar;
@@ -53,6 +51,11 @@ public class HalamanMasuk extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        try
+        {
+            this.getSupportActionBar().hide();
+        }
+        catch (NullPointerException e){}
         setContentView(R.layout.activity_masuk);
 
         auth = FirebaseAuth.getInstance();
