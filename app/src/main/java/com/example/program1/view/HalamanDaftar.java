@@ -25,6 +25,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.program1.R;
 import com.example.program1.model.ModelAdmin;
 import com.example.program1.model.Pengguna;
+import com.example.program1.view.admin.HomeAdmin;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
@@ -77,9 +78,7 @@ public class HalamanDaftar extends AppCompatActivity {
                 final String strNama = nama.getText().toString().trim();
                 String strEmail = email.getText().toString().trim();
                 final String strPassword = password.getText().toString().trim();
-
                 String emailValid = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
-
 
                 if (strNama.isEmpty())
                 {
@@ -117,7 +116,6 @@ public class HalamanDaftar extends AppCompatActivity {
                 }
 
                 if (bolehDaftar) {
-
 
                     if (strEmail.matches(emailValid)) {
                         if (strPassword.length() < 6) {
@@ -181,7 +179,7 @@ public class HalamanDaftar extends AppCompatActivity {
                 nama.setText("");
                 email.setText("");
                 password.setText("");
-                startActivity(new Intent(getApplicationContext(), HalamanMasuk.class));
+                startActivity(new Intent(getApplicationContext(), HomeAdmin.class));
                 HalamanDaftar.this.finish();
             }
         });

@@ -4,24 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/style_gradasi_1"
+    android:background="@color/warnaMerah"
     tools:context=".view.HalamanDaftar">
+    <ImageView
+        android:id="@+id/imgBackground2"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="#33ffffff"
+
+        android:scaleType="centerCrop" />
 
 
-
-
-    <TextView
-        android:id="@+id/text_masukSignUp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-
-        android:layout_above="@id/layout_daftar"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="4dp"
-        android:layout_marginBottom="24dp"
-        android:text=""
-        android:textColor="@color/warnaPutih"
-        android:textSize="28sp" />
 
     <LinearLayout
         android:id="@+id/layout_daftar"
@@ -50,12 +43,19 @@
             android:orientation="horizontal">
 
         </LinearLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/img_logo"
+            android:layout_width="160dp"
+            android:layout_height="160dp"
+            android:layout_marginTop="20dp"
+            android:layout_gravity="center"
+            android:background="@drawable/logo"
+            android:padding="8dp" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:errorEnabled="true"
-            android:background="#8Cffffff"
             >
 
 
@@ -67,7 +67,7 @@
 
                 android:inputType="text"
                 android:textColor="@color/warnaPutih"
-                android:textColorHint="@color/warnaGray"
+                android:textColorHint="@color/warnaPutih"
                 android:textSize="16sp" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -76,7 +76,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:errorEnabled="true"
-            android:background="#8Cffffff"
             >
 
             <com.google.android.material.textfield.TextInputEditText
@@ -96,7 +95,6 @@
             android:layout_height="wrap_content"
             app:errorEnabled="true"
             app:passwordToggleEnabled="true"
-            android:background="#8Cffffff"
             >
 
             <com.google.android.material.textfield.TextInputEditText

@@ -41,7 +41,6 @@ public class HalamanMasuk extends AppCompatActivity {
     private static String TAG = "HalamanMasuk";
     private TextInputEditText email, password;
     private Button masuk;
-    private TextView daftar;
     private String strEmail, strPassword;
     private FirebaseAuth auth;
     private FirebaseUser user;
@@ -64,7 +63,6 @@ public class HalamanMasuk extends AppCompatActivity {
         password = (TextInputEditText) findViewById(R.id.input_masukPassword);
 
         masuk = (Button) findViewById(R.id.btn_masuk);
-        daftar = (TextView) findViewById(R.id.btn_daftar);
 
         masuk.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -127,12 +125,7 @@ public class HalamanMasuk extends AppCompatActivity {
             }
         });
 
-        daftar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), com.example.program1.view.HalamanDaftar.class));
-            }
-        });
+
     }
 
     private void cekLevel(String level) {

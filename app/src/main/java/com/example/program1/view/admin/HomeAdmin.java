@@ -12,36 +12,23 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.program1.model.Food;
 import com.example.program1.R;
-import com.google.firebase.database.DatabaseReference;
-
-import java.util.ArrayList;
+import com.example.program1.view.HalamanDaftar;
 
 //import
 
 public class HomeAdmin extends AppCompatActivity 
 {
-
-    public static String ACTIVE = "fragment_volunteer_aktif";
-
-    MemasukanMakanan memasukanMakanan;
-    DatabaseReference databaseReference;
-    RecyclerView myRecyclerView;
-    RecyclerView.Adapter myRecyclerViewAdapter;
-    RecyclerView.LayoutManager myRecyclerViewLayoutMgr;
-    ArrayList<Food> foodArrayList;
-    private CardView butMakanan, butMinuman, butBayar;
+    private CardView butMakanan, butMinuman, butBayar, butDaftar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin);
 
-
-        final FragmentTransaction ft = getFragmentManager().beginTransaction();
-
         butMakanan = findViewById(R.id.btn_memasukan_makanan);
         butMinuman = findViewById(R.id.btn_memasukan_minuman);
         butBayar = findViewById(R.id.btn_bayar_pesanan);
+        butDaftar = findViewById(R.id.btn_tambah_meja);
 
 
         butMakanan.setOnClickListener(new View.OnClickListener() {
@@ -60,12 +47,16 @@ public class HomeAdmin extends AppCompatActivity
         butBayar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(HomeAdmin.this, MemasukanOvoAdmin.class));
+                startActivity(new Intent(HomeAdmin.this, BayarPesanan.class));
+            }
+        });
+        butDaftar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(HomeAdmin.this, HalamanDaftar.class));
             }
         });
 
     }
-
-
 
 }

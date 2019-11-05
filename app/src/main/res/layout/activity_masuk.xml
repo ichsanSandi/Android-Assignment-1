@@ -51,6 +51,13 @@
             android:layout_gravity="center"
             android:background="@drawable/logo"
             android:padding="8dp" />
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="0dp"
+            android:layout_height="80dp"
+            android:layout_marginTop="20dp"
+            android:layout_gravity="center"
+            android:background="@drawable/logo"
+            android:padding="8dp" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
@@ -107,20 +114,7 @@
             android:textColor="@color/warnaPutih"
             android:textSize="24sp" />
 
-        <Button
-            android:id="@+id/btn_daftar"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:layout_centerHorizontal="true"
-            android:layout_marginLeft="40dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginRight="40dp"
-            android:background="@drawable/bg_oval_white"
-            android:foreground="?android:attr/selectableItemBackground"
-            android:text="Daftar"
-            android:textAllCaps="false"
-            android:textColor="@color/warnaPutih"
-            android:textSize="24sp" />
+
 
 
     </LinearLayout>
