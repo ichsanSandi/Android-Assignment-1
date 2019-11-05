@@ -12,9 +12,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.program1.Food;
 import com.example.program1.R;
-import com.example.program1.model.ModelMinuman;
 import com.example.program1.model.ModelTransaksiMinuman;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
@@ -25,12 +23,12 @@ import java.util.ArrayList;
 public class AdapterTransaksiMinuman extends RecyclerView.Adapter<AdapterTransaksiMinuman.ViewHolder> {
 
     LayoutInflater mInflator;
-    ArrayList<ModelTransaksiMinuman> foodArrayList = new ArrayList<>();
+    ArrayList<ModelTransaksiMinuman> drinkArrayList = new ArrayList<>();
     Context c;
 
     public AdapterTransaksiMinuman (ArrayList<ModelTransaksiMinuman> foodArrayList, Context c)
     {
-        this.foodArrayList = foodArrayList;
+        this.drinkArrayList = foodArrayList;
         this.c = c;
     }
 
@@ -49,10 +47,10 @@ public class AdapterTransaksiMinuman extends RecyclerView.Adapter<AdapterTransak
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            name = (TextView) itemView.findViewById(R.id.transaksi_nama_makan_minum);
-            price = (TextView) itemView.findViewById(R.id.transaksi_harga_makan_minum);
-            jumlah = (TextView) itemView.findViewById(R.id.transaksi_jumlah_makan_minum);
-            total = (TextView) itemView.findViewById(R.id.transaksi_total_makan_minum);
+            name = (TextView) itemView.findViewById(R.id.melihat_nama_makan_minum);
+            price = (TextView) itemView.findViewById(R.id.melihat_harga_makan_minum);
+            orderButton = (Button) itemView.findViewById(R.id.orderButton);
+            orderAmount = (EditText) itemView.findViewById(R.id.orderAmount);
         }
     }
 
@@ -67,25 +65,77 @@ public class AdapterTransaksiMinuman extends RecyclerView.Adapter<AdapterTransak
     {
         FirebaseAuth auth;
         auth = FirebaseAuth.getInstance();
-        final String name = foodArrayList.get(position).getNamaMinuman();
-        final String price = String.valueOf(foodArrayList.get(position).getHargaMinuman());
-        final String jumlah = String.valueOf(foodArrayList.get(position).getJumlahMinuman());
-        int totalMinuman = Integer.valueOf(jumlah) * Integer.valueOf(price);
-        final String total = String.valueOf(totalMinuman);
+        final String name = drinkArrayList.get(position).getNamaMinuman();
+        final String price = String.valueOf(drinkArrayList.get(position).getHargaMinuman());
+//        final String jumlah = String.valueOf(drinkArrayList.get(position).getJumlahMinuman());
+//        int totalMinuman = Integer.valueOf(jumlah) * Integer.valueOf(price);
+//        final String total = String.valueOf(totalMinuman);
+        final DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference();
+        final Button orderButton = viewHolder.orderButton;
+        final String uid = "";
+        final String emailUser = auth.getCurrentUser().getEmail();
 
 
         viewHolder.name.setText(name);
         viewHolder.price.setText(price);
-        viewHolder.jumlah.setText(jumlah);
-        viewHolder.total.setText(total);
 
-        System.out.println("berapa ");
+        orderButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder alertDialog = new AlertDialog.Builder(c);
+                alertDialog.setMessage("Total Order: " + (Integer.valueOf(price) * Integer.valueOf(viewHolder.orderAmount.getText().toString())) );
+                AlertDialog alert11 = alertDialog.create();
+                final String jumlah = viewHolder.orderAmount.getText().toString();
+                final ModelTransaksiMinuman dataMinuman = new ModelTransaksiMinuman(uid, name, price, emailUser, jumlah,"pesan", Integer.MAX_VALUE);
+                final DatabaseReference pushId = dbRef.child("transaksiMakanan");
+//                final Boolean[] ada = new Boolean[1];
+//                ada[0] = true;
+                DatabaseReference getId = FirebaseDatabase.getInstance().getReference().child("transaksiMakanan");
+                getId.push().setValue(dataMinuman);
+//                getId.addValueEventListener(new ValueEventListener() {
+//                    @Override
+//                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//                        for (DataSnapshot perData : dataSnapshot.getChildren()) {
+//                            ModelTransaksiMakanan model = perData.getValue(ModelTransaksiMakanan.class);
+//                            if (model.getStatusMakanan() != null && model.getNamaKonsumen().equalsIgnoreCase(emailUser) &&
+//                                    model.getStatusMakanan().equalsIgnoreCase("pesan")&& model.getNamaMakanan().equalsIgnoreCase(name))
+//                            {
+//                                String key = perData.getKey();
+//                                System.out.println(key + "key");
+//                                pushId.child(key).child("jumlahMakanan").setValue(jumlah);
+//                                System.out.println("merubah nilai");
+////                                ada[0] = true;
+//                                break;
+//                            }
+//                            else
+//                            {
+//                                ada[0] = false;
+//                                dbRef.child("transaksiMakanan").push().setValue(dataMakanan);
+//                            }
+//
+//                        }
+//                    }
+//
+//                    @Override
+//                    public void onCancelled(@NonNull DatabaseError databaseError) {
+//
+//                    }
+//                });
+//                if (ada[0] == false)
+//                {
+//                    pushId.push().setValue(dataMakanan);
+//                    System.out.println("membuat baru");
+//                }
+
+                alert11.show();
+            }
+        });
     }
 
     @Override
     public int getItemCount()
     {
-        return foodArrayList.size();
+        return drinkArrayList.size();
     }
 
 }

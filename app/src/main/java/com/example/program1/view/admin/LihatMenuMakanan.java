@@ -12,10 +12,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.program1.Food;
+import com.example.program1.model.Food;
 import com.example.program1.R;
 import com.example.program1.adapter.AdapterAdminMakanan;
-import com.example.program1.adapter.AdapterKonsumenMakanan;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;

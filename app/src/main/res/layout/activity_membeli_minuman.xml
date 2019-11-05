@@ -3,12 +3,6 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <Button
-        android:id="@+id/btn_pesan_minuman"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="0dp"
-        android:text="Pesan" />
     <TextView
         android:id="@+id/progressTextView"
         android:layout_width="match_parent"
@@ -18,8 +12,15 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/drinkRecyclerView"
         android:layout_width="match_parent"
+        android:layout_height="500dp"
+        android:scrollbars="vertical" />
+
+    <Button
+        android:id="@+id/btn_pesan_minuman"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:scrollbars="vertical"/>
+        android:layout_marginBottom="0dp"
+        android:text="Pesan" />
 
 
 </LinearLayout>

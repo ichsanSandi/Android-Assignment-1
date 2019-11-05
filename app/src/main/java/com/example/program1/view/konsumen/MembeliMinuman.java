@@ -12,10 +12,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.program1.Drink;
 import com.example.program1.R;
-import com.example.program1.adapter.AdapterKonsumenMakanan;
 import com.example.program1.adapter.AdapterKonsumenMinuman;
+import com.example.program1.model.Drink;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -49,7 +48,6 @@ public class MembeliMinuman extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 drinkArrayList = new ArrayList<>();
-                System.out.println(dataSnapshot.getChildren());
                 for (DataSnapshot dataSnapshotIter : dataSnapshot.getChildren())
                 {
                     System.out.println(dataSnapshotIter.getValue());
@@ -57,15 +55,6 @@ public class MembeliMinuman extends AppCompatActivity {
                     minuman.setKey(dataSnapshotIter.getKey());
                     drinkArrayList.add(minuman);
                 }
-//                myRecyclerViewAdapter = new AdapterMakanan(drinkArrayList, MembeliMinuman.this, new AdapterMakanan.OnItemClickListener() {
-//                    @Override
-//                    public void onItemClick(ModelMakanan model) {
-//                        Intent data = new Intent(getApplicationContext(), MembeliMinuman2.class);
-//                        data.putExtra("namaMakanan", model.getNamaMakanan());
-//                        data.putExtra("hargaMakanan", model.getHargaMakanan());
-//                        getApplicationContext().startActivity(data);
-//                    }
-//                });
                 myRecyclerViewAdapter = new AdapterKonsumenMinuman(drinkArrayList, MembeliMinuman.this);
 
                 myRecyclerView.setAdapter(myRecyclerViewAdapter);

@@ -12,7 +12,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.program1.Food;
+import com.example.program1.model.Food;
 import com.example.program1.R;
 import com.example.program1.model.ModelTransaksiMakanan;
 import com.google.firebase.auth.FirebaseAuth;
@@ -85,10 +85,10 @@ public class AdapterKonsumenMakanan extends RecyclerView.Adapter<AdapterKonsumen
                 alertDialog.setMessage("Total Order: " + (Integer.valueOf(price) * Integer.valueOf(viewHolder.orderAmount.getText().toString())) );
                 AlertDialog alert11 = alertDialog.create();
                 final String jumlah = viewHolder.orderAmount.getText().toString();
-                final ModelTransaksiMakanan dataMakanan = new ModelTransaksiMakanan(uid, name, price, emailUser, jumlah,"pesan" );
+                final ModelTransaksiMakanan dataMakanan = new ModelTransaksiMakanan(uid, name, price, emailUser, jumlah,"pesan", Integer.MAX_VALUE);
                 final DatabaseReference pushId = dbRef.child("transaksiMakanan");
-                final Boolean[] ada = new Boolean[1];
-                ada[0] = true;
+//                final Boolean[] ada = new Boolean[1];
+//                ada[0] = true;
                 DatabaseReference getId = FirebaseDatabase.getInstance().getReference().child("transaksiMakanan");
                 getId.push().setValue(dataMakanan);
 //                getId.addValueEventListener(new ValueEventListener() {

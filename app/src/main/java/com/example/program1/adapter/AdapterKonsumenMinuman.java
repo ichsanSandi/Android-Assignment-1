@@ -12,8 +12,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.program1.Drink;
 import com.example.program1.R;
+import com.example.program1.model.Drink;
 import com.example.program1.model.ModelTransaksiMinuman;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
@@ -86,7 +86,7 @@ public class AdapterKonsumenMinuman extends RecyclerView.Adapter<AdapterKonsumen
                 alertDialog.setMessage("Total Order: " + (Integer.valueOf(price) * Integer.valueOf(viewHolder.orderAmount.getText().toString())) );
                 AlertDialog alert11 = alertDialog.create();
                 String jumlah = viewHolder.orderAmount.getText().toString();
-                ModelTransaksiMinuman dataMinuman = new ModelTransaksiMinuman(uid, name, price, emailUser, jumlah,"pesan" );
+                ModelTransaksiMinuman dataMinuman = new ModelTransaksiMinuman(uid, name, price, emailUser, jumlah,"pesan", Integer.MAX_VALUE);
                 DatabaseReference pushId = dbRef.child("transaksiMinuman");
                 pushId.push().setValue(dataMinuman);
 

@@ -12,7 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.program1.Food;
+import com.example.program1.model.Food;
 import com.example.program1.R;
 import com.example.program1.adapter.AdapterKonsumenMakanan;
 import com.google.firebase.database.DataSnapshot;
@@ -47,10 +47,8 @@ public class MembeliMakanan extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 foodArrayList = new ArrayList<>();
-                System.out.println(dataSnapshot.getChildren());
                 for (DataSnapshot dataSnapshotIter : dataSnapshot.getChildren())
                 {
-                    System.out.println(dataSnapshotIter.getValue());
                     Food makanan = (Food) dataSnapshotIter.getValue(Food.class);
                     makanan.setKey(dataSnapshotIter.getKey());
                     foodArrayList.add(makanan);

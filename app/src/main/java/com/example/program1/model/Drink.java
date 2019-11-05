@@ -1,10 +1,10 @@
-package com.example.program1;
+package com.example.program1.model;
 
 import androidx.annotation.NonNull;
 
 public class Drink {
 
-    private int id;
+    private String id;
     private String name;
     private int price;
     private String key;
@@ -14,14 +14,14 @@ public class Drink {
 
     }
 
-    public Drink(String name, int id, int price)
+    public Drink(String name, String id, int price)
     {
         this.id = id;
         this.name = name;
         this.price = price;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -33,7 +33,7 @@ public class Drink {
         this.price = price;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 

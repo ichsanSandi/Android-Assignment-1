@@ -13,13 +13,14 @@ public class ModelTransaksiMakanan {
     private String namaKonsumen;
     private String jumlahMakanan;
     private String statusMakanan;
+    private int timestamp;
 
 
     public ModelTransaksiMakanan() {
 
     }
 
-    public ModelTransaksiMakanan(String idTransaksiMakanan, String namaMakanan, String hargaMakanan, String namaKonsumen, String jumlahMakanan, String statusMakanan)
+    public ModelTransaksiMakanan(String idTransaksiMakanan, String namaMakanan, String hargaMakanan, String namaKonsumen, String jumlahMakanan, String statusMakanan, int timestamp)
     {
         this.idTransaksiMakanan = idTransaksiMakanan;
         this.namaMakanan = namaMakanan;
@@ -27,7 +28,7 @@ public class ModelTransaksiMakanan {
         this.namaKonsumen = namaKonsumen;
         this.jumlahMakanan = jumlahMakanan;
         this.statusMakanan = statusMakanan;
-
+        this.timestamp = timestamp;
     }
 
     public String getIdTransaksiMakanan() {
@@ -80,4 +81,15 @@ public class ModelTransaksiMakanan {
         this.key = key;
     }
 
+    public void setTimestamp(int timestamp) {
+        this.timestamp = timestamp;
+    }
+
+    public String getKey() {
+        return key;
+    }
+
+    public int getTimestamp() {
+        return timestamp;
+    }
 }

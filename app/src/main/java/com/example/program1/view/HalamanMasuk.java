@@ -19,7 +19,6 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.program1.R;
-import com.example.program1.Welcome;
 import com.example.program1.model.Pengguna;
 import com.example.program1.view.admin.HomeAdmin;
 import com.example.program1.view.koki.HomeKoki;
@@ -164,12 +163,8 @@ public class HalamanMasuk extends AppCompatActivity {
         builder.setPositiveButton("Ya", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-//                System.exit(1);
-                //                HalamanMasuk.this.finish();
-                Intent i = new Intent(getApplicationContext(), Welcome.class);
-                i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                i.putExtra("EXIT", true);
-                startActivity(i);
+            android.os.Process.killProcess(android.os.Process.myPid());
+            System.exit(1);
             }
         });
         builder.setNegativeButton("Tidak", new DialogInterface.OnClickListener() {

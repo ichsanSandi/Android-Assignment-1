@@ -8,11 +8,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Beli Makanan"/>
+
     <Button
         android:id="@+id/konsumen_beli_minuman"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Beli Makanan"/>
+        android:text="Beli Minuman" />
 
     <Button
         android:id="@+id/konsumen_isi_ovo"
@@ -56,19 +57,39 @@
 
 
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/foodText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Makanan" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/transaksi_recyclerView_pesanan"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="200dp"
         android:clipToPadding="false"
-        android:scrollbars="vertical"/>
+        android:scrollbars="vertical" />
+
+    <TextView
+        android:id="@+id/drinkText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Minuman" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="200dp" />
+
     <LinearLayout
 
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:orientation="horizontal">
+
         <TextView
+            android:id="@+id/totalText"
             android:layout_width="290dp"
             android:layout_height="30dp"
             android:text="TOTAL" />

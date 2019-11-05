@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.program1.R;
 import com.example.program1.adapter.AdapterTransaksiMakanan;
 import com.example.program1.model.ModelTransaksiMakanan;
+import com.example.program1.model.ModelTransaksiMinuman;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -38,7 +39,8 @@ public class HomeKonsumen extends AppCompatActivity
     RecyclerView myRecyclerView;
     RecyclerView.Adapter myRecyclerViewAdapter;
     RecyclerView.LayoutManager myRecyclerViewLayoutMgr;
-    ArrayList<ModelTransaksiMakanan> foodArrayList;
+    ArrayList<ModelTransaksiMakanan> foodArrayList = new ArrayList<>();
+    ArrayList<ModelTransaksiMinuman> drinkArrayList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,7 +74,6 @@ public class HomeKonsumen extends AppCompatActivity
         databaseReference.child("transaksiMakanan").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                foodArrayList = new ArrayList<>();
                 System.out.println(dataSnapshot.getChildren());
                 for (DataSnapshot dataSnapshotIter : dataSnapshot.getChildren()) {
                     String user = dataSnapshotIter.getValue(ModelTransaksiMakanan.class).getNamaKonsumen();
@@ -82,9 +83,7 @@ public class HomeKonsumen extends AppCompatActivity
                         if ((dataSnapshotIter.getValue(ModelTransaksiMakanan.class).getStatusMakanan()).equalsIgnoreCase("beli") || (dataSnapshotIter.getValue(ModelTransaksiMakanan.class).getStatusMakanan()).equalsIgnoreCase("bayar")) {
                             foodArrayList.add(makanan);
                         }
-
                     }
-
                 }
 //                myRecyclerViewAdapter = new AdapterMakanan(foodArrayList, MembeliMakanan.this, new AdapterMakanan.OnItemClickListener() {
 //                    @Override
