@@ -21,7 +21,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 
-public class AdapterKonsumenMakanan extends RecyclerView.Adapter<AdapterKonsumenMakanan.ViewHolder> {
+public class AdapterMenuMakanan extends RecyclerView.Adapter<AdapterMenuMakanan.ViewHolder> {
 
     LayoutInflater mInflator;
     String[] foods;
@@ -30,7 +30,7 @@ public class AdapterKonsumenMakanan extends RecyclerView.Adapter<AdapterKonsumen
     ArrayList<Food> foodArrayList = new ArrayList<>();
     Context c;
 
-    public AdapterKonsumenMakanan(ArrayList<Food> foodArrayList, Context c)
+    public AdapterMenuMakanan(ArrayList<Food> foodArrayList, Context c)
     {
         this.foodArrayList = foodArrayList;
         this.c = c;

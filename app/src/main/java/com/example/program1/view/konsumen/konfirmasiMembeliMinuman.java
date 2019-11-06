@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.program1.R;
-import com.example.program1.adapter.AdapterTransaksiMinuman;
+import com.example.program1.adapter.AdapterKonfirmasiTransaksiMinuman;
 import com.example.program1.model.ModelTransaksiMinuman;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -25,7 +25,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-public class MembeliMinuman2 extends AppCompatActivity {
+public class konfirmasiMembeliMinuman extends AppCompatActivity {
 
     private FirebaseAuth auth;
     private FirebaseUser user;
@@ -35,7 +35,7 @@ public class MembeliMinuman2 extends AppCompatActivity {
     RecyclerView myRecyclerView;
     RecyclerView.Adapter myRecyclerViewAdapter;
     RecyclerView.LayoutManager myRecyclerViewLayoutMgr;
-    ArrayList<ModelTransaksiMinuman> foodArrayList;
+    ArrayList<ModelTransaksiMinuman> drinkArrayList;
     Button but_pesan;
 
 
@@ -56,27 +56,27 @@ public class MembeliMinuman2 extends AppCompatActivity {
         databaseReference.child("transaksiMinuman").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                foodArrayList = new ArrayList<>();
+                drinkArrayList = new ArrayList<>();
                 System.out.println(dataSnapshot.getChildren());
                 for (DataSnapshot dataSnapshotIter : dataSnapshot.getChildren()) {
                     String user = dataSnapshotIter.getValue(ModelTransaksiMinuman.class).getNamaKonsumen();
                     ModelTransaksiMinuman minuman = dataSnapshotIter.getValue(ModelTransaksiMinuman.class);
                     if (user.equalsIgnoreCase(emailUser)) {
                         if((dataSnapshotIter.getValue(ModelTransaksiMinuman.class).getStatusMinuman()).equalsIgnoreCase("pesan")) {
-                            foodArrayList.add(minuman);
+                            drinkArrayList.add(minuman);
                         }
                     }
                 }
 //                myRecyclerViewAdapter = new AdapterMinuman(foodArrayList, MembeliMinuman.this, new AdapterMinuman.OnItemClickListener() {
 //                    @Override
 //                    public void onItemClick(ModelMinuman model) {
-//                        Intent data = new Intent(getApplicationContext(), MembeliMinuman2.class);
+//                        Intent data = new Intent(getApplicationContext(), konfirmasiMembeliMinuman.class);
 //                        data.putExtra("namaMinuman", model.getNamaMinuman());
 //                        data.putExtra("hargaMinuman", model.getHargaMinuman());
 //                        getApplicationContext().startActivity(data);
 //                    }
 //                });
-                myRecyclerViewAdapter = new AdapterTransaksiMinuman(foodArrayList, MembeliMinuman2.this);
+                myRecyclerViewAdapter = new AdapterKonfirmasiTransaksiMinuman(drinkArrayList, konfirmasiMembeliMinuman.this);
 
                 myRecyclerView.setAdapter(myRecyclerViewAdapter);
             }
@@ -105,6 +105,7 @@ public class MembeliMinuman2 extends AppCompatActivity {
                                         System.out.println(model.getNamaMinuman());
                                         String key = perData.getKey();
                                         pushId.child(key).child("statusMinuman").setValue("beli");
+//                                        pushId.child(key).child("timestamp").setValue(date.);
                                     }
                                 }
                             }
@@ -116,7 +117,7 @@ public class MembeliMinuman2 extends AppCompatActivity {
 
                     }
                 });
-                startActivity(new Intent(MembeliMinuman2.this, MembeliMinuman2.class));
+                startActivity(new Intent(konfirmasiMembeliMinuman.this, HomeKonsumen.class));
             }
         });
 

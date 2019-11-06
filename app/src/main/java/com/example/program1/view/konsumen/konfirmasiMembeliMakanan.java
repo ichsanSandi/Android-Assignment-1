@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.program1.R;
-import com.example.program1.adapter.AdapterTransaksiMakanan;
+import com.example.program1.adapter.AdapterKonfirmasiTransaksiMakanan;
 import com.example.program1.model.ModelTransaksiMakanan;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -25,7 +25,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-public class MembeliMakanan2 extends AppCompatActivity {
+public class konfirmasiMembeliMakanan extends AppCompatActivity {
 
     private FirebaseAuth auth;
     private FirebaseUser user;
@@ -69,13 +69,13 @@ public class MembeliMakanan2 extends AppCompatActivity {
 //                myRecyclerViewAdapter = new AdapterMakanan(foodArrayList, MembeliMakanan.this, new AdapterMakanan.OnItemClickListener() {
 //                    @Override
 //                    public void onItemClick(ModelMakanan model) {
-//                        Intent data = new Intent(getApplicationContext(), MembeliMakanan2.class);
+//                        Intent data = new Intent(getApplicationContext(), konfirmasiMembeliMakanan.class);
 //                        data.putExtra("namaMakanan", model.getNamaMakanan());
 //                        data.putExtra("hargaMakanan", model.getHargaMakanan());
 //                        getApplicationContext().startActivity(data);
 //                    }
 //                });
-                myRecyclerViewAdapter = new AdapterTransaksiMakanan(foodArrayList, MembeliMakanan2.this);
+                myRecyclerViewAdapter = new AdapterKonfirmasiTransaksiMakanan(foodArrayList, konfirmasiMembeliMakanan.this);
 
                 myRecyclerView.setAdapter(myRecyclerViewAdapter);
             }
@@ -115,7 +115,7 @@ public class MembeliMakanan2 extends AppCompatActivity {
 
                 }
             });
-            startActivity(new Intent(MembeliMakanan2.this, HomeKonsumen.class));
+            startActivity(new Intent(konfirmasiMembeliMakanan.this, HomeKonsumen.class));
             }
         });
 

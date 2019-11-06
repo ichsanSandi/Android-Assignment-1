@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.program1.R;
-import com.example.program1.adapter.AdapterKonsumenMinuman;
+import com.example.program1.adapter.AdapterMenuMinuman;
 import com.example.program1.model.Drink;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -55,7 +55,7 @@ public class MembeliMinuman extends AppCompatActivity {
                     minuman.setKey(dataSnapshotIter.getKey());
                     drinkArrayList.add(minuman);
                 }
-                myRecyclerViewAdapter = new AdapterKonsumenMinuman(drinkArrayList, MembeliMinuman.this);
+                myRecyclerViewAdapter = new AdapterMenuMinuman(drinkArrayList, MembeliMinuman.this);
 
                 myRecyclerView.setAdapter(myRecyclerViewAdapter);
             }
@@ -69,7 +69,7 @@ public class MembeliMinuman extends AppCompatActivity {
         but_pesan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MembeliMinuman.this, MembeliMinuman2.class));
+                startActivity(new Intent(MembeliMinuman.this, konfirmasiMembeliMinuman.class));
             }
         });
 //
