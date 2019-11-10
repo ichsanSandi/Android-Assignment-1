@@ -12,7 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.program1.Drink;
+import com.example.program1.model.Drink;
 import com.example.program1.R;
 import com.example.program1.adapter.AdapterAdminMinuman;
 import com.google.firebase.database.DataSnapshot;
