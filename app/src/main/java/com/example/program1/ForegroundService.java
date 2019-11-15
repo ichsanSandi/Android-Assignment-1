@@ -23,6 +23,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.concurrent.TimeUnit;
 
+import static com.example.program1.RoomDB.FoodsDatabase.MIGRATION_1_2;
+
 public class ForegroundService extends Service {
   public static final String CHANNEL_ID = "ForegroundServiceChannel";
   public static final String TAG = "ForegroundService";
@@ -55,8 +57,9 @@ public class ForegroundService extends Service {
         DatabaseConn dbConn = new DatabaseConn();
         FoodsDatabase foodsDatabase = Room.databaseBuilder(getApplicationContext(), FoodsDatabase.class, "foods-database")
                 .allowMainThreadQueries()
+                .addMigrations(MIGRATION_1_2)
                 .build();
-        for (int i = 0; i < 5; i++)
+        for (int i = 0; i < 3; i++)
         {
           try {
             TimeUnit.SECONDS.sleep(1);
@@ -71,9 +74,9 @@ public class ForegroundService extends Service {
           while (cursor.next())
           {
             Foods foods = new Foods();
-            foods.setId(Integer.valueOf(cursor.getString(3)));
-            foods.setPrice(Integer.valueOf(cursor.getString(2)));
-            foods.setName(cursor.getString(1));
+//            foods.setId(Integer.valueOf(cursor.getString(1)));
+            foods.setPrice(Integer.valueOf(cursor.getString(3)));
+            foods.setName(cursor.getString(2));
             foodsDatabase.FoodsDao().insertFood(foods);
           }
         } catch (SQLException e) {

@@ -20,6 +20,8 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.example.program1.RoomDB.FoodsDatabase.MIGRATION_1_2;
+
 public class TestActivity extends AppCompatActivity {
 
   RecyclerView recyclerView;
@@ -42,6 +44,7 @@ public class TestActivity extends AppCompatActivity {
 
     FoodsDatabase foodDb = Room.databaseBuilder(getApplicationContext(), FoodsDatabase.class, "foods-database")
             .allowMainThreadQueries()
+            .addMigrations(MIGRATION_1_2)
             .build();
     foodsList = foodDb.FoodsDao().getAll();
     foodsArrayList = new ArrayList<Foods>(foodsList);

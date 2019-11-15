@@ -16,7 +16,7 @@ public interface FoodsDao {
   @Insert
   void insertFood(Foods foods);
 
-  @Query("SELECT * FROM Foods WHERE foods_id = (:id)")
+  @Query("SELECT * FROM Foods WHERE foods_id LIKE :id")
   List<Foods> getNameFromId(int id);
 
   @Update
