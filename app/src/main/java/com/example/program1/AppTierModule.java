@@ -10,7 +10,8 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.program1.view.HalamanMasuk;
+import com.example.program1.Room.activity_user;
+
 
 public class AppTierModule extends AppCompatActivity {
 
@@ -33,7 +34,7 @@ public class AppTierModule extends AppCompatActivity {
     }
     public void loginAkun (View view)
     {
-        Intent intent = new Intent(this, HalamanMasuk.class);
+        Intent intent = new Intent(this, activity_user.class);
 
         startActivity(intent);
 

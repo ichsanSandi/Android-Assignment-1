@@ -13,6 +13,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
+import com.example.program1.Room.activity_user;
 import com.example.program1.view.HalamanMasuk;
 
 public class HalamanAwal extends AppCompatActivity {
@@ -98,7 +99,7 @@ public class HalamanAwal extends AppCompatActivity {
                 btnNext.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        startActivity(new Intent(getApplicationContext(), HalamanMasuk.class));
+                        startActivity(new Intent(getApplicationContext(), activity_user.class));
                     }
                 });
             }
