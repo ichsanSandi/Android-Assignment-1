@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.program1.R;
 import com.example.program1.adapter.AdapterMeja;
-import com.example.program1.adapter.AdapterTransaksiMakanan;
+import com.example.program1.adapter.AdapterKonfirmasiTransaksiMakanan;
 import com.example.program1.model.ModelTransaksiMakanan;
 import com.example.program1.model.Pengguna;
 import com.google.firebase.auth.FirebaseAuth;
@@ -79,13 +79,13 @@ public class HomeKoki extends AppCompatActivity {
 //                myRecyclerViewAdapter = new AdapterMakanan(foodArrayList, MembeliMakanan.this, new AdapterMakanan.OnItemClickListener() {
 //                    @Override
 //                    public void onItemClick(ModelMakanan model) {
-//                        Intent data = new Intent(getApplicationContext(), MembeliMakanan2.class);
+//                        Intent data = new Intent(getApplicationContext(), konfirmasiMembeliMakanan.class);
 //                        data.putExtra("namaMakanan", model.getNamaMakanan());
 //                        data.putExtra("hargaMakanan", model.getHargaMakanan());
 //                        getApplicationContext().startActivity(data);
 //                    }
 //                });
-                myRecyclerViewAdapter = new AdapterTransaksiMakanan(foodArrayList, HomeKoki.this);
+                myRecyclerViewAdapter = new AdapterKonfirmasiTransaksiMakanan(foodArrayList, HomeKoki.this);
 
                 myRecyclerView.setAdapter(myRecyclerViewAdapter);
             }

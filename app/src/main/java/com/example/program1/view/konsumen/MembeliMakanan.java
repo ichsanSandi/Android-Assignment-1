@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.program1.model.Food;
 import com.example.program1.R;
-import com.example.program1.adapter.AdapterKonsumenMakanan;
+import com.example.program1.adapter.AdapterMenuMakanan;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -56,13 +56,13 @@ public class MembeliMakanan extends AppCompatActivity {
 //                myRecyclerViewAdapter = new AdapterMakanan(foodArrayList, MembeliMakanan.this, new AdapterMakanan.OnItemClickListener() {
 //                    @Override
 //                    public void onItemClick(ModelMakanan model) {
-//                        Intent data = new Intent(getApplicationContext(), MembeliMakanan2.class);
+//                        Intent data = new Intent(getApplicationContext(), konfirmasiMembeliMakanan.class);
 //                        data.putExtra("namaMakanan", model.getNamaMakanan());
 //                        data.putExtra("hargaMakanan", model.getHargaMakanan());
 //                        getApplicationContext().startActivity(data);
 //                    }
 //                });
-                myRecyclerViewAdapter = new AdapterKonsumenMakanan(foodArrayList, MembeliMakanan.this);
+                myRecyclerViewAdapter = new AdapterMenuMakanan(foodArrayList, MembeliMakanan.this);
 
                 myRecyclerView.setAdapter(myRecyclerViewAdapter);
             }
@@ -76,7 +76,7 @@ public class MembeliMakanan extends AppCompatActivity {
         but_pesan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MembeliMakanan.this, MembeliMakanan2.class));
+                startActivity(new Intent(MembeliMakanan.this, konfirmasiMembeliMakanan.class));
             }
         });
 

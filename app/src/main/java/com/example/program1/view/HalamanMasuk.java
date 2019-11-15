@@ -11,7 +11,6 @@ import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -35,6 +34,10 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 
 public class HalamanMasuk extends AppCompatActivity {
 
@@ -67,6 +70,24 @@ public class HalamanMasuk extends AppCompatActivity {
         masuk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String url = "jdbc:postgresql://127.0.0.1:5432/db_exploration";
+                String username = "irest";
+                String pwd = "147258";
+                try
+                {
+                    Class.forName("org.postgresql.Driver");
+                    Connection conn = DriverManager.getConnection(url, username, pwd);
+                    Context context = getApplicationContext();
+                    CharSequence text = "Connected!";
+                    int duration = Toast.LENGTH_SHORT;
+
+                    Toast toast = Toast.makeText(context, text, duration);
+                    toast.show();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                } catch (ClassNotFoundException e) {
+                    e.printStackTrace();
+                }
                 strEmail = email.getText().toString();
                 strPassword = password.getText().toString();
                 boolean bolehMasuk = true;
@@ -152,7 +173,7 @@ public class HalamanMasuk extends AppCompatActivity {
     public void onBackPressed() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setCancelable(false);
-        builder.setMessage("Tutup aplikasi Resto.in?");
+        builder.setMessage("Tutup aplikasi iRest?");
         builder.setPositiveButton("Ya", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {

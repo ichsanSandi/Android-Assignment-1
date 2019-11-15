@@ -86,23 +86,25 @@
 
         </androidx.appcompat.widget.Toolbar>
     </com.google.android.material.appbar.AppBarLayout>
-    <Button
-        android:id="@+id/konsumen_beli_makanan"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Beli Makanan"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-    <Button
-        android:id="@+id/konsumen_beli_minuman"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Beli Minuman" />
+        <Button
+            android:id="@+id/konsumen_beli_makanan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Beli Makanan" />
 
-    <Button
-        android:id="@+id/konsumen_isi_ovo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Isi Ovo"/>
+        <Button
+            android:id="@+id/konsumen_beli_minuman"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="130dp"
+            android:text="Beli Minuman" />
+    </RelativeLayout>
+
     <LinearLayout
         android:id="@+id/item_selected_makan_minum"
         android:layout_width="match_parent"

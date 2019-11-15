@@ -17,13 +17,13 @@ import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
 
-public class AdapterTransaksiMakanan extends RecyclerView.Adapter<AdapterTransaksiMakanan.ViewHolder> {
+public class AdapterKonfirmasiTransaksiMakanan extends RecyclerView.Adapter<AdapterKonfirmasiTransaksiMakanan.ViewHolder> {
 
     LayoutInflater mInflator;
     ArrayList<ModelTransaksiMakanan> foodArrayList = new ArrayList<>();
     Context c;
 
-    public AdapterTransaksiMakanan (ArrayList<ModelTransaksiMakanan> foodArrayList, Context c)
+    public AdapterKonfirmasiTransaksiMakanan(ArrayList<ModelTransaksiMakanan> foodArrayList, Context c)
     {
         this.foodArrayList = foodArrayList;
         this.c = c;

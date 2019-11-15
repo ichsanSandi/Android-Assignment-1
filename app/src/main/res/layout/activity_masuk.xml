@@ -37,25 +37,20 @@
 
     <LinearLayout
         android:id="@+id/layout_masuk"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="334dp"
+        android:layout_height="646dp"
         android:layout_centerInParent="true"
         android:layout_marginLeft="48dp"
         android:layout_marginRight="48dp"
         android:orientation="vertical">
+
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/img_logo"
             android:layout_width="160dp"
             android:layout_height="160dp"
-            android:layout_marginTop="20dp"
             android:layout_gravity="center"
-            android:background="@drawable/logo"
-            android:padding="8dp" />
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="0dp"
-            android:layout_height="80dp"
             android:layout_marginTop="20dp"
-            android:layout_gravity="center"
+            android:layout_marginBottom="10dp"
             android:background="@drawable/logo"
             android:padding="8dp" />
 
@@ -63,6 +58,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
 
+            android:layout_marginTop="15dp"
             app:errorEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -105,7 +101,7 @@
             android:layout_below="@id/layout_masuk"
             android:layout_centerHorizontal="true"
             android:layout_marginLeft="40dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="35dp"
             android:layout_marginRight="40dp"
             android:background="@drawable/bg_oval_white"
             android:foreground="?android:attr/selectableItemBackground"
@@ -113,8 +109,6 @@
             android:textAllCaps="false"
             android:textColor="@color/warnaPutih"
             android:textSize="24sp" />
-
-
 
 
     </LinearLayout>
