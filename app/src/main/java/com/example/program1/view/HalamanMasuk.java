@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -14,10 +15,14 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
+import com.example.program1.ForegroundService;
 import com.example.program1.R;
+import com.example.program1.TestActivity;
 import com.example.program1.model.Pengguna;
 import com.example.program1.view.admin.HomeAdmin;
 import com.example.program1.view.koki.HomeKoki;
@@ -44,6 +49,7 @@ public class HalamanMasuk extends AppCompatActivity {
     private static String TAG = "HalamanMasuk";
     private TextInputEditText email, password;
     private Button masuk;
+    private Button testButton;
     private String strEmail, strPassword;
     private FirebaseAuth auth;
     private FirebaseUser user;
@@ -66,13 +72,23 @@ public class HalamanMasuk extends AppCompatActivity {
         password = (TextInputEditText) findViewById(R.id.input_masukPassword);
 
         masuk = (Button) findViewById(R.id.btn_masuk);
+        testButton = (Button) findViewById(R.id.testButton);
+
+        testButton.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.O)
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(HalamanMasuk.this, TestActivity.class));
+                startService();
+            }
+        });
 
         masuk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String url = "jdbc:postgresql://127.0.0.1:5432/db_exploration";
                 String username = "irest";
-                String pwd = "147258";
+                String pwd = "123456";
                 try
                 {
                     Class.forName("org.postgresql.Driver");
@@ -149,6 +165,12 @@ public class HalamanMasuk extends AppCompatActivity {
 
     }
 
+    private void startService() {
+        Intent service = new Intent(HalamanMasuk.this, ForegroundService.class);
+        service.putExtra("inputExtra", "Foreground Service Example in Android");
+        ContextCompat.startForegroundService(this, service);
+    }
+
     private void cekLevel(String level) {
         switch (level) {
             case Pengguna.Admin:
@@ -177,8 +199,10 @@ public class HalamanMasuk extends AppCompatActivity {
         builder.setPositiveButton("Ya", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-            android.os.Process.killProcess(android.os.Process.myPid());
-            System.exit(1);
+//                startService();
+//                android.os.Process.killProcess(android.os.Process.myPid());
+//                System.exit(1);
+                finish();
             }
         });
         builder.setNegativeButton("Tidak", new DialogInterface.OnClickListener() {

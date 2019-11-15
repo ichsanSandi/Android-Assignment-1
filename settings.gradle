@@ -1,2 +1,2 @@
-include ':app', ':mysql-connector-java-5.1.48-bin', ':postgresql-42.2.8'
+include ':app', ':postgresql-42.2.8'
 rootProject.name='Program1'

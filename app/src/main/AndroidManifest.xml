@@ -3,6 +3,7 @@
     package="com.example.program1">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
 
     <application
         android:allowBackup="true"
@@ -10,6 +11,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Design.Light.NoActionBar">
+        <service android:name=".ForegroundService"
+            android:enabled="true"
+            android:exported="true"/>
+        <activity android:name=".TestActivity" android:noHistory="true"/>
+        <activity android:name=".AddFoodsItemTest"/>
+        <activity android:name=".UpdateFoodsItemTest" android:noHistory="true"/>
         <activity android:name=".ImageItem"></activity>
         <activity android:name=".AppTierModule"/>
         <activity android:name=".SecondTierModule"/>
@@ -36,6 +43,9 @@
         <activity android:name=".view.konsumen.MembeliMinuman"/>
         <activity android:name=".view.konsumen.konfirmasiMembeliMinuman"/>
         <activity android:name=".view.koki.HomeKoki"/>
+        <activity android:name=".DatabaseConn"/>
+
+
     </application>
 
 </manifest>

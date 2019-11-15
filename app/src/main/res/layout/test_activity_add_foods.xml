@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/foodsAddNameTextView"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:textSize="20dp"
+        android:text="Food Name" />
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/foodsAddNameEditText"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:hint="hint" />
+
+    <TextView
+        android:id="@+id/foodsAddPriceTextView"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:textSize="20dp"
+        android:text="Price" />
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/foodsAddPriceEditText"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:hint="hint" />
+
+    <Button
+        android:id="@+id/foodsAddConfirmButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Add" />
+
+</LinearLayout>
