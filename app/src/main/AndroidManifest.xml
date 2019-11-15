@@ -17,6 +17,13 @@
         <service android:name=".ForegroundService"
             android:enabled="true"
             android:exported="true"/>
+        <activity android:name=".view.HalamanMasuk">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity android:name=".TestActivity" android:noHistory="true"/>
         <activity android:name=".AddFoodsItemTest"/>
         <activity android:name=".UpdateFoodsItemTest" android:noHistory="true"/>
@@ -24,13 +31,7 @@
         <activity android:name=".AppTierModule"/>
         <activity android:name=".SecondTierModule"/>
         <activity android:name=".HalamanAwal" />
-        <activity android:name=".Room.Percobaan">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+        <activity android:name=".Room.Percobaan"/>
         <activity android:name=".Room.Foreground"/>
         <activity android:name=".Room.IntentService"/>
         <activity android:name=".Room.JobSchedulerService"/>

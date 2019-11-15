@@ -7,6 +7,7 @@ import android.widget.Button;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.room.Room;
@@ -32,6 +33,7 @@ public class TestActivity extends AppCompatActivity {
   @Override
   protected void onCreate(@Nullable Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
+    startService();
     setContentView(R.layout.test_activity_layout);
 
     recyclerView = (RecyclerView) findViewById(R.id.itemTestRecyclerView);
@@ -63,7 +65,12 @@ public class TestActivity extends AppCompatActivity {
         startActivity(intent);
       }
     });
+  }
 
+  private void startService() {
+    Intent service = new Intent(TestActivity.this, ForegroundService.class);
+    service.putExtra("inputExtra", "Foreground Service Example in Android");
+    ContextCompat.startForegroundService(this, service);
   }
 
   private void stopService() {

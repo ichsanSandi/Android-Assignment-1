@@ -18,9 +18,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
 
-import com.example.program1.ForegroundService;
 import com.example.program1.R;
 import com.example.program1.TestActivity;
 import com.example.program1.model.Pengguna;
@@ -79,7 +77,6 @@ public class HalamanMasuk extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(HalamanMasuk.this, TestActivity.class));
-                startService();
             }
         });
 
@@ -161,14 +158,6 @@ public class HalamanMasuk extends AppCompatActivity {
                 }
             }
         });
-
-
-    }
-
-    private void startService() {
-        Intent service = new Intent(HalamanMasuk.this, ForegroundService.class);
-        service.putExtra("inputExtra", "Foreground Service Example in Android");
-        ContextCompat.startForegroundService(this, service);
     }
 
     private void cekLevel(String level) {

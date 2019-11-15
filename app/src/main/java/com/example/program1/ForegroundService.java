@@ -12,8 +12,16 @@ import android.util.Log;
 import android.widget.Toast;
 
 import androidx.core.app.NotificationCompat;
+import androidx.room.Room;
 
+import com.example.program1.RoomDB.Foods;
+import com.example.program1.RoomDB.FoodsDatabase;
 import com.example.program1.view.HalamanMasuk;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.concurrent.TimeUnit;
 
 public class ForegroundService extends Service {
   public static final String CHANNEL_ID = "ForegroundServiceChannel";
@@ -25,7 +33,7 @@ public class ForegroundService extends Service {
   }
 
   @Override
-  public int onStartCommand(Intent intent, int flags, int startId) {
+  public int onStartCommand(Intent intent, int flags, final int startId) {
 
     createNotificationChannel();
     Intent notificationIntent = new Intent(this, HalamanMasuk.class);
@@ -41,10 +49,38 @@ public class ForegroundService extends Service {
             .build();
 
     Toast.makeText(this, "Notification Service started by user.", Toast.LENGTH_LONG).show();
-    for (int i = 0; i < Integer.MAX_VALUE; i++)
-    {
-      Log.w(TAG, String.valueOf(i));
-    }
+    new Thread(new Runnable() {
+      @Override
+      public void run() {
+        DatabaseConn dbConn = new DatabaseConn();
+        FoodsDatabase foodsDatabase = Room.databaseBuilder(getApplicationContext(), FoodsDatabase.class, "foods-database")
+                .allowMainThreadQueries()
+                .build();
+        for (int i = 0; i < 5; i++)
+        {
+          try {
+            TimeUnit.SECONDS.sleep(1);
+            Log.w(TAG, String.valueOf(i));
+          } catch (InterruptedException e) {
+            e.printStackTrace();
+          }
+        }
+        try {
+          Statement statement1 = dbConn.postgreConn().createStatement();
+          ResultSet cursor = statement1.executeQuery("Select * from public.foods");
+          while (cursor.next())
+          {
+            Foods foods = new Foods();
+            foods.setId(Integer.valueOf(cursor.getString(3)));
+            foods.setPrice(Integer.valueOf(cursor.getString(2)));
+            foods.setName(cursor.getString(1));
+            foodsDatabase.FoodsDao().insertFood(foods);
+          }
+        } catch (SQLException e) {
+          e.printStackTrace();
+        }
+      }
+    }).start();
 //    DatabaseConn dbConn = new DatabaseConn();
 //    dbConn.postgreConn();
 
