@@ -15,7 +15,15 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.room.Room;
 
+import com.example.program1.Room.Foods;
+import com.example.program1.Room.FoodsDatabase;
+import com.example.program1.Room.User;
+import com.example.program1.Room.activity_user;
+import com.example.program1.Room.read;
+import com.example.program1.model.Drink;
+import com.example.program1.model.Food;
 import com.example.program1.model.Pengguna;
 import com.example.program1.view.HalamanMasuk;
 import com.example.program1.view.admin.HomeAdmin;
@@ -27,6 +35,11 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.internal.Util;
+import com.example.program1.Room.AppDatabase;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 //import com.example.program1.view.Perusahaan.HomePerusahaan;
 
@@ -41,6 +54,10 @@ public class Welcome extends AppCompatActivity {
     FirebaseAuth auth;
     FirebaseUser user;
     DatabaseReference dbRef;
+    public static AppDatabase AppDatabase;
+    ArrayList<String> PenggunaList;
+    ArrayList<Food> foodArrayList;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,14 +80,80 @@ public class Welcome extends AppCompatActivity {
                         SharedPreferences pref = getApplicationContext().getSharedPreferences("com.example.program1", 0);
                         if (pref.getBoolean("first_launch", false)) {
                             pref.edit().putBoolean("first_lauch", false).commit();
-                            startActivity(new Intent(Welcome.this, HalamanAwal.class));
+                            startActivity(new Intent(Welcome.this, activity_user.class));
 //                            startActivity(new Intent(getApplicationContext(),coba.class));
                         } else {
                             if (!get_internet(getApplicationContext())) {
                                 Toast.makeText(Welcome.this, "Tidak ada koneksi internet", Toast.LENGTH_LONG).show();
-                                startActivity(new Intent(getApplicationContext(),HalamanMasuk.class));
+                                startActivity(new Intent(getApplicationContext(), activity_user.class));
 //                                startActivity(new Intent(getApplicationContext(),coba.class));
                             } else {
+
+                                AppDatabase = Room.databaseBuilder(getApplicationContext(),AppDatabase.class,"userdb").allowMainThreadQueries().fallbackToDestructiveMigration().build();
+
+                                //food
+                                dbRef.child("drinks").addValueEventListener(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                        foodArrayList = new ArrayList<>();
+                                        System.out.println(dataSnapshot.getChildren());
+                                        for (DataSnapshot dataSnapshotIter : dataSnapshot.getChildren()) {
+                                            Food makanan = dataSnapshotIter.getValue(Food.class);
+                                            foodArrayList.add(makanan);
+                                            Foods food = new Foods();
+                                            System.out.println(dataSnapshotIter.getValue(Drink.class).getId() + "lah");
+                                            food.setUidFood(dataSnapshotIter.getValue(Drink.class).getId());
+                                            food.setNameFood(dataSnapshotIter.getValue(Drink.class).getName());
+                                            food.setPriceFood(String.valueOf(dataSnapshotIter.getValue(Drink.class).getPrice()));
+                                            Welcome.AppDatabase.foodDao().update(food);
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                                        System.out.println(databaseError.getDetails()+" "+databaseError.getMessage());
+                                    }
+                                });
+
+                                //user
+//                                List<User> users = Welcome.AppDatabase.userDao().getAll();
+//
+//                                dbRef.child("pengguna").addListenerForSingleValueEvent(new ValueEventListener() {
+//                                    @Override
+//                                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//                                        PenggunaList = new ArrayList<>();
+//                                        int i = 0;
+//                                        for (DataSnapshot child : dataSnapshot.getChildren()) {
+//                                            String peng = child.getKey();
+//                                            PenggunaList.add(peng);
+//
+//                                            System.out.println("kenapa2" + PenggunaList.get(i));
+//                                            i++;
+//                                        }
+//
+//                                    }
+//
+//                                    @Override
+//                                    public void onCancelled(@NonNull DatabaseError databaseError) {
+//                                        Toast.makeText(Welcome.this, "Gagal Login / Sesi Berakhir", Toast.LENGTH_LONG).show();
+//                                        Log.w(TAG, "Login ERROR : " + databaseError.getDetails());
+//                                        startActivity(new Intent(getApplicationContext(), activity_user.class));
+//                                    }
+//                                });
+//                                int position = 0;
+//
+//                                for(User usr : users)
+//                                {
+//                                    if("" != (String.valueOf(usr.uid)))
+//                                    {
+//                                        Pengguna daftar = new Pengguna((String.valueOf(usr.uid)), usr.firstName, usr.lastName, Pengguna.Konsumen,"123456","0");
+//                                        dbRef.child("pengguna").child((String.valueOf(usr.uid))).push().setValue(daftar);
+//                                        System.out.println("kenapa2");
+//                                    }
+//                                    System.out.println("kenapa1");
+//                                    position++;
+//                                }
+
                                 if (user != null) {
                                     dbRef.child("pengguna").child(user.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
                                         @Override
@@ -79,17 +162,19 @@ public class Welcome extends AppCompatActivity {
                                                 Pengguna pen = child.getValue(Pengguna.class);
                                                 cekLevel(pen.getLevel());
                                             }
+                                            startActivity(new Intent(getApplicationContext(), activity_user.class));
                                         }
 
                                         @Override
                                         public void onCancelled(@NonNull DatabaseError databaseError) {
                                             Toast.makeText(Welcome.this, "Gagal Login / Sesi Berakhir", Toast.LENGTH_LONG).show();
                                             Log.w(TAG, "Login ERROR : " + databaseError.getDetails());
-                                            startActivity(new Intent(getApplicationContext(), HalamanMasuk.class));
+                                            startActivity(new Intent(getApplicationContext(), activity_user.class));
                                         }
                                     });
                                 } else {
-                                    startActivity(new Intent(getApplicationContext(), HalamanMasuk.class));
+
+                                    startActivity(new Intent(getApplicationContext(), activity_user.class));
                                 }
                             }
 

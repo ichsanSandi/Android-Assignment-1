@@ -5,7 +5,10 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
 
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+
     <application
+        android:name=".Room.App"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:roundIcon="@mipmap/ic_launcher_round"
@@ -20,15 +23,20 @@
         <activity android:name=".ImageItem"></activity>
         <activity android:name=".AppTierModule"/>
         <activity android:name=".SecondTierModule"/>
-        <activity android:name=".Welcome"/>
         <activity android:name=".HalamanAwal" />
-        <activity android:name=".view.HalamanMasuk">
+        <activity android:name=".Room.Percobaan">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".Room.Foreground"/>
+        <activity android:name=".Room.IntentService"/>
+        <activity android:name=".Room.JobSchedulerService"/>
+        <activity android:name=".Room.read" />
+        <activity android:name=".Room.activity_user" />
+        <activity android:name=".Room.ubah" />
         <activity android:name=".view.HalamanDaftar" />
         <activity android:name=".view.admin.HomeAdmin"/>
         <activity android:name=".view.admin.MemasukanMakanan"/>
@@ -43,6 +51,11 @@
         <activity android:name=".view.konsumen.MembeliMinuman"/>
         <activity android:name=".view.konsumen.konfirmasiMembeliMinuman"/>
         <activity android:name=".view.koki.HomeKoki"/>
+        <service android:name=".Room.ExampleService" />
+        <service android:name=".Room.ExampleIntentService" />
+        <service
+            android:name=".Room.ExampleJobService"
+            android:permission="android.permission.BIND_JOB_SERVICE" />
         <activity android:name=".DatabaseConn"/>
 
 
