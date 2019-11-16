@@ -17,26 +17,26 @@ public class Food
 		this.price = price;
 	}
 	public void setId (String id)
-	{ this.id = id;	}
+		{ this.id = id;	}
 	
 	public void setName (String name)
-	{ this.name = name;	}
+		{ this.name = name;	}
 	
 	public void setPrice (int price)
-	{ this.price = price;	}
+		{ this.price = price;	}
 	
 	public String getId ()
-	{ return id; }
+		{ return id; }
 	
 	public String getName ()
-	{ return name; }
+		{ return name; }
 	
 	public int getPrice ()
-	{ return price; }
+		{ return price; }
 	
 	public String getKey ()
-	{ return key; }
+		{ return key; }
 	
 	public void setKey (String key)
-	{ this.key = key; }
+		{ this.key = key; }
 }

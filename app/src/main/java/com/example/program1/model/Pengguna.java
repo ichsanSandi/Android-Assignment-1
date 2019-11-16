@@ -29,38 +29,38 @@ public class Pengguna
 	}
 	
 	public String getLevel ()
-	{ return level; }
+		{ return level; }
 	
 	public void setLevel (String level)
-	{ this.level = level; }
+		{ this.level = level; }
 	
 	public String getId ()
-	{ return id; }
+		{ return id; }
 	
 	public void setId (String id)
-	{ this.id = id; }
+		{ this.id = id; }
 	
 	public String getNama ()
-	{ return nama; }
+		{ return nama; }
 	
 	public void setNama (String nama)
-	{ this.nama = nama; }
+		{ this.nama = nama; }
 	
 	public String getEmail ()
-	{ return email; }
+		{ return email; }
 	
 	public void setEmail (String email)
-	{ this.email = email; }
+		{ this.email = email; }
 	
 	public String getPassword ()
-	{ return password; }
+		{ return password; }
 	
 	public void setPassword (String password)
-	{ this.password = password; }
+		{ this.password = password; }
 	
 	public String getOvo ()
-	{ return ovo; }
+		{ return ovo; }
 	
 	public void setOvo (String ovo)
-	{ this.ovo = ovo; }
+		{ this.ovo = ovo; }
 }

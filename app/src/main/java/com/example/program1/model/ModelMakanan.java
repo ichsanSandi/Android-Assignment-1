@@ -23,29 +23,29 @@ public class ModelMakanan
 	}
 			
 	public String getIdMakanan ()
-	{ return idMakanan; }
+		{ return idMakanan; }
 			
 	public void setIdMakanan (String idMakanan)
-	{ this.idMakanan = idMakanan; }
+		{ this.idMakanan = idMakanan; }
 	
 	public String getNamaMakanan ()
-	{ return namaMakanan; }
+		{ return namaMakanan; }
 			
 	public void setNamaMakanan (String namaMakanan)
-	{ this.namaMakanan = namaMakanan; }
+		{ this.namaMakanan = namaMakanan; }
 			
 	public String getHargaMakanan ()
-	{ return hargaMakanan; }
+		{ return hargaMakanan; }
 			
 	public void setHargaMakanan (String hargaMakanan)
-	{ this.hargaMakanan = hargaMakanan; }
+		{ this.hargaMakanan = hargaMakanan; }
 			
 	public String getFotoMakanan ()
-	{ return fotoMakanan; }
+		{ return fotoMakanan; }
 			
 	public void setFotoMakanan (String fotoMakanan)
-	{ this.fotoMakanan = fotoMakanan; }
+		{ this.fotoMakanan = fotoMakanan; }
 			
 	public void setKey (String key)
-	{ this.key = key; }
+		{ this.key = key; }
 }

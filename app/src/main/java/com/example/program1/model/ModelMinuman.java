@@ -23,26 +23,26 @@ public class ModelMinuman
 	}
 	
 	public String getIdMinuman ()
-	{ return idMinuman; }
+		{ return idMinuman; }
 	
 	public void setIdMinuman (String idMinuman)
-	{ this.idMinuman = idMinuman; }
+		{ this.idMinuman = idMinuman; }
 	
 	public String getNamaMinuman ()
-	{ return namaMinuman; }
+		{ return namaMinuman; }
 	
 	public void setNamaMinuman (String namaMinuman)
-	{ this.namaMinuman = namaMinuman; }
+		{ this.namaMinuman = namaMinuman; }
 	
 	public String getHargaMinuman ()
-	{ return hargaMinuman; }
+		{ return hargaMinuman; }
 	
 	public void setHargaMinuman (String hargaMinuman)
-	{ this.hargaMinuman = hargaMinuman; }
+		{ this.hargaMinuman = hargaMinuman; }
 	
 	public String getFotoMinuman ()
-	{ return fotoMinuman; }
+		{ return fotoMinuman; }
 	
 	public void setFotoMinuman (String fotoMinuman)
-	{ this.fotoMinuman = fotoMinuman; }
+		{ this.fotoMinuman = fotoMinuman; }
 }

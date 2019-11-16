@@ -29,50 +29,50 @@ public class ModelTransaksiMinuman
 	}
 	
 	public String getIdTransaksiMinuman ()
-	{ return idTransaksiMinuman; }
+		{ return idTransaksiMinuman; }
 	
 	public void setIdTransaksiMinuman (String idTransaksiMinuman)
-	{ this.idTransaksiMinuman = idTransaksiMinuman; }
+		{ this.idTransaksiMinuman = idTransaksiMinuman; }
 	
 	public String getNamaMinuman ()
-	{ return namaMinuman; }
+		{ return namaMinuman; }
 	
 	public void setNamaMinuman (String namaMinuman)
-	{ this.namaMinuman = namaMinuman; }
-	
+		{ this.namaMinuman = namaMinuman; }
+		
 	public String getHargaMinuman ()
-	{ return hargaMinuman; }
+		{ return hargaMinuman; }
 	
 	public void setHargaMinuman (String hargaMinuman)
-	{ this.hargaMinuman = hargaMinuman; }
+		{ this.hargaMinuman = hargaMinuman; }
 	
 	public String getNamaKonsumen ()
-	{ return namaKonsumen; }
+		{ return namaKonsumen; }
 	
 	public void setNamaKonsumen (String namaKonsumen)
-	{ this.namaKonsumen = namaKonsumen; }
+		{ this.namaKonsumen = namaKonsumen; }
 	
 	public String getJumlahMinuman ()
-	{ return jumlahMinuman; }
+		{ return jumlahMinuman; }
 	
 	public void setJumlahMinuman (String jumlahMinuman)
-	{ this.jumlahMinuman = jumlahMinuman; }
-	
+		{ this.jumlahMinuman = jumlahMinuman; }
+		
 	public String getStatusMinuman ()
-	{ return statusMinuman; }
+		{ return statusMinuman; }
 	
 	public void setStatusMinuman (String statusMinuman)
-	{ this.statusMinuman = statusMinuman; }
+		{ this.statusMinuman = statusMinuman; }
 	
 	public void setKey (String key)
-	{ this.key = key; }
+		{ this.key = key; }
 	
 	public int getTimestamp ()
-	{ return timestamp; }
+		{ return timestamp; }
 	
 	public void setTimestamp (int timestamp)
-	{ this.timestamp = timestamp; }
+		{ this.timestamp = timestamp; }
 	
 	public String getKey ()
-	{ return key; }
+		{ return key; }
 }
