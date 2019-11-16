@@ -25,7 +25,8 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-public class BayarPesanan extends AppCompatActivity {
+public class BayarPesanan extends AppCompatActivity
+{
 
     private FirebaseAuth auth;
     private FirebaseUser user;
@@ -40,71 +41,73 @@ public class BayarPesanan extends AppCompatActivity {
 
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_transaksi_makanan);
+    protected void onCreate (@Nullable Bundle savedInstanceState)
+    {
+        super.onCreate (savedInstanceState);
+        setContentView (R.layout.activity_transaksi_makanan);
         auth = FirebaseAuth.getInstance();
         final String emailUser = auth.getCurrentUser().getEmail();
         dbRef = FirebaseDatabase.getInstance().getReference();
 
-        myRecyclerView = (RecyclerView) findViewById(R.id.transaksi_recyclerView_makanan);
-        myRecyclerView.setHasFixedSize(true);
-        myRecyclerViewLayoutMgr = new LinearLayoutManager(this);
-        myRecyclerView.setLayoutManager(myRecyclerViewLayoutMgr);
-        but_pesan = findViewById(R.id.btn_beli_makanan);
+        myRecyclerView =  (RecyclerView) findViewById (R.id.transaksi_recyclerView_makanan);
+        myRecyclerView.setHasFixedSize (true);
+        myRecyclerViewLayoutMgr = new LinearLayoutManager (this);
+        myRecyclerView.setLayoutManager (myRecyclerViewLayoutMgr);
+        but_pesan = findViewById (R.id.btn_beli_makanan);
         databaseReference = FirebaseDatabase.getInstance().getReference();
-        databaseReference.child("transaksiMakanan").addValueEventListener(new ValueEventListener() {
+        databaseReference.child ("transaksiMakanan").addValueEventListener (new ValueEventListener()
+        {
             @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+            public void onDataChange (@NonNull DataSnapshot dataSnapshot)
+            {
                 foodArrayList = new ArrayList<>();
-                System.out.println(dataSnapshot.getChildren());
-                for (DataSnapshot dataSnapshotIter : dataSnapshot.getChildren()) {
-                    String user = dataSnapshotIter.getValue(ModelTransaksiMakanan.class).getNamaKonsumen();
-                    ModelTransaksiMakanan makanan = dataSnapshotIter.getValue(ModelTransaksiMakanan.class);
-                    if (user.equalsIgnoreCase(emailUser)) {
-                        if((dataSnapshotIter.getValue(ModelTransaksiMakanan.class).getNamaKonsumen()).equalsIgnoreCase("bayar")) {
-                            foodArrayList.add(makanan);
+                System.out.println (dataSnapshot.getChildren());
+                for  (DataSnapshot dataSnapshotIter : dataSnapshot.getChildren())
+                {
+                    String user = dataSnapshotIter.getValue (ModelTransaksiMakanan.class).getNamaKonsumen();
+                    ModelTransaksiMakanan makanan = dataSnapshotIter.getValue (ModelTransaksiMakanan.class);
+                    if  (user.equalsIgnoreCase (emailUser))
+                    {
+                        if ( (dataSnapshotIter.getValue (ModelTransaksiMakanan.class).getNamaKonsumen()).equalsIgnoreCase ("bayar"))
+                        {
+                            foodArrayList.add (makanan);
                         }
                     }
                 }
-//                myRecyclerViewAdapter = new AdapterMakanan(foodArrayList, MembeliMakanan.this, new AdapterMakanan.OnItemClickListener() {
-//                    @Override
-//                    public void onItemClick(ModelMakanan model) {
-//                        Intent data = new Intent(getApplicationContext(), konfirmasiMembeliMakanan.class);
-//                        data.putExtra("namaMakanan", model.getNamaMakanan());
-//                        data.putExtra("hargaMakanan", model.getHargaMakanan());
-//                        getApplicationContext().startActivity(data);
-//                    }
-//                });
-                myRecyclerViewAdapter = new AdapterKonfirmasiTransaksiMakanan(foodArrayList, BayarPesanan.this);
+                myRecyclerViewAdapter = new AdapterKonfirmasiTransaksiMakanan (foodArrayList, BayarPesanan.this);
 
-                myRecyclerView.setAdapter(myRecyclerViewAdapter);
+                myRecyclerView.setAdapter (myRecyclerViewAdapter);
             }
 
             @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                System.out.println(databaseError.getDetails()+" "+databaseError.getMessage());
+            public void onCancelled (@NonNull DatabaseError databaseError)
+            {
+                System.out.println (databaseError.getDetails()+" "+databaseError.getMessage());
             }
         });
 
-        but_pesan.setOnClickListener(new View.OnClickListener() {
+        but_pesan.setOnClickListener (new View.OnClickListener()
+        {
             @Override
-            public void onClick(View v) {
-                DatabaseReference getId = FirebaseDatabase.getInstance().getReference().child("transaksiMakanan");
-                final DatabaseReference pushId = dbRef.child("transaksiMakanan");
-                getId.addValueEventListener(new ValueEventListener() {
+            public void onClick (View v)
+            {
+                DatabaseReference getId = FirebaseDatabase.getInstance().getReference().child ("transaksiMakanan");
+                final DatabaseReference pushId = dbRef.child ("transaksiMakanan");
+                getId.addValueEventListener (new ValueEventListener() {
                     @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        for (DataSnapshot perData : dataSnapshot.getChildren()) {
-                            ModelTransaksiMakanan model = perData.getValue(ModelTransaksiMakanan.class);
-                            if (model.getStatusMakanan() != null) {
-                                if (model.getNamaKonsumen().equalsIgnoreCase(emailUser))
+                    public void onDataChange (@NonNull DataSnapshot dataSnapshot)
+                    {
+                        for  (DataSnapshot perData : dataSnapshot.getChildren()) {
+                            ModelTransaksiMakanan model = perData.getValue (ModelTransaksiMakanan.class);
+                            if  (model.getStatusMakanan() != null)
+                            {
+                                if  (model.getNamaKonsumen().equalsIgnoreCase (emailUser))
                                 {
-                                    if (model.getStatusMakanan().equalsIgnoreCase("bayar"))
+                                    if  (model.getStatusMakanan().equalsIgnoreCase ("bayar"))
                                     {
-                                        System.out.println(model.getNamaMakanan());
+                                        System.out.println (model.getNamaMakanan());
                                         String key = perData.getKey();
-                                        pushId.child(key).child("statusMakanan").setValue("lunas");
+                                        pushId.child (key).child ("statusMakanan").setValue ("lunas");
                                     }
                                 }
                             }
@@ -112,20 +115,14 @@ public class BayarPesanan extends AppCompatActivity {
                     }
 
                     @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                    public void onCancelled (@NonNull DatabaseError databaseError)
+                    {
 
                     }
                 });
-                startActivity(new Intent(BayarPesanan.this, BayarPesanan.class));
+                startActivity (new Intent (BayarPesanan.this, BayarPesanan.class));
             }
         });
-
-
-//
     }
 
-    public static Intent getActiveIntent(Activity activity)
-    {
-        return new Intent(activity, BayarPesanan.class);
-    }
 }

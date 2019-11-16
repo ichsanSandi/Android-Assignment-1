@@ -1,6 +1,5 @@
 package com.example.program1.view.konsumen;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -23,69 +22,56 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-public class MembeliMakanan extends AppCompatActivity {
+public class MembeliMakanan extends AppCompatActivity 
+{
 
     DatabaseReference databaseReference;
     RecyclerView myRecyclerView;
     RecyclerView.Adapter myRecyclerViewAdapter;
     RecyclerView.LayoutManager myRecyclerViewLayoutMgr;
     ArrayList<Food> foodArrayList;
-    Button but_pesan;
+    Button butPesan;
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_membeli_makanan);
-
-        myRecyclerView = (RecyclerView) findViewById(R.id.myFoodRecyclerView);
-        myRecyclerView.setHasFixedSize(true);
-        myRecyclerViewLayoutMgr = new LinearLayoutManager(this);
-        myRecyclerView.setLayoutManager(myRecyclerViewLayoutMgr);
-        but_pesan = findViewById(R.id.btn_pesan_makanan);
+    protected void onCreate (@Nullable Bundle savedInstanceState) 
+    {
+        super.onCreate (savedInstanceState);
+        setContentView (R.layout.activity_membeli_makanan);
+        myRecyclerView = (RecyclerView) findViewById (R.id.myFoodRecyclerView);
+        myRecyclerView.setHasFixedSize (true);
+        myRecyclerViewLayoutMgr = new LinearLayoutManager (this);
+        myRecyclerView.setLayoutManager (myRecyclerViewLayoutMgr);
+        butPesan = findViewById (R.id.btn_pesan_makanan);
         databaseReference = FirebaseDatabase.getInstance().getReference();
-        databaseReference.child("foods").addValueEventListener(new ValueEventListener() {
+        databaseReference.child ("foods").addValueEventListener (new ValueEventListener() 
+        {
             @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+            public void onDataChange (@NonNull DataSnapshot dataSnapshot) {
                 foodArrayList = new ArrayList<>();
                 for (DataSnapshot dataSnapshotIter : dataSnapshot.getChildren())
                 {
-                    Food makanan = (Food) dataSnapshotIter.getValue(Food.class);
-                    makanan.setKey(dataSnapshotIter.getKey());
-                    foodArrayList.add(makanan);
+                    Food makanan = (Food) dataSnapshotIter.getValue (Food.class);
+                    makanan.setKey (dataSnapshotIter.getKey());
+                    foodArrayList.add (makanan);
                 }
-//                myRecyclerViewAdapter = new AdapterMakanan(foodArrayList, MembeliMakanan.this, new AdapterMakanan.OnItemClickListener() {
-//                    @Override
-//                    public void onItemClick(ModelMakanan model) {
-//                        Intent data = new Intent(getApplicationContext(), konfirmasiMembeliMakanan.class);
-//                        data.putExtra("namaMakanan", model.getNamaMakanan());
-//                        data.putExtra("hargaMakanan", model.getHargaMakanan());
-//                        getApplicationContext().startActivity(data);
-//                    }
-//                });
-                myRecyclerViewAdapter = new AdapterMenuMakanan(foodArrayList, MembeliMakanan.this);
+                myRecyclerViewAdapter = new AdapterMenuMakanan (foodArrayList, MembeliMakanan.this);
 
-                myRecyclerView.setAdapter(myRecyclerViewAdapter);
+                myRecyclerView.setAdapter (myRecyclerViewAdapter);
             }
 
             @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                System.out.println(databaseError.getDetails()+" "+databaseError.getMessage());
+            public void onCancelled (@NonNull DatabaseError databaseError) {
+                System.out.println (databaseError.getDetails()+" "+databaseError.getMessage());
             }
         });
 
-        but_pesan.setOnClickListener(new View.OnClickListener() {
+        butPesan.setOnClickListener (new View.OnClickListener() 
+        {
             @Override
-            public void onClick(View v) {
-                startActivity(new Intent(MembeliMakanan.this, konfirmasiMembeliMakanan.class));
+            public void onClick (View v) 
+            {
+                startActivity (new Intent (MembeliMakanan.this, konfirmasiMembeliMakanan.class));
             }
         });
-
-
-//
-    }
-
-    public static Intent getActiveIntent(Activity activity)
-    {
-        return new Intent(activity, MembeliMakanan.class);
     }
 }

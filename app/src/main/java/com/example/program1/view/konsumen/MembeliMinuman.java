@@ -23,60 +23,55 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-public class MembeliMinuman extends AppCompatActivity {
-
-
+public class MembeliMinuman extends AppCompatActivity 
+{
     DatabaseReference databaseReference;
     RecyclerView myRecyclerView;
     RecyclerView.Adapter myRecyclerViewAdapter;
     RecyclerView.LayoutManager myRecyclerViewLayoutMgr;
     ArrayList<Drink> drinkArrayList;
-    Button but_pesan;
+    Button butPesan;
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_membeli_minuman);
-
-        myRecyclerView = (RecyclerView) findViewById(R.id.drinkRecyclerView);
-        myRecyclerView.setHasFixedSize(true);
-        myRecyclerViewLayoutMgr = new LinearLayoutManager(this);
-        myRecyclerView.setLayoutManager(myRecyclerViewLayoutMgr);
-        but_pesan = findViewById(R.id.btn_pesan_minuman);
+    protected void onCreate (@Nullable Bundle savedInstanceState)
+    {
+        super.onCreate (savedInstanceState);
+        setContentView (R.layout.activity_membeli_minuman);
+        myRecyclerView = (RecyclerView) findViewById (R.id.drinkRecyclerView);
+        myRecyclerView.setHasFixedSize (true);
+        myRecyclerViewLayoutMgr = new LinearLayoutManager (this);
+        myRecyclerView.setLayoutManager (myRecyclerViewLayoutMgr);
+        butPesan = findViewById (R.id.btn_pesan_minuman);
         databaseReference = FirebaseDatabase.getInstance().getReference();
-        databaseReference.child("drinks").addValueEventListener(new ValueEventListener() {
+
+        databaseReference.child ("drinks").addValueEventListener (new ValueEventListener()
+        {
             @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+            public void onDataChange (@NonNull DataSnapshot dataSnapshot) {
                 drinkArrayList = new ArrayList<>();
                 for (DataSnapshot dataSnapshotIter : dataSnapshot.getChildren())
                 {
-                    System.out.println(dataSnapshotIter.getValue());
-                    Drink minuman = (Drink) dataSnapshotIter.getValue(Drink.class);
-                    minuman.setKey(dataSnapshotIter.getKey());
-                    drinkArrayList.add(minuman);
+                    System.out.println (dataSnapshotIter.getValue());
+                    Drink minuman = (Drink) dataSnapshotIter.getValue (Drink.class);
+                    minuman.setKey (dataSnapshotIter.getKey());
+                    drinkArrayList.add (minuman);
                 }
-                myRecyclerViewAdapter = new AdapterMenuMinuman(drinkArrayList, MembeliMinuman.this);
+                myRecyclerViewAdapter = new AdapterMenuMinuman (drinkArrayList, MembeliMinuman.this);
 
-                myRecyclerView.setAdapter(myRecyclerViewAdapter);
+                myRecyclerView.setAdapter (myRecyclerViewAdapter);
             }
 
             @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                System.out.println(databaseError.getDetails()+" "+databaseError.getMessage());
+            public void onCancelled (@NonNull DatabaseError databaseError) {
+                System.out.println (databaseError.getDetails() + " " + databaseError.getMessage());
             }
         });
 
-        but_pesan.setOnClickListener(new View.OnClickListener() {
+        butPesan.setOnClickListener (new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                startActivity(new Intent(MembeliMinuman.this, konfirmasiMembeliMinuman.class));
+            public void onClick (View v) {
+                startActivity (new Intent (MembeliMinuman.this, konfirmasiMembeliMinuman.class));
             }
         });
-//
-    }
-
-    public static Intent getActiveIntent(Activity activity)
-    {
-        return new Intent(activity, MembeliMinuman.class);
     }
 }

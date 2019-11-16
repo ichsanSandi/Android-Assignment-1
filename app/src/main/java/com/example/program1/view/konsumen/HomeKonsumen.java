@@ -25,15 +25,13 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-//import
-
 public class HomeKonsumen extends AppCompatActivity
 {
-    private Button butMakanan, butMinuman;
-    private FragmentManager fm;
-    private FirebaseAuth auth;
-    private FirebaseUser user;
-    private DatabaseReference dbRef;
+     Button butMakanan, butMinuman;
+     FragmentManager fm;
+     FirebaseAuth auth;
+     FirebaseUser user;
+     DatabaseReference dbRef;
 
     DatabaseReference databaseReference;
     RecyclerView myRecyclerView;
@@ -43,68 +41,67 @@ public class HomeKonsumen extends AppCompatActivity
     ArrayList<ModelTransaksiMinuman> drinkArrayList = new ArrayList<>();
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home_konsumen);
+    protected void onCreate (Bundle savedInstanceState)
+    {
+        super.onCreate (savedInstanceState);
+        setContentView (R.layout.activity_home_konsumen);
         auth = FirebaseAuth.getInstance();
         final String emailUser = auth.getCurrentUser().getEmail();
         dbRef = FirebaseDatabase.getInstance().getReference();
+        butMakanan = findViewById (R.id.konsumen_beli_makanan);
+        butMinuman = findViewById (R.id.konsumen_beli_minuman);
 
-        butMakanan = findViewById(R.id.konsumen_beli_makanan);
-        butMinuman = findViewById(R.id.konsumen_beli_minuman);
-        fm = getSupportFragmentManager();
-        butMakanan.setOnClickListener(new View.OnClickListener() {
+        butMakanan.setOnClickListener (new View.OnClickListener()
+        {
             @Override
-            public void onClick(View v) {
-                startActivity(new Intent(HomeKonsumen.this, MembeliMakanan.class));
-            }
-        });
-        butMinuman.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(HomeKonsumen.this, MembeliMinuman.class));
+            public void onClick (View v)
+            {
+                startActivity (new Intent (HomeKonsumen.this, MembeliMakanan.class));
             }
         });
 
-        myRecyclerView = (RecyclerView) findViewById(R.id.transaksi_recyclerView_pesanan);
-        myRecyclerView.setHasFixedSize(true);
-        myRecyclerViewLayoutMgr = new LinearLayoutManager(this);
-        myRecyclerView.setLayoutManager(myRecyclerViewLayoutMgr);
+        butMinuman.setOnClickListener (new View.OnClickListener()
+        {
+            @Override
+            public void onClick (View v)
+            {
+                startActivity (new Intent (HomeKonsumen.this, MembeliMinuman.class));
+            }
+        });
+
+        myRecyclerView = (RecyclerView) findViewById (R.id.transaksi_recyclerView_pesanan);
+        myRecyclerView.setHasFixedSize (true);
+        myRecyclerViewLayoutMgr = new LinearLayoutManager (this);
+        myRecyclerView.setLayoutManager (myRecyclerViewLayoutMgr);
         databaseReference = FirebaseDatabase.getInstance().getReference();
-        databaseReference.child("transaksiMakanan").addValueEventListener(new ValueEventListener() {
+        databaseReference.child ("transaksiMakanan").addValueEventListener (new ValueEventListener()
+        {
             @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                System.out.println(dataSnapshot.getChildren());
-                for (DataSnapshot dataSnapshotIter : dataSnapshot.getChildren()) {
-                    String user = dataSnapshotIter.getValue(ModelTransaksiMakanan.class).getNamaKonsumen();
-                    ModelTransaksiMakanan makanan = (ModelTransaksiMakanan) dataSnapshotIter.getValue(ModelTransaksiMakanan.class);
-
-                    if (user.equalsIgnoreCase(emailUser)) {
-                        if ((dataSnapshotIter.getValue(ModelTransaksiMakanan.class).getStatusMakanan()).equalsIgnoreCase("beli") || (dataSnapshotIter.getValue(ModelTransaksiMakanan.class).getStatusMakanan()).equalsIgnoreCase("bayar")) {
-                            foodArrayList.add(makanan);
+            public void onDataChange (@NonNull DataSnapshot dataSnapshot)
+            {
+                System.out.println (dataSnapshot.getChildren());
+                for (DataSnapshot dataSnapshotIter : dataSnapshot.getChildren())
+                {
+                    String user = dataSnapshotIter.getValue (ModelTransaksiMakanan.class).getNamaKonsumen();
+                    ModelTransaksiMakanan makanan = (ModelTransaksiMakanan) dataSnapshotIter.getValue (ModelTransaksiMakanan.class);
+                    if (user.equalsIgnoreCase (emailUser))
+                    {
+                        if ( (dataSnapshotIter.getValue (ModelTransaksiMakanan.class).getStatusMakanan()).equalsIgnoreCase ("beli") || (dataSnapshotIter.getValue (ModelTransaksiMakanan.class).getStatusMakanan()).equalsIgnoreCase ("bayar"))
+                        {
+                            foodArrayList.add (makanan);
                         }
                     }
                 }
-//                myRecyclerViewAdapter = new AdapterMakanan(foodArrayList, MembeliMakanan.this, new AdapterMakanan.OnItemClickListener() {
-//                    @Override
-//                    public void onItemClick(ModelMakanan model) {
-//                        Intent data = new Intent(getApplicationContext(), konfirmasiMembeliMakanan.class);
-//                        data.putExtra("namaMakanan", model.getNamaMakanan());
-//                        data.putExtra("hargaMakanan", model.getHargaMakanan());
-//                        getApplicationContext().startActivity(data);
-//                    }
-//                });
-                myRecyclerViewAdapter = new AdapterKonfirmasiTransaksiMakanan(foodArrayList, HomeKonsumen.this);
+                myRecyclerViewAdapter = new AdapterKonfirmasiTransaksiMakanan (foodArrayList, HomeKonsumen.this);
 
-                myRecyclerView.setAdapter(myRecyclerViewAdapter);
+                myRecyclerView.setAdapter (myRecyclerViewAdapter);
             }
 
             @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                System.out.println(databaseError.getDetails()+" "+databaseError.getMessage());
+            public void onCancelled (@NonNull DatabaseError databaseError)
+            {
+                System.out.println (databaseError.getDetails()+" "+databaseError.getMessage());
             }
         });
-
-
     }
 }

@@ -59,41 +59,23 @@ import com.google.firebase.storage.UploadTask;
 import java.io.ByteArrayOutputStream;
 import com.squareup.picasso.Picasso;
 
-public class MemasukanMakanan extends AppCompatActivity {
+public class MemasukanMakanan extends AppCompatActivity 
+{
+     final String TAG = MemasukanMakanan.class.getSimpleName();
+     EditText namaMakanan, hargaMakanan;
+     ImageView fotoMakanan;
+     Button tambah, batal;
+     static final int PICK_IMAGE_REQUEST = 1;
+     Uri mImageUri;
+     ProgressBar mProgressBar;
+     FirebaseAuth auth;
+     FirebaseUser user;
+     DatabaseReference dbRef;
+     StorageReference mStorageRef;
+     String uid;
+     String namaMakanan1 = "", hargaMakanan1 = "";
+     static final String DIR_FOTO_MAKANAN = "FOTO_MAKANAN";
 
-    public static final int WRITE_EXTERNAL = 101;
-    public static final int REQUEST_IMAGE_CAPTURE = 102;
-
-    private final String TAG = MemasukanMakanan.class.getSimpleName();
-
-    private EditText namaMakanan, hargaMakanan;
-    private ImageView fotoMakanan;
-    private Button tambah, batal;
-
-    //
-    private static final int PICK_IMAGE_REQUEST = 1;
-    private Uri mImageUri;
-    private StorageTask mUploadTask;
-    private ProgressBar mProgressBar;
-    private String mName;
-    private String mImageUrl;
-    //
-    private FirebaseAuth auth;
-    private FirebaseUser user;
-    private DatabaseReference dbRef;
-    private StorageReference mStorageRef;
-    private Button buka_kamera;
-    private Bitmap hasilFoto;
-    private Uri uriFoto;
-    private String uid;
-    private String urlDownload;
-    private String namaMakanan1 = "", hargaMakanan1 = "";
-
-    public static final String DIR_FOTO_MAKANAN = "FOTO_MAKANAN";
-
-    public MemasukanMakanan() {
-
-    }
 
     @Nullable
     @Override
@@ -108,25 +90,22 @@ public class MemasukanMakanan extends AppCompatActivity {
         namaMakanan = findViewById(R.id.input_namaMakanan);
         hargaMakanan = findViewById(R.id.input_hargaMakanan);
         fotoMakanan = findViewById(R.id.foto_admin_fotoMakanan);
-//
         namaMakanan1 = getIntent().getStringExtra("namaMakanan");
         hargaMakanan1 = getIntent().getStringExtra("hargaMakanan");
 
         mProgressBar = findViewById(R.id.progress_bar);
-//
         batal = findViewById(R.id.btn_batal);
         tambah = findViewById(R.id.btn_tambah);
 
         namaMakanan.setText(namaMakanan1);
         hargaMakanan.setText(hargaMakanan1);
-//
-        fotoMakanan.setOnClickListener(new View.OnClickListener() {
+        fotoMakanan.setOnClickListener(new View.OnClickListener()
+        {
             @Override
             public void onClick(View v) {
                 openFileChooser();
             }
         });
-        //
 
         tambah.setOnClickListener(new View.OnClickListener()
         {
@@ -167,33 +146,43 @@ public class MemasukanMakanan extends AppCompatActivity {
 
                         UploadTask uploadFoto = fileReference.putFile(mImageUri);
 
-                        Task<Uri> uploading = uploadFoto.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
+                        Task<Uri> uploading = uploadFoto.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>()
+                        {
                             @Override
-                            public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
-                                if (!task.isSuccessful()) {
+                            public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception
+                            {
+                                if (!task.isSuccessful())
+                                {
                                     Log.w(TAG, "Gagal upload foto ktp:" + task.getException());
                                 }
                                 return fileReference.getDownloadUrl();
                             }
-                        }).addOnCompleteListener(new OnCompleteListener<Uri>() {
+                        }).addOnCompleteListener(new OnCompleteListener<Uri>()
+                        {
                             @Override
-                            public void onComplete(@NonNull Task<Uri> task) {
-                                if (task.isSuccessful()) {
+                            public void onComplete(@NonNull Task<Uri> task)
+                            {
+                                if (task.isSuccessful())
+                                {
                                     String urlDownload = task.getResult().toString();
                                     System.out.println(mImageUri.toString());
-                                    //                            String uploadId = dbRef.push().getKey();
                                     ModelMakanan dataMakanan = new ModelMakanan(uid, strnamaMakanan, strhargaMakanan, urlDownload);
                                     System.out.println(urlDownload + "coba2");
                                     final DatabaseReference pushId = dbRef.child("foods");
                                     pushId.push().setValue(dataMakanan);
                                     DatabaseReference getId = FirebaseDatabase.getInstance().getReference().child("foods");
-                                    getId.addValueEventListener(new ValueEventListener() {
+                                    getId.addValueEventListener(new ValueEventListener()
+                                    {
                                         @Override
-                                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                            for (DataSnapshot perData : dataSnapshot.getChildren()) {
+                                        public void onDataChange(@NonNull DataSnapshot dataSnapshot)
+                                        {
+                                            for (DataSnapshot perData : dataSnapshot.getChildren())
+                                            {
                                                 ModelMakanan model = perData.getValue(ModelMakanan.class);
-                                                if (model.getNamaMakanan() != null) {
-                                                    if (model.getNamaMakanan().equalsIgnoreCase(strnamaMakanan)) {
+                                                if (model.getNamaMakanan() != null)
+                                                {
+                                                    if (model.getNamaMakanan().equalsIgnoreCase(strnamaMakanan))
+                                                    {
                                                         System.out.println(model.getNamaMakanan());
                                                         String key = perData.getKey();
                                                         pushId.child(key).child("idMakanan").setValue(key);
@@ -211,11 +200,7 @@ public class MemasukanMakanan extends AppCompatActivity {
                                 }
                             }
                         });
-                    } else {
-//                        Toast.makeText(this, "No file selected", Toast.LENGTH_SHORT).show();
                     }
-
-
                 }
                 else
                 {
@@ -229,14 +214,17 @@ public class MemasukanMakanan extends AppCompatActivity {
         batal.setOnClickListener(new View.OnClickListener()
         {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v)
+            {
                 AlertDialog.Builder builder = new AlertDialog.Builder(getApplicationContext());
                 builder.setTitle("ModelMakanan");
                 builder.setMessage("Batal menambahkan admin?");
                 builder.setCancelable(false);
-                builder.setPositiveButton("Ya", new DialogInterface.OnClickListener() {
+                builder.setPositiveButton("Ya", new DialogInterface.OnClickListener()
+                {
                     @Override
-                    public void onClick(DialogInterface dialog, int which) {
+                    public void onClick(DialogInterface dialog, int which)
+                    {
                         dialog.cancel();
                         namaMakanan.setText("");
                         hargaMakanan.setText("");
@@ -249,7 +237,8 @@ public class MemasukanMakanan extends AppCompatActivity {
     }
 
 
-    private void openFileChooser() {
+     void openFileChooser()
+     {
         Intent intent = new Intent();
         intent.setType("image/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
@@ -257,22 +246,22 @@ public class MemasukanMakanan extends AppCompatActivity {
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    protected void onActivityResult(int requestCode, int resultCode, Intent data)
+    {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK
-                && data != null && data.getData() != null) {
+        if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null)
+        {
             mImageUri = data.getData();
 
             Picasso.with(this).load(mImageUri).into(fotoMakanan);
         }
     }
 
-    private String getFileExtension(Uri uri) {
+     public String getFileExtension(Uri uri)
+     {
         ContentResolver cR = getContentResolver();
         MimeTypeMap mime = MimeTypeMap.getSingleton();
         return mime.getExtensionFromMimeType(cR.getType(uri));
     }
-//
-
 }

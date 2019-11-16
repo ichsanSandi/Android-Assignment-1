@@ -23,6 +23,7 @@ public class JobSchedulerService extends AppCompatActivity {
     public void scheduleJob(View v) {
         ComponentName componentName = new ComponentName(this, ExampleJobService.class);
         JobInfo info = null;
+
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
             info = new JobInfo.Builder(123, componentName)
                     .setRequiresCharging(true)

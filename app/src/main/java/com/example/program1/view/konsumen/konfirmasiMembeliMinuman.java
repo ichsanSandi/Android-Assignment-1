@@ -1,6 +1,5 @@
 package com.example.program1.view.konsumen;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -25,12 +24,12 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-public class konfirmasiMembeliMinuman extends AppCompatActivity {
+public class konfirmasiMembeliMinuman extends AppCompatActivity
+{
 
-    private FirebaseAuth auth;
-    private FirebaseUser user;
-    private DatabaseReference dbRef;
-
+     FirebaseAuth auth;
+     FirebaseUser user;
+     DatabaseReference dbRef;
     DatabaseReference databaseReference;
     RecyclerView myRecyclerView;
     RecyclerView.Adapter myRecyclerViewAdapter;
@@ -38,74 +37,76 @@ public class konfirmasiMembeliMinuman extends AppCompatActivity {
     ArrayList<ModelTransaksiMinuman> drinkArrayList;
     Button but_pesan;
 
-
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_transaksi_minuman);
+    protected void onCreate (@Nullable Bundle savedInstanceState) 
+    {
+        super.onCreate (savedInstanceState);
+        setContentView (R.layout.activity_transaksi_minuman);
         auth = FirebaseAuth.getInstance();
         final String emailUser = auth.getCurrentUser().getEmail();
         dbRef = FirebaseDatabase.getInstance().getReference();
-
-        myRecyclerView = (RecyclerView) findViewById(R.id.transaksi_recyclerView_minuman);
-        myRecyclerView.setHasFixedSize(true);
-        myRecyclerViewLayoutMgr = new LinearLayoutManager(this);
-        myRecyclerView.setLayoutManager(myRecyclerViewLayoutMgr);
-        but_pesan = findViewById(R.id.btn_beli_minuman);
+        myRecyclerView = (RecyclerView) findViewById (R.id.transaksi_recyclerView_minuman);
+        myRecyclerView.setHasFixedSize (true);
+        myRecyclerViewLayoutMgr = new LinearLayoutManager (this);
+        myRecyclerView.setLayoutManager (myRecyclerViewLayoutMgr);
+        but_pesan = findViewById (R.id.btn_beli_minuman);
         databaseReference = FirebaseDatabase.getInstance().getReference();
-        databaseReference.child("transaksiMinuman").addValueEventListener(new ValueEventListener() {
+        databaseReference.child ("transaksiMinuman").addValueEventListener (new ValueEventListener()
+        {
             @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+            public void onDataChange (@NonNull DataSnapshot dataSnapshot) 
+            {
                 drinkArrayList = new ArrayList<>();
-                System.out.println(dataSnapshot.getChildren());
-                for (DataSnapshot dataSnapshotIter : dataSnapshot.getChildren()) {
-                    String user = dataSnapshotIter.getValue(ModelTransaksiMinuman.class).getNamaKonsumen();
-                    ModelTransaksiMinuman minuman = dataSnapshotIter.getValue(ModelTransaksiMinuman.class);
-                    if (user.equalsIgnoreCase(emailUser)) {
-                        if((dataSnapshotIter.getValue(ModelTransaksiMinuman.class).getStatusMinuman()).equalsIgnoreCase("pesan")) {
-                            drinkArrayList.add(minuman);
+                System.out.println (dataSnapshot.getChildren());
+                for (DataSnapshot dataSnapshotIter : dataSnapshot.getChildren())
+                {
+                    String user = dataSnapshotIter.getValue (ModelTransaksiMinuman.class).getNamaKonsumen();
+                    ModelTransaksiMinuman minuman = dataSnapshotIter.getValue (ModelTransaksiMinuman.class);
+                    if (user.equalsIgnoreCase (emailUser)) 
+                    {
+                        if ( (dataSnapshotIter.getValue (ModelTransaksiMinuman.class).getStatusMinuman()).equalsIgnoreCase ("pesan")) 
+                        {
+                                drinkArrayList.add (minuman);
                         }
                     }
                 }
-//                myRecyclerViewAdapter = new AdapterMinuman(foodArrayList, MembeliMinuman.this, new AdapterMinuman.OnItemClickListener() {
-//                    @Override
-//                    public void onItemClick(ModelMinuman model) {
-//                        Intent data = new Intent(getApplicationContext(), konfirmasiMembeliMinuman.class);
-//                        data.putExtra("namaMinuman", model.getNamaMinuman());
-//                        data.putExtra("hargaMinuman", model.getHargaMinuman());
-//                        getApplicationContext().startActivity(data);
-//                    }
-//                });
-                myRecyclerViewAdapter = new AdapterKonfirmasiTransaksiMinuman(drinkArrayList, konfirmasiMembeliMinuman.this);
+                myRecyclerViewAdapter = new AdapterKonfirmasiTransaksiMinuman (drinkArrayList, konfirmasiMembeliMinuman.this);
 
-                myRecyclerView.setAdapter(myRecyclerViewAdapter);
+                myRecyclerView.setAdapter (myRecyclerViewAdapter);
             }
 
             @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                System.out.println(databaseError.getDetails()+" "+databaseError.getMessage());
+            public void onCancelled (@NonNull DatabaseError databaseError) 
+            {
+                System.out.println (databaseError.getDetails()+" "+databaseError.getMessage());
             }
         });
 
-        but_pesan.setOnClickListener(new View.OnClickListener() {
+        but_pesan.setOnClickListener (new View.OnClickListener() 
+        {
             @Override
-            public void onClick(View v) {
-                DatabaseReference getId = FirebaseDatabase.getInstance().getReference().child("transaksiMinuman");
-                final DatabaseReference pushId = dbRef.child("transaksiMinuman");
-                getId.addValueEventListener(new ValueEventListener() {
+            public void onClick (View v) 
+            {
+                DatabaseReference getId = FirebaseDatabase.getInstance().getReference().child ("transaksiMinuman");
+                final DatabaseReference pushId = dbRef.child ("transaksiMinuman");
+                getId.addValueEventListener (new ValueEventListener() 
+                {
                     @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        for (DataSnapshot perData : dataSnapshot.getChildren()) {
-                            ModelTransaksiMinuman model = perData.getValue(ModelTransaksiMinuman.class);
-                            if (model.getStatusMinuman() != null) {
-                                if (model.getNamaKonsumen().equalsIgnoreCase(emailUser))
+                    public void onDataChange (@NonNull DataSnapshot dataSnapshot) 
+                    {
+                        for (DataSnapshot perData : dataSnapshot.getChildren()) 
+                        {
+                            ModelTransaksiMinuman model = perData.getValue (ModelTransaksiMinuman.class);
+                            if (model.getStatusMinuman() != null) 
+                            {
+                                if (model.getNamaKonsumen().equalsIgnoreCase (emailUser))
                                 {
-                                    if (model.getStatusMinuman().equalsIgnoreCase("pesan"))
+                                    if (model.getStatusMinuman().equalsIgnoreCase ("pesan"))
                                     {
-                                        System.out.println(model.getNamaMinuman());
+                                        System.out.println (model.getNamaMinuman());
                                         String key = perData.getKey();
-                                        pushId.child(key).child("statusMinuman").setValue("beli");
-//                                        pushId.child(key).child("timestamp").setValue(date.);
+                                        pushId.child (key).child ("statusMinuman").setValue ("beli");
+//                                        pushId.child (key).child ("timestamp").setValue (date.);
                                     }
                                 }
                             }
@@ -113,20 +114,13 @@ public class konfirmasiMembeliMinuman extends AppCompatActivity {
                     }
 
                     @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                    public void onCancelled (@NonNull DatabaseError databaseError) 
+                    {
 
                     }
                 });
-                startActivity(new Intent(konfirmasiMembeliMinuman.this, HomeKonsumen.class));
+                startActivity (new Intent (konfirmasiMembeliMinuman.this, HomeKonsumen.class));
             }
         });
-
-
-//
-    }
-
-    public static Intent getActiveIntent(Activity activity)
-    {
-        return new Intent(activity, MembeliMinuman.class);
     }
 }

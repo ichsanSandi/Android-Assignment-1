@@ -121,7 +121,22 @@
             android:layout_marginRight="40dp"
             android:background="@drawable/bg_oval_white"
             android:foreground="?android:attr/selectableItemBackground"
-            android:text="Test"
+            android:text="Ichsan"
+            android:textAllCaps="false"
+            android:textColor="@color/warnaPutih"
+            android:textSize="24sp" />
+            <Button
+            android:id="@+id/testButton2"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_below="@id/layout_masuk"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="40dp"
+            android:layout_marginTop="35dp"
+            android:layout_marginRight="40dp"
+            android:background="@drawable/bg_oval_white"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:text="Egar"
             android:textAllCaps="false"
             android:textColor="@color/warnaPutih"
             android:textSize="24sp" />

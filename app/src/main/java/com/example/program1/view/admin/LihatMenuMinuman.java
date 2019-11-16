@@ -23,70 +23,58 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-public class LihatMenuMinuman extends AppCompatActivity {
+public class LihatMenuMinuman extends AppCompatActivity
+{
 
     DatabaseReference databaseReference;
     RecyclerView myRecyclerView;
     RecyclerView.Adapter myRecyclerViewAdapter;
     RecyclerView.LayoutManager myRecyclerViewLayoutMgr;
     ArrayList<Drink> foodArrayList;
-    Button but_pesan;
+    Button butPesan;
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_lihat_menu_minuman);
-        myRecyclerView = (RecyclerView) findViewById(R.id.foodRecyclerView);
-        myRecyclerView.setHasFixedSize(true);
-        myRecyclerViewLayoutMgr = new LinearLayoutManager(this);
-        myRecyclerView.setLayoutManager(myRecyclerViewLayoutMgr);
-        but_pesan = findViewById(R.id.btn_pesan_minuman);
+    protected void onCreate (@Nullable Bundle savedInstanceState)
+    {
+        super.onCreate (savedInstanceState);
+        setContentView (R.layout.activity_lihat_menu_minuman);
+        myRecyclerView = (RecyclerView) findViewById (R.id.foodRecyclerView);
+        myRecyclerView.setHasFixedSize (true);
+        myRecyclerViewLayoutMgr = new LinearLayoutManager (this);
+        myRecyclerView.setLayoutManager (myRecyclerViewLayoutMgr);
+        butPesan = findViewById (R.id.btn_pesan_minuman);
         databaseReference = FirebaseDatabase.getInstance().getReference();
-        databaseReference.child("drinks").addValueEventListener(new ValueEventListener() {
+        databaseReference.child ("drinks").addValueEventListener (new ValueEventListener()
+        {
             @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+            public void onDataChange (@NonNull DataSnapshot dataSnapshot)
+            {
                 foodArrayList = new ArrayList<>();
-                System.out.println(dataSnapshot.getChildren());
+                System.out.println (dataSnapshot.getChildren());
                 for (DataSnapshot dataSnapshotIter : dataSnapshot.getChildren())
                 {
-                    System.out.println(dataSnapshotIter.getValue());
-                    Drink Minuman = (Drink) dataSnapshotIter.getValue(Drink.class);
-                    Minuman.setKey(dataSnapshotIter.getKey());
-                    foodArrayList.add(Minuman);
+                    System.out.println (dataSnapshotIter.getValue());
+                    Drink Minuman = (Drink) dataSnapshotIter.getValue (Drink.class);
+                    Minuman.setKey (dataSnapshotIter.getKey());
+                    foodArrayList.add (Minuman);
                 }
-//                myRecyclerViewAdapter = new AdapterMinuman(foodArrayList, LihatMenuMinuman.this, new AdapterMinuman.OnItemClickListener() {
-//                    @Override
-//                    public void onItemClick(ModelMinuman model) {
-//                        Intent data = new Intent(getApplicationContext(), LihatMenuMinuman2.class);
-//                        data.putExtra("namaMinuman", model.getNamaMinuman());
-//                        data.putExtra("hargaMinuman", model.getHargaMinuman());
-//                        getApplicationContext().startActivity(data);
-//                    }
-//                });
-                myRecyclerViewAdapter = new AdapterAdminMinuman(foodArrayList, LihatMenuMinuman.this);
+                myRecyclerViewAdapter = new AdapterAdminMinuman (foodArrayList, LihatMenuMinuman.this);
 
-                myRecyclerView.setAdapter(myRecyclerViewAdapter);
+                myRecyclerView.setAdapter (myRecyclerViewAdapter);
             }
-
             @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                System.out.println(databaseError.getDetails()+" "+databaseError.getMessage());
+            public void onCancelled (@NonNull DatabaseError databaseError)
+            {
+                System.out.println (databaseError.getDetails()+" "+databaseError.getMessage());
             }
         });
 
-        but_pesan.setOnClickListener(new View.OnClickListener() {
+        butPesan.setOnClickListener (new View.OnClickListener()
+        {
             @Override
-            public void onClick(View v) {
-                startActivity(new Intent(LihatMenuMinuman.this, MemasukanMinuman.class));
+            public void onClick (View v) {
+                startActivity (new Intent (LihatMenuMinuman.this, MemasukanMinuman.class));
             }
         });
-
-
-//
-    }
-
-    public static Intent getActiveIntent(Activity activity)
-    {
-        return new Intent(activity, LihatMenuMinuman.class);
     }
 }

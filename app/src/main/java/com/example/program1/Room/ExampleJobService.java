@@ -50,42 +50,46 @@ public class ExampleJobService extends JobService {
                 for (int i = 0; i < 100; i++) {
                     Log.d(TAG, "run: " + i);
 
-                    if(i%15 == 0)
-                    {
-                        auth = FirebaseAuth.getInstance();
-                        user = auth.getCurrentUser();
-                        dbRef = FirebaseDatabase.getInstance().getReference();
-                        AppDatabase = Room.databaseBuilder(getApplicationContext(),AppDatabase.class,"userdb").allowMainThreadQueries().fallbackToDestructiveMigration().build();
-
-                        //food
-                        dbRef.child("foods").addValueEventListener(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                foodArrayList = new ArrayList<>();
-                                int i = 0;
-                                int j = 0;
-                                System.out.println(dataSnapshot.getChildren());
-                                for (DataSnapshot dataSnapshotIter : dataSnapshot.getChildren()) {
-                                    i++;
-
-                                }
-                                List<Foods> users = read.AppDatabase.foodDao().getAll();
-                                for (Foods fod : users)
-                                {
-                                    j++;
-                                }
-                                if(i < j || i > j)
-                                {
-                                    Log.d(TAG, "Data Kurang Atau Lebih");
-                                }
-                            }
-
-                            @Override
-                            public void onCancelled(@NonNull DatabaseError databaseError) {
-                                System.out.println(databaseError.getDetails()+" "+databaseError.getMessage());
-                            }
-                        });
-                    }
+//                    if(i%5 == 0)
+//                    {
+//                        auth = FirebaseAuth.getInstance();
+//                        user = auth.getCurrentUser();
+//                        dbRef = FirebaseDatabase.getInstance().getReference();
+//                        AppDatabase = Room.databaseBuilder(getApplicationContext(),AppDatabase.class,"userdb").allowMainThreadQueries().fallbackToDestructiveMigration().build();
+//
+//                        //food
+//                        dbRef.child("foods").addValueEventListener(new ValueEventListener() {
+//                            @Override
+//                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//                                foodArrayList = new ArrayList<>();
+//                                int i = 0;
+//                                int j = 0;
+//                                System.out.println(dataSnapshot.getChildren());
+//                                for (DataSnapshot dataSnapshotIter : dataSnapshot.getChildren()) {
+//                                    i++;
+//
+//                                }
+//                                List<Foods> users = read.AppDatabase.foodDao().getAll();
+//                                for (Foods fod : users)
+//                                {
+//                                    j++;
+//                                }
+//                                if(i < j)
+//                                {
+//                                    Log.d(TAG, "Data DB lokal ada yang kurang");
+//                                }
+//                                else if (i > j)
+//                                {
+//                                    Log.d(TAG, "Data DB server ada yang kurang");
+//                                }
+//                            }
+//
+//                            @Override
+//                            public void onCancelled(@NonNull DatabaseError databaseError) {
+//                                System.out.println(databaseError.getDetails()+" "+databaseError.getMessage());
+//                            }
+//                        });
+//                    }
                     if (jobCancelled) {
                         return;
                     }

@@ -42,7 +42,6 @@
         <activity android:name=".view.admin.MemasukanMinuman"/>
         <activity android:name=".view.admin.LihatMenuMakanan"/>
         <activity android:name=".view.admin.LihatMenuMinuman"/>
-        <activity android:name=".view.admin.MemasukanOvoAdmin"/>
         <activity android:name=".view.admin.BayarPesanan"/>
         <activity android:name=".view.konsumen.HomeKonsumen"/>
         <activity android:name=".view.konsumen.MembeliMakanan"/>
