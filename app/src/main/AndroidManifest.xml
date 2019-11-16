@@ -27,10 +27,8 @@
         <activity android:name=".TestActivity" android:noHistory="true"/>
         <activity android:name=".AddFoodsItemTest"/>
         <activity android:name=".UpdateFoodsItemTest" android:noHistory="true"/>
-        <activity android:name=".ImageItem"></activity>
         <activity android:name=".AppTierModule"/>
         <activity android:name=".SecondTierModule"/>
-        <activity android:name=".HalamanAwal" />
         <activity android:name=".Room.Percobaan"/>
         <activity android:name=".Room.Foreground"/>
         <activity android:name=".Room.IntentService"/>
@@ -52,6 +50,7 @@
         <activity android:name=".view.konsumen.MembeliMinuman"/>
         <activity android:name=".view.konsumen.konfirmasiMembeliMinuman"/>
         <activity android:name=".view.koki.HomeKoki"/>
+        <activity android:name=".Welcome"/>
         <service android:name=".Room.ExampleService" />
         <service android:name=".Room.ExampleIntentService" />
         <service
