@@ -15,6 +15,17 @@
         android:layout_marginBottom="36dp"
         android:text="Back" />
 
+    <Button
+        android:id="@+id/startServiceBttn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="160dp"
+        android:layout_marginEnd="150dp"
+        android:layout_marginBottom="-2dp"
+        android:text="Start Service" />
+
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/addItemTest"
         android:layout_width="wrap_content"

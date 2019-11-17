@@ -25,6 +25,7 @@ public class TestActivity extends AppCompatActivity
   RecyclerView.Adapter foodsRecyclerViewAdapter;
   RecyclerView.LayoutManager foodsRecyclerViewLayoutMgr;
   Button backBttn;
+  Button startServiceBttn;
   FloatingActionButton addBttn;
   List<Foods> foodsList;
   ArrayList<Foods> foodsArrayList;
@@ -33,10 +34,9 @@ public class TestActivity extends AppCompatActivity
   protected void onCreate (@Nullable Bundle savedInstanceState)
   {
     super.onCreate (savedInstanceState);
-    startService ();
     setContentView (R.layout.test_activity_layout);
 
-    foodsRecyclerView = (RecyclerView) findViewById (R.id.itemTestRecyclerView);
+    foodsRecyclerView = findViewById (R.id.itemTestRecyclerView);
     foodsRecyclerViewLayoutMgr = new LinearLayoutManager (this);
     foodsRecyclerView.setLayoutManager (foodsRecyclerViewLayoutMgr);
 
@@ -45,11 +45,11 @@ public class TestActivity extends AppCompatActivity
             .addMigrations (MIGRATION_1_2)
             .build ();
     foodsList = foodDb.FoodsDao ().getAll ();
-    foodsArrayList = new ArrayList<Foods> (foodsList);
+    foodsArrayList = new ArrayList<> (foodsList);
     foodsRecyclerViewAdapter = new AdapterTestView (foodsArrayList, TestActivity.this, foodDb, foodsRecyclerViewAdapter);
     foodsRecyclerView.setAdapter (foodsRecyclerViewAdapter);
 
-    backBttn = (Button) findViewById (R.id.backBttn);
+    backBttn = findViewById (R.id.backBttn);
     backBttn.setOnClickListener (new View.OnClickListener()
     {
       @Override
@@ -59,7 +59,7 @@ public class TestActivity extends AppCompatActivity
       }
     });
 
-    addBttn = (FloatingActionButton) findViewById (R.id.addItemTest);
+    addBttn = findViewById (R.id.addItemTest);
     addBttn.setOnClickListener (new View.OnClickListener ()
     {
       @Override
@@ -67,6 +67,16 @@ public class TestActivity extends AppCompatActivity
       {
         Intent addFoodsItemIntent = new Intent (TestActivity.this, AddFoodsItemTest.class);
         startActivity (addFoodsItemIntent);
+      }
+    });
+
+    startServiceBttn = findViewById(R.id.startServiceBttn);
+    startServiceBttn.setOnClickListener(new View.OnClickListener()
+    {
+      @Override
+      public void onClick(View v)
+      {
+        startService ();
       }
     });
   }

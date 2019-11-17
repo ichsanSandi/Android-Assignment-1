@@ -10,17 +10,12 @@ import android.os.Build;
 import android.os.IBinder;
 import android.util.Log;
 import android.widget.Toast;
-import androidx.core.app.NotificationCompat;
-import androidx.room.Room;
-import com.example.program1.RoomDB.Foods;
-import com.example.program1.RoomDB.FoodsDatabase;
-import com.example.program1.view.HalamanMasuk;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.concurrent.TimeUnit;
 
-import static com.example.program1.RoomDB.FoodsDatabase.MIGRATION_1_2;
+import androidx.core.app.NotificationCompat;
+
+import com.example.program1.view.HalamanMasuk;
+
+import java.util.concurrent.TimeUnit;
 
 public class ForegroundService extends Service
 {
@@ -56,13 +51,13 @@ public class ForegroundService extends Service
       @Override
       public void run ()
       {
-        DatabaseConn dbConn = new DatabaseConn ();
-        FoodsDatabase foodsDatabase1 = Room.databaseBuilder(getApplicationContext (), FoodsDatabase.class, "foods-database")
-                .allowMainThreadQueries ()
-                .addMigrations (MIGRATION_1_2)
-                .build ();
+//        DatabaseConn dbConn = new DatabaseConn ();
+//        FoodsDatabase foodsDatabase1 = Room.databaseBuilder(getApplicationContext (), FoodsDatabase.class, "foods-database")
+//                .allowMainThreadQueries ()
+//                .addMigrations (MIGRATION_1_2)
+//                .build ();
 
-        for (int i = 0; i < 3; i++)
+        for (int i = 0; i < Integer.MAX_VALUE; i++)
         {
           try
           {
@@ -75,23 +70,23 @@ public class ForegroundService extends Service
           }
         }
 
-        try
-        {
-          Statement statement1 = dbConn.postgreConn ().createStatement ();
-          ResultSet cursor = statement1.executeQuery ("Select * from public.foods");
-          while (cursor.next ())
-          {
-            Foods foodsObject = new Foods ();
-            //foodsObject.setId(Integer.valueOf(cursor.getString(1)));
-            foodsObject.setPrice (Integer.valueOf (cursor.getString(3)));
-            foodsObject.setName (cursor.getString (2));
-            foodsDatabase1.FoodsDao ().insertFood (foodsObject);
-          }
-        }
-        catch (SQLException e)
-        {
-          e.printStackTrace ();
-        }
+//        try
+//        {
+//          Statement statement1 = dbConn.postgreConn ().createStatement ();
+//          ResultSet cursor = statement1.executeQuery ("Select * from public.foods");
+//          while (cursor.next ())
+//          {
+//            Foods foodsObject = new Foods ();
+//            //foodsObject.setId(Integer.valueOf(cursor.getString(1)));
+//            foodsObject.setPrice (Integer.valueOf (cursor.getString(3)));
+//            foodsObject.setName (cursor.getString (2));
+//            foodsDatabase1.FoodsDao ().insertFood (foodsObject);
+//          }
+//        }
+//        catch (SQLException e)
+//        {
+//          e.printStackTrace ();
+//        }
       }
     }).start ();
     startForeground ( 1, foregroundNotification);
