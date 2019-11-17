@@ -5,14 +5,15 @@ import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 @Entity
-public class Drinks {
+public class Drinks
+{
   @PrimaryKey
-  @ColumnInfo(name = "drinks_id")
+  @ColumnInfo (name = "drinks_id")
   public String id;
 
-  @ColumnInfo(name = "drinks_name")
+  @ColumnInfo (name = "drinks_name")
   public String name;
 
-  @ColumnInfo(name = "drinks_price")
+  @ColumnInfo (name = "drinks_price")
   public int price;
 }
