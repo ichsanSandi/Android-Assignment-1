@@ -52,20 +52,20 @@ public class User
     { return firstName; }
 
   public void setLastName (String lastName)
-  { this.lastName = lastName; }
+   { this.lastName = lastName; }
 
   public String getLastName ()
-  { return lastName; }
+   { return lastName; }
 
   public void setPassword (String password)
-  { this.password = password; }
+   { this.password = password; }
 
   public String getPassword ()
-  { return password; }
+   { return password; }
 
   public void setRole (String role)
-  { this.role = role; }
+   { this.role = role; }
 
   public String getRole ()
-  { return role; }
+   { return role; }
 }
