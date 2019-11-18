@@ -95,10 +95,10 @@
 
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/id"
+            android:id="@+id/idUserUbahText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Nama"
+            android:hint="id"
 
             android:inputType="text"
             android:textColor="@color/warnaMerah"
@@ -115,10 +115,10 @@
 
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/nama1"
+            android:id="@+id/firstNameUbahText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Nama"
+            android:hint="first name"
 
             android:inputType="text"
             android:textColor="@color/warnaMerah"
@@ -134,10 +134,10 @@
 
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/nama2"
+            android:id="@+id/lastNameUbahText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Nama"
+            android:hint="last name"
 
             android:inputType="text"
             android:textColor="@color/warnaMerah"
@@ -149,43 +149,19 @@
 
 
     <Button
-        android:id="@+id/but1"
+        android:id="@+id/ubahUserBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Beli Makanan"/>
+        android:text="Ubah User"/>
 
     <Button
-        android:id="@+id/but2"
+        android:id="@+id/lihatUserBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Beli Minuman" />
+        android:text="Lihat User" />
 
 
 
-    <LinearLayout
-
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:orientation="horizontal">
-
-        <TextView
-            android:id="@+id/totalText"
-            android:layout_width="290dp"
-            android:layout_height="30dp"
-            android:text="TOTAL" />
-        <TextView
-            android:id="@+id/transaksi_total_makan"
-            android:layout_width="100dp"
-            android:layout_height="30dp"
-            android:layout_marginLeft="8dp"
-            android:text="TOTAL" />
-    </LinearLayout>
-
-    <TextView
-        android:id="@+id/konsumen_status"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Status" />
+    
 
 </LinearLayout>

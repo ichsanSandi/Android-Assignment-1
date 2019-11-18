@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:gravity="center"
     android:orientation="vertical"
-    tools:context="com.example.program1.Room.JobSchedulerService">
+    tools:context="com.example.program1.Room.Jo">
 
     <Button
         android:layout_width="wrap_content"

@@ -11,16 +11,12 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.program1.model.Drink;
 import com.example.program1.R;
-import com.example.program1.view.admin.MemasukanMinuman;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 
-public class AdapterRoom extends RecyclerView.Adapter<AdapterRoom.ViewHolder> {
+public class AdapterRoom extends RecyclerView.Adapter<AdapterRoom.ViewHolder>
+{
 
     LayoutInflater mInflator;
     ArrayList<Foods> foodArrayList = new ArrayList<>();
@@ -40,7 +36,8 @@ public class AdapterRoom extends RecyclerView.Adapter<AdapterRoom.ViewHolder> {
         Button ubahBut;
         Button hapusBut;
 
-        public ViewHolder(@NonNull View itemView) {
+        public ViewHolder(@NonNull View itemView)
+        {
             super(itemView);
             id = (TextView) itemView.findViewById(R.id.id);
             name = (TextView) itemView.findViewById(R.id.nama1);
@@ -73,7 +70,7 @@ public class AdapterRoom extends RecyclerView.Adapter<AdapterRoom.ViewHolder> {
         ubahBut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent data = new Intent(c.getApplicationContext(), ubah.class);
+                Intent data = new Intent(c.getApplicationContext(), RoomUpdateDataUser.class);
                 data.putExtra("id", String.valueOf(uid));
                 data.putExtra("firstName", name1);
                 data.putExtra("lastName", name2);
@@ -86,9 +83,9 @@ public class AdapterRoom extends RecyclerView.Adapter<AdapterRoom.ViewHolder> {
                 String id = uid;
                 Foods user = new Foods();
                 user.setUidFood(id);
-                read.AppDatabase.foodDao().delete(user);
+                RoomReadDataUser.AppDatabase.foodDao().delete(user);
 
-                Intent data = new Intent(c.getApplicationContext(), read.class);
+                Intent data = new Intent(c.getApplicationContext(), RoomReadDataUser.class);
                 c.getApplicationContext().startActivity(data);
             }
         });

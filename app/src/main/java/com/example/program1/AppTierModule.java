@@ -8,7 +8,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import com.example.program1.Room.activity_user;
+import com.example.program1.Room.RoomInsertDataUser;
 
 public class AppTierModule extends AppCompatActivity
 {
@@ -32,7 +32,7 @@ public class AppTierModule extends AppCompatActivity
 
   public void loginAkun (View view)
   {
-    Intent userActivityIntent = new Intent (this, activity_user.class);
+    Intent userActivityIntent = new Intent (this, RoomInsertDataUser.class);
     startActivity (userActivityIntent);
   }
 }

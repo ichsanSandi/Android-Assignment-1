@@ -17,7 +17,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.room.Room;
 import com.example.program1.Room.AppDatabase;
 import com.example.program1.Room.Foods;
-import com.example.program1.Room.activity_user;
+import com.example.program1.Room.RoomInsertDataUser;
 import com.example.program1.model.Drink;
 import com.example.program1.model.Food;
 import com.example.program1.model.Pengguna;
@@ -72,7 +72,7 @@ public class Welcome extends AppCompatActivity
             if (sharedPreferences1.getBoolean ("first_launch", false))
             {
               sharedPreferences1.edit ().putBoolean ("first_lauch", false).commit ();
-              startActivity (new Intent (Welcome.this, activity_user.class));
+              startActivity (new Intent (Welcome.this, RoomInsertDataUser.class));
 //                            startActivity(new Intent(getApplicationContext(),coba.class));
             }
             else
@@ -80,7 +80,7 @@ public class Welcome extends AppCompatActivity
               if (!get_internet(getApplicationContext ()))
               {
                 Toast.makeText (Welcome.this, "Tidak ada koneksi internet", Toast.LENGTH_LONG).show ();
-                startActivity (new Intent (getApplicationContext (), activity_user.class));
+                startActivity (new Intent (getApplicationContext (), RoomInsertDataUser.class));
 //                                startActivity(new Intent(getApplicationContext(),coba.class));
               }
               else
@@ -118,44 +118,6 @@ public class Welcome extends AppCompatActivity
                   }
                 });
 
-                //user
-//                                List<User> users = Welcome.roomAppDatabase.userDao().getAll();
-//
-//                                firebaseDbRef.child("pengguna").addListenerForSingleValueEvent(new ValueEventListener() {
-//                                    @Override
-//                                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-//                                        PenggunaList = new ArrayList<>();
-//                                        int i = 0;
-//                                        for (DataSnapshot child : dataSnapshot.getChildren()) {
-//                                            String peng = child.getKey();
-//                                            PenggunaList.add(peng);
-//
-//                                            System.out.println("kenapa2" + PenggunaList.get(i));
-//                                            i++;
-//                                        }
-//
-//                                    }
-//
-//                                    @Override
-//                                    public void onCancelled(@NonNull DatabaseError databaseError) {
-//                                        Toast.makeText(Welcome.this, "Gagal Login / Sesi Berakhir", Toast.LENGTH_LONG).show();
-//                                        Log.w(TAG, "Login ERROR : " + databaseError.getDetails());
-//                                        startActivity(new Intent(getApplicationContext(), activity_user.class));
-//                                    }
-//                                });
-//                                int position = 0;
-//
-//                                for(User usr : users)
-//                                {
-//                                    if("" != (String.valueOf(usr.uid)))
-//                                    {
-//                                        Pengguna daftar = new Pengguna((String.valueOf(usr.uid)), usr.firstName, usr.lastName, Pengguna.Konsumen,"123456","0");
-//                                        firebaseDbRef.child("pengguna").child((String.valueOf(usr.uid))).push().setValue(daftar);
-//                                        System.out.println("kenapa2");
-//                                    }
-//                                    System.out.println("kenapa1");
-//                                    position++;
-//                                }
 
                 if (firebaseUser1 != null)
                 {
@@ -169,7 +131,7 @@ public class Welcome extends AppCompatActivity
                         Pengguna pengguna1 = child.getValue (Pengguna.class);
                         cekLevel (pengguna1.getLevel ());
                       }
-                      startActivity (new Intent (getApplicationContext (), activity_user.class));
+                      startActivity (new Intent (getApplicationContext (), RoomInsertDataUser.class));
                     }
 
                     @Override
@@ -177,13 +139,13 @@ public class Welcome extends AppCompatActivity
                     {
                       Toast.makeText (Welcome.this, "Gagal Login / Sesi Berakhir", Toast.LENGTH_LONG).show ();
                       Log.w (TAG, "Login ERROR : " + databaseError.getDetails ());
-                      startActivity (new Intent(getApplicationContext (), activity_user.class));
+                      startActivity (new Intent(getApplicationContext (), RoomInsertDataUser.class));
                     }
                   });
                 }
                 else
                 {
-                  startActivity (new Intent (getApplicationContext (), activity_user.class));
+                  startActivity (new Intent (getApplicationContext (), RoomInsertDataUser.class));
                 }
               }
             }

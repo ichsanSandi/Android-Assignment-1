@@ -9,26 +9,20 @@ import androidx.room.Update;
 import java.util.List;
 
 @Dao
-public interface FoodDao {
-    @Query("SELECT * FROM foods")
-    List<Foods> getAll();
+public interface FoodDao
+{
+  @Query("SELECT * FROM foods")
+  List<Foods> getAll();
 
-    @Query("SELECT * FROM foods WHERE uid IN (:foodsIds)")
-    List<Foods> loadAllByIds(int[] foodsIds);
+  @Insert
+  void insertAll(Foods... foodss);
 
-    @Query("SELECT * FROM foods WHERE name LIKE :first AND " +
-            "price LIKE :last LIMIT 1")
-    Foods findByName(String first, String last);
+  @Insert
+  void addFoods(Foods foodss);
 
-    @Insert
-    void insertAll(Foods... foodss);
+  @Delete
+  void delete(Foods foods);
 
-    @Insert
-    void addFoods(Foods foodss);
-
-    @Delete
-    void delete(Foods foods);
-
-    @Update
-    void update(Foods foods);
+  @Update
+  void update(Foods foods);
 }

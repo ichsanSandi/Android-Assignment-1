@@ -18,10 +18,11 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.program1.R;
-import com.example.program1.Room.JobSchedulerService;
+import com.example.program1.Room.JobSchedulerContoh;
 import com.example.program1.Room.Percobaan;
 import com.example.program1.TestActivity;
 import com.example.program1.model.Pengguna;
+import com.example.program1.view.admin.HomeAdmin;
 import com.example.program1.view.koki.HomeKoki;
 import com.example.program1.view.konsumen.HomeKonsumen;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -200,7 +201,7 @@ public class HalamanMasuk extends AppCompatActivity
     switch (level)
     {
       case Pengguna.Admin:
-        startActivity (new Intent (HalamanMasuk.this, JobSchedulerService.class));
+        startActivity (new Intent (HalamanMasuk.this, HomeAdmin.class));
         break;
       case Pengguna.Konsumen:
         startActivity (new Intent (HalamanMasuk.this, HomeKonsumen.class));
