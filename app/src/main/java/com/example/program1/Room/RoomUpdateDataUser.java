@@ -40,9 +40,11 @@ public class RoomUpdateDataUser extends AppCompatActivity {
 
     AppDatabase = Room.databaseBuilder(getApplicationContext(),AppDatabase.class,"userdb").allowMainThreadQueries().build();
 
-    ubahUserButton.setOnClickListener(new View.OnClickListener() {
+    ubahUserButton.setOnClickListener(new View.OnClickListener()
+    {
       @Override
-      public void onClick(View v) {
+      public void onClick(View v)
+      {
         int userId = Integer.parseInt(idUser.getText().toString());
         String first_name = firstNameUbah.getText().toString();
         String last_name = lastNameUbah.getText().toString();

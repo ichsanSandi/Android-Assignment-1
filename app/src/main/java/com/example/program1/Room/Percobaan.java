@@ -22,21 +22,27 @@ public class Percobaan extends AppCompatActivity
     IntentServiceButton = findViewById(R.id.IntentServiceBtn);
     JobSchedulerButton = findViewById(R.id.JobSchedullerBtn);
 
-    ForegroundButton.setOnClickListener(new View.OnClickListener() {
+    ForegroundButton.setOnClickListener(new View.OnClickListener()
+    {
       @Override
-      public void onClick(View v) {
+      public void onClick(View v)
+      {
         startActivity(new Intent(Percobaan.this, Foreground.class));
       }
     });
-    IntentServiceButton.setOnClickListener(new View.OnClickListener() {
+    IntentServiceButton.setOnClickListener(new View.OnClickListener()
+    {
       @Override
-      public void onClick(View v) {
+      public void onClick(View v)
+      {
         startActivity(new Intent(Percobaan.this, IntentService.class));
       }
     });
-    JobSchedulerButton.setOnClickListener(new View.OnClickListener() {
+    JobSchedulerButton.setOnClickListener(new View.OnClickListener()
+    {
       @Override
-      public void onClick(View v) {
+      public void onClick(View v)
+      {
         startActivity(new Intent(Percobaan.this, JobSchedulerContoh.class));
       }
     });

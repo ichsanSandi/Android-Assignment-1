@@ -67,15 +67,6 @@ public class konfirmasiMembeliMakanan extends AppCompatActivity
             }
           }
         }
-//                myRecyclerViewAdapter = new AdapterMakanan (foodArrayList, MembeliMakanan.this, new AdapterMakanan.OnItemClickListener() {
-//                    @Override
-//                    public void onItemClick (ModelMakanan model) {
-//                        Intent data = new Intent (getApplicationContext(), konfirmasiMembeliMakanan.class);
-//                        data.putExtra ("namaMakanan", model.getNamaMakanan());
-//                        data.putExtra ("hargaMakanan", model.getHargaMakanan());
-//                        getApplicationContext().startActivity (data);
-//                    }
-//                });
         myRecyclerViewAdapter = new AdapterKonfirmasiTransaksiMakanan (foodArrayList, konfirmasiMembeliMakanan.this);
 
         myRecyclerView.setAdapter (myRecyclerViewAdapter);
@@ -129,8 +120,4 @@ public class konfirmasiMembeliMakanan extends AppCompatActivity
     });
   }
 
-  public static Intent getActiveIntent (Activity activity)
-  {
-    return new Intent (activity, MembeliMakanan.class);
-  }
 }

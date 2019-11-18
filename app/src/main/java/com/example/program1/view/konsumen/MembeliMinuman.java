@@ -58,14 +58,17 @@ public class MembeliMinuman extends AppCompatActivity
       }
 
       @Override
-      public void onCancelled (@NonNull DatabaseError databaseError) {
+      public void onCancelled (@NonNull DatabaseError databaseError)
+      {
         System.out.println (databaseError.getDetails() + " " + databaseError.getMessage());
       }
     });
 
-    butPesan.setOnClickListener (new View.OnClickListener() {
+    butPesan.setOnClickListener (new View.OnClickListener()
+    {
       @Override
-      public void onClick (View v) {
+      public void onClick (View v)
+      {
         startActivity (new Intent (MembeliMinuman.this, konfirmasiMembeliMinuman.class));
       }
     });

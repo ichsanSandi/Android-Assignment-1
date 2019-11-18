@@ -48,10 +48,6 @@ public class JobSchedulerContoh extends AppCompatActivity
             JobInfo jobInfo = info.build();
             scheduler.schedule(jobInfo);
         }
-//        info.setMinimumLatency(period);
-//        info.setPeriodic(period);
-
-
     }
 
     public void cancelJob(View v)
