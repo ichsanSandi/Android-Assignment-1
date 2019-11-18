@@ -15,7 +15,7 @@ public class ModelTransaksiMakanan
 	private int timestamp;
 	
 	public ModelTransaksiMakanan ()
-	{	}
+		{	}
 	
 	public ModelTransaksiMakanan (String idTransaksiMakanan, String namaMakanan, String hargaMakanan, String namaKonsumen, String jumlahMakanan, String statusMakanan, int timestamp)
 	{
@@ -52,7 +52,7 @@ public class ModelTransaksiMakanan
 	public void setNamaKonsumen (String namaKonsumen)
 		{ this.namaKonsumen = namaKonsumen; }
 		
-	public String getJumlahMakanan()
+	public String getJumlahMakanan ()
 		{ return jumlahMakanan; }
 	
 	public void setJumlahMakanan (String jumlahMakanan)

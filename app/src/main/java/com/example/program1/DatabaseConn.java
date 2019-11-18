@@ -9,16 +9,16 @@ import java.sql.SQLException;
 @SuppressLint ("Registered")
 public class DatabaseConn extends Application
 {
-  public Connection postgreConn ()
+  public Connection connection1()
   {
-    String connectionUrl = "jdbc:postgresql://10.0.30.53:5432/db_exploration";
-    String connectionUsername = "irest";
-    String connectionPassword = "123456";
+
+    String connectionUrl = String.valueOf(R.string.connectionURL);
+    String connectionUsername = String.valueOf(R.string.connectionUserName);
+    String connectionPassword = String.valueOf(R.string.connectionPassword);
     
     try
     {
-      Connection connectionToPostgre = DriverManager.getConnection (connectionUrl, connectionUsername, connectionPassword);
-      return connectionToPostgre;
+      return DriverManager.getConnection (connectionUrl, connectionUsername, connectionPassword);
     }
     catch (SQLException e)
     {

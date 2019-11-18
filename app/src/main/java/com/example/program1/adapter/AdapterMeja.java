@@ -47,5 +47,5 @@ public class AdapterMeja extends RecyclerView.Adapter<AdapterMeja.ViewHolder>
 
   @Override
   public int getItemCount ()
-  { return foodArrayList.size (); }
+    { return foodArrayList.size (); }
 }

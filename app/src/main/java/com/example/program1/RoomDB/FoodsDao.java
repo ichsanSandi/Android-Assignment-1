@@ -13,6 +13,9 @@ public interface FoodsDao
   @Query ("SELECT * FROM Foods")
   List<Foods> getAll ();
 
+  @Query("SELECT foods_server_id FROM Foods")
+  List<String> getFoodsServer_id ();
+
   @Insert
   void insertFood (Foods foods);
 

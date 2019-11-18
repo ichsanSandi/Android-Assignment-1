@@ -20,7 +20,6 @@ public class UpdateFoodsItemTest extends AppCompatActivity
   Button updtBttn;
   EditText nameEditText;
   EditText priceEditText;
-  Intent returnIntent = new Intent (UpdateFoodsItemTest.this, TestActivity.class);
   
   @Override
   protected void onCreate (@Nullable Bundle savedInstanceState)
@@ -32,6 +31,9 @@ public class UpdateFoodsItemTest extends AppCompatActivity
     priceEditText = (EditText) findViewById (R.id.foodsUpdatePriceEditText);
     updtBttn = (Button) findViewById (R.id.UpdateConfirmButton);
 
+    nameEditText.setText (getIntent ().getStringExtra("name"));
+    priceEditText.setHint (getIntent ().getStringExtra ("price"));
+
     updtBttn.setOnClickListener (new View.OnClickListener ()
     {
       @Override
@@ -42,9 +44,6 @@ public class UpdateFoodsItemTest extends AppCompatActivity
         foodsObject.setId (Integer.valueOf (getIntent ().getStringExtra ("id")));
         foodsObject.setName (nameEditText.getText ().toString ());
         foodsObject.setPrice (Integer.valueOf (priceEditText.getText ().toString ()));
-
-        nameEditText.setHint (foodsObject.getName ());
-        priceEditText.setHint (foodsObject.getPrice ());
 
         FoodsDatabase foodDb = Room.databaseBuilder (getApplicationContext (), FoodsDatabase.class, "foods-database")
             .allowMainThreadQueries ()
@@ -58,7 +57,8 @@ public class UpdateFoodsItemTest extends AppCompatActivity
 
         Toast toast1 = Toast.makeText (toastContext, toastText, toastDuration);
         toast1.show ();
-        
+
+        Intent returnIntent = new Intent (UpdateFoodsItemTest.this, TestActivity.class);
         startActivity (returnIntent);
       }
     });
@@ -66,6 +66,7 @@ public class UpdateFoodsItemTest extends AppCompatActivity
   @Override
   public void onBackPressed ()
   {
+    Intent returnIntent = new Intent (UpdateFoodsItemTest.this, TestActivity.class);
     startActivity (returnIntent);
   }
 }

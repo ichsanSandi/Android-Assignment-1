@@ -12,21 +12,32 @@ import android.util.Log;
 import android.widget.Toast;
 
 import androidx.core.app.NotificationCompat;
+import androidx.room.Room;
 
+import com.example.program1.RoomDB.Foods;
+import com.example.program1.RoomDB.FoodsDatabase;
 import com.example.program1.view.HalamanMasuk;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
+
+import static com.example.program1.RoomDB.FoodsDatabase.MIGRATION_1_2;
 
 public class ForegroundService extends Service
 {
   public static final String CHANNEL_ID = "ForegroundServiceChannel";
   public static final String TAG = "ForegroundService";
 
+  List<String> foodsServer_idList;
+  ArrayList<String> foodsServer_idArrayList;
+
   @Override
   public void onCreate ()
-  {
-    super.onCreate ();
-  }
+    { super.onCreate (); }
 
   @Override
   public int onStartCommand (Intent intentOperand1, int flags, final int startId)
@@ -51,13 +62,13 @@ public class ForegroundService extends Service
       @Override
       public void run ()
       {
-//        DatabaseConn dbConn = new DatabaseConn ();
-//        FoodsDatabase foodsDatabase1 = Room.databaseBuilder(getApplicationContext (), FoodsDatabase.class, "foods-database")
-//                .allowMainThreadQueries ()
-//                .addMigrations (MIGRATION_1_2)
-//                .build ();
+        DatabaseConn dbConn = new DatabaseConn ();
+        FoodsDatabase foodsDatabase1 = Room.databaseBuilder(getApplicationContext (), FoodsDatabase.class, "foods-database")
+                .allowMainThreadQueries ()
+                .addMigrations (MIGRATION_1_2)
+                .build ();
 
-        for (int i = 0; i < Integer.MAX_VALUE; i++)
+        for (int i = 0; i < 3; i++)
         {
           try
           {
@@ -66,27 +77,32 @@ public class ForegroundService extends Service
           }
           catch (InterruptedException e)
           {
-            e.printStackTrace();
+            e.printStackTrace ();
           }
         }
 
-//        try
-//        {
-//          Statement statement1 = dbConn.postgreConn ().createStatement ();
-//          ResultSet cursor = statement1.executeQuery ("Select * from public.foods");
-//          while (cursor.next ())
-//          {
-//            Foods foodsObject = new Foods ();
-//            //foodsObject.setId(Integer.valueOf(cursor.getString(1)));
-//            foodsObject.setPrice (Integer.valueOf (cursor.getString(3)));
-//            foodsObject.setName (cursor.getString (2));
-//            foodsDatabase1.FoodsDao ().insertFood (foodsObject);
-//          }
-//        }
-//        catch (SQLException e)
-//        {
-//          e.printStackTrace ();
-//        }
+        try
+        {
+          foodsServer_idList = foodsDatabase1.FoodsDao ().getFoodsServer_id ();
+          foodsServer_idArrayList = new ArrayList<> (foodsServer_idList);
+          Statement statement1 = dbConn.connection1().createStatement ();
+          ResultSet cursor = statement1.executeQuery ("Select * from public.foods");
+          while (cursor.next ())
+          {
+            if (!foodsServer_idArrayList.contains(cursor.getString(1)))
+            {
+              Foods foodsObject = new Foods ();
+              foodsObject.setServer_id(cursor.getString(1));
+              foodsObject.setPrice (Integer.valueOf (cursor.getString(3)));
+              foodsObject.setName (cursor.getString (2));
+              foodsDatabase1.FoodsDao ().insertFood (foodsObject);
+            }
+          }
+        }
+        catch (SQLException e)
+        {
+          e.printStackTrace ();
+        }
       }
     }).start ();
     startForeground ( 1, foregroundNotification);
@@ -95,15 +111,11 @@ public class ForegroundService extends Service
 
   @Override
   public void onDestroy ()
-  {
-    super.onDestroy ();
-  }
+    { super.onDestroy (); }
 
   @Override
   public IBinder onBind (Intent intent)
-  {
-    return null;
-  }
+    { return null; }
 
   private void createNotificationChannel ()
   {
@@ -122,7 +134,5 @@ public class ForegroundService extends Service
 
   @Override
   public void onTaskRemoved (Intent rootIntent)
-  {
-    super.onTaskRemoved (rootIntent);
-  }
+    { super.onTaskRemoved (rootIntent); }
 }

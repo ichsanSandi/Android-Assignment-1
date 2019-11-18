@@ -17,14 +17,14 @@ import com.example.program1.RoomDB.FoodsDatabase;
 import com.example.program1.UpdateFoodsItemTest;
 import java.util.ArrayList;
 
-public class AdapterTestView extends RecyclerView.Adapter<AdapterTestView.ViewHolder>
+public class AdapterItemTestView extends RecyclerView.Adapter<AdapterItemTestView.ViewHolder>
 {
   private ArrayList<Foods> foodsList;
   private Context c;
   private FoodsDatabase foodsDatabase;
   private RecyclerView.Adapter recyclerAdapter;
 
-  public AdapterTestView (ArrayList<Foods> foodArrayList, Context c, FoodsDatabase foodsDatabase, RecyclerView.Adapter recyclerViewAdapter)
+  public AdapterItemTestView (ArrayList<Foods> foodArrayList, Context c, FoodsDatabase foodsDatabase, RecyclerView.Adapter recyclerViewAdapter)
   {
     this.foodsList = foodArrayList;
     this.c = c;
@@ -39,7 +39,8 @@ public class AdapterTestView extends RecyclerView.Adapter<AdapterTestView.ViewHo
     TextView price;
     Button deleteBttn;
     Button updateBttn;
-    ViewHolder(@NonNull View itemView)
+
+    ViewHolder (@NonNull View itemView)
     {
       super (itemView);
       name = (TextView) itemView.findViewById (R.id.nameFoodsText);
@@ -52,12 +53,13 @@ public class AdapterTestView extends RecyclerView.Adapter<AdapterTestView.ViewHo
 
   @NonNull
   @Override
-  public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+  public ViewHolder onCreateViewHolder (@NonNull ViewGroup parent, int viewType)
+  {
     View view = LayoutInflater.from (parent.getContext ()).inflate (R.layout.item_test_layout, parent, false);
     return new ViewHolder (view);
   }
 
-  public void onBindViewHolder(@NonNull final AdapterTestView.ViewHolder holder, final int position)
+  public void onBindViewHolder (@NonNull final AdapterItemTestView.ViewHolder holder, final int position)
   {
     final String id = String.valueOf (foodsList.get (position).getId ());
     final String price = String.valueOf (foodsList.get (position).getPrice ());
@@ -81,18 +83,10 @@ public class AdapterTestView extends RecyclerView.Adapter<AdapterTestView.ViewHo
           @Override
           public void onClick (DialogInterface dialog, int which)
           {
-            if (foodsList.size () == 1)
-            {
-              foodsDatabase.FoodsDao ().deleteFood (foodsList.get (0));
-              foodsList.remove (0);
-              AdapterTestView.this.notifyItemRemoved (0);
-            }
-            else
-            {
-              foodsDatabase.FoodsDao ().deleteFood (foodsList.get (position));
-              foodsList.remove (position);
-              AdapterTestView.this.notifyItemRemoved (position);
-            }
+            foodsDatabase.FoodsDao ().deleteFood (foodsList.get (position));
+            foodsList.remove (position);
+            AdapterItemTestView.this.notifyItemRemoved (position);
+            AdapterItemTestView.this.notifyDataSetChanged ();
           }
         });
         builder.setNegativeButton ("Tidak", new DialogInterface.OnClickListener ()
@@ -119,11 +113,11 @@ public class AdapterTestView extends RecyclerView.Adapter<AdapterTestView.ViewHo
         foodObj.putExtra ("name", name);
         foodObj.putExtra ("price", price);
         c.startActivity (foodObj);
-        AdapterTestView.this.notifyItemChanged (position);
+        AdapterItemTestView.this.notifyItemChanged (position);
       }
     });
   }
   @Override
   public int getItemCount ()
-    { return foodsList.size ();  }
+    { return foodsList.size (); }
 }

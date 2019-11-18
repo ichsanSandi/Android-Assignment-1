@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.room.Room;
 import com.example.program1.RoomDB.Foods;
 import com.example.program1.RoomDB.FoodsDatabase;
-import com.example.program1.adapter.AdapterTestView;
+import com.example.program1.adapter.AdapterItemTestView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.ArrayList;
 import java.util.List;
@@ -46,7 +46,7 @@ public class TestActivity extends AppCompatActivity
             .build ();
     foodsList = foodDb.FoodsDao ().getAll ();
     foodsArrayList = new ArrayList<> (foodsList);
-    foodsRecyclerViewAdapter = new AdapterTestView (foodsArrayList, TestActivity.this, foodDb, foodsRecyclerViewAdapter);
+    foodsRecyclerViewAdapter = new AdapterItemTestView(foodsArrayList, TestActivity.this, foodDb, foodsRecyclerViewAdapter);
     foodsRecyclerView.setAdapter (foodsRecyclerViewAdapter);
 
     backBttn = findViewById (R.id.backBttn);

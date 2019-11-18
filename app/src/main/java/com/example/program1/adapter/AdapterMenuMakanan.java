@@ -89,5 +89,5 @@ public class AdapterMenuMakanan extends RecyclerView.Adapter<AdapterMenuMakanan.
 
   @Override
   public int getItemCount ()
-  { return foodArrayList.size ();	}
+    { return foodArrayList.size ();	}
 }

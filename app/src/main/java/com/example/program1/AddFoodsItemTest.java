@@ -15,7 +15,6 @@ import com.example.program1.RoomDB.FoodsDatabase;
 
 import static com.example.program1.RoomDB.FoodsDatabase.MIGRATION_1_2;
 
-
 public class AddFoodsItemTest extends AppCompatActivity
 {
   Button addBttn;
@@ -32,7 +31,10 @@ public class AddFoodsItemTest extends AppCompatActivity
     priceEditText = (EditText) findViewById (R.id.foodsAddPriceEditText);
     addBttn = (Button) findViewById (R.id.foodsAddConfirmButton);
 
-    addBttn.setOnClickListener (new View.OnClickListener()
+    nameEditText.setHint ("Nama Makanan");
+    priceEditText.setHint ("Harga Makanan");
+
+    addBttn.setOnClickListener (new View.OnClickListener ()
     {
       @Override
       public void onClick (View v)
@@ -46,7 +48,7 @@ public class AddFoodsItemTest extends AppCompatActivity
                 .addMigrations (MIGRATION_1_2)
                 .build ();
         foodDb.FoodsDao ().insertFood (foodsObject);
-        
+
         Context context1 = getApplicationContext ();
         CharSequence appearedToastText = "Data Added";
         int duration = Toast.LENGTH_LONG;

@@ -64,5 +64,5 @@ public class AdapterKonfirmasiTransaksiMakanan extends RecyclerView.Adapter<Adap
 
   @Override
   public int getItemCount ()
-  { return foodArrayList.size (); }
+    { return foodArrayList.size (); }
 }

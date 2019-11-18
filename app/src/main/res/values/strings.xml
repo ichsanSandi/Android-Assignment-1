@@ -4,6 +4,9 @@
     <string name="price_textView">Price</string>
     <string name="itemName_textView">Name</string>
     <string name="amounText">Banyaknya</string>
+    <string name="connectionURL">jdbc:postgresql://10.0.30.53:5432/db_exploration</string>
+    <string name="connectionUserName">irest</string>
+    <string name="connectionPassword">123456</string>
     <string-array name="foods">
         <item>rice</item>
         <item>potato</item>

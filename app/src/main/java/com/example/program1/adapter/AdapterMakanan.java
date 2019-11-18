@@ -13,8 +13,8 @@ import com.example.program1.R;
 import com.example.program1.model.ModelMakanan;
 import java.util.ArrayList;
 
-public class AdapterMakanan extends RecyclerView.Adapter<AdapterMakanan.ViewHolder> {
-
+public class AdapterMakanan extends RecyclerView.Adapter<AdapterMakanan.ViewHolder>
+{
   private TextView name;
   private TextView price;
   private ImageView foto;
@@ -24,7 +24,7 @@ public class AdapterMakanan extends RecyclerView.Adapter<AdapterMakanan.ViewHold
   private OnItemClickListener listenerDetail;
 
   public interface OnItemClickListener
-  { void onItemClick(ModelMakanan model);	}
+    { void onItemClick (ModelMakanan model); }
 
   public AdapterMakanan (ArrayList<ModelMakanan> foodArrayList, Context c, OnItemClickListener listenerDetail)
   {
@@ -73,9 +73,9 @@ public class AdapterMakanan extends RecyclerView.Adapter<AdapterMakanan.ViewHold
 
   @Override
   public void onBindViewHolder (ViewHolder viewHolder, final int position)
-  { viewHolder.bind (foodArrayList.get (position), listenerDetail); }
+    { viewHolder.bind (foodArrayList.get (position), listenerDetail); }
 
   @Override
   public int getItemCount ()
-  {	return foodArrayList.size (); }
+    {	return foodArrayList.size (); }
 }

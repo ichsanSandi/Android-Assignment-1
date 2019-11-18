@@ -8,7 +8,7 @@ public class Food
 	private String key;
 	
 	public Food ()
-	{	}
+		{	}
 	
 	public Food (String name, String id, int price)
 	{

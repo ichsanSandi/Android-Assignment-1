@@ -12,7 +12,7 @@ public class ModelMinuman
 	private String fotoMinuman;
 	
 	public ModelMinuman ()
-	{	}
+		{	}
 	
 	public ModelMinuman (String idMinuman, String namaMinuman, String hargaMinuman, String fotoMinuman)
 	{

@@ -74,7 +74,5 @@ public class SecondTierModule extends AppCompatActivity
     }
 
     public static Intent getActiveIntent (Activity activity)
-    {
-      return new Intent (activity, SecondTierModule.class);
-    }
+      { return new Intent (activity, SecondTierModule.class); }
 }

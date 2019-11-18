@@ -15,7 +15,7 @@ public class ModelTransaksiMinuman
 	private int timestamp;
 	
 	public ModelTransaksiMinuman ()
-	{ }
+		{ }
 	
 	public ModelTransaksiMinuman (String idTransaksiMinuman, String namaMinuman, String hargaMinuman, String namaKonsumen, String jumlahMinuman, String statusMinuman, int timestamp)
 	{

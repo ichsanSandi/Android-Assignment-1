@@ -80,5 +80,5 @@ public class AdapterAdminMinuman extends RecyclerView.Adapter<AdapterAdminMinuma
 
   @Override
   public int getItemCount ()
-  { return foodArrayList.size (); }
+    { return foodArrayList.size (); }
 }

@@ -114,7 +114,7 @@ public class Welcome extends AppCompatActivity
                   @Override
                   public void onCancelled (@NonNull DatabaseError databaseError1)
                   {
-                    System.out.println (databaseError1.getDetails ()+" "+databaseError1.getMessage ());
+                    System.out.println (databaseError1.getDetails () + " " + databaseError1.getMessage ());
                   }
                 });
 
