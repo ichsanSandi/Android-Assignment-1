@@ -35,6 +35,9 @@ public class ForegroundService extends Service
   List<String> foodsServer_idList;
   ArrayList<String> foodsServer_idArrayList;
 
+  List<Foods> foodsUnsyncDataList;
+  ArrayList<Foods> foodsUnsyncDataArrayList;
+
   @Override
   public void onCreate ()
     { super.onCreate (); }
@@ -57,16 +60,24 @@ public class ForegroundService extends Service
 
     Toast.makeText (this, "Notification Service started by user.", Toast.LENGTH_LONG).show ();
 
-    new Thread (new Runnable ()
+  new Thread
+   (
+    new Runnable ()
     {
       @Override
       public void run ()
       {
         DatabaseConn dbConn = new DatabaseConn ();
-        FoodsDatabase foodsDatabase1 = Room.databaseBuilder(getApplicationContext (), FoodsDatabase.class, "foods-database")
-                .allowMainThreadQueries ()
-                .addMigrations (MIGRATION_1_2)
-                .build ();
+        FoodsDatabase foodsDatabase1 =
+         Room.databaseBuilder
+         (
+          getApplicationContext (),
+          FoodsDatabase.class,
+          "foods-database"
+         )
+         .addMigrations(MIGRATION_1_2)
+         .allowMainThreadQueries ()
+         .build ();
 
         for (int i = 0; i < 3; i++)
         {
@@ -76,17 +87,14 @@ public class ForegroundService extends Service
             Log.w (TAG, String.valueOf (i));
           }
           catch (InterruptedException e)
-          {
-            e.printStackTrace ();
-          }
+          { e.printStackTrace ();  }
         }
-
         try
         {
           foodsServer_idList = foodsDatabase1.FoodsDao ().getFoodsServer_id ();
           foodsServer_idArrayList = new ArrayList<> (foodsServer_idList);
           Statement statement1 = dbConn.connection1().createStatement ();
-          ResultSet cursor = statement1.executeQuery ("Select * from public.foods");
+          ResultSet cursor = statement1.executeQuery ("Select * from foods");
           while (cursor.next ())
           {
             if (!foodsServer_idArrayList.contains(cursor.getString(1)))
@@ -98,13 +106,15 @@ public class ForegroundService extends Service
               foodsDatabase1.FoodsDao ().insertFood (foodsObject);
             }
           }
+          foodsUnsyncDataList = foodsDatabase1.FoodsDao ().getUnsyncObject ();
+          foodsUnsyncDataArrayList = new ArrayList<>(foodsUnsyncDataList);
+          Statement statement2 = dbConn.connection1 ().createStatement ();
         }
         catch (SQLException e)
-        {
-          e.printStackTrace ();
-        }
+        { e.printStackTrace (); }
       }
-    }).start ();
+    }
+   ).start ();
     startForeground ( 1, foregroundNotification);
     return START_STICKY;
   }
