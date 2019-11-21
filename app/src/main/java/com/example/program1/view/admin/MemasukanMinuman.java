@@ -62,7 +62,6 @@ public class MemasukanMinuman extends AppCompatActivity
     mProgressBar = findViewById (R.id.progress_bar);
     batal = findViewById (R.id.btn_batal);
     tambah = findViewById (R.id.btn_tambah);
-
     fotoMinuman.setOnClickListener (new View.OnClickListener()
     {
       @Override
@@ -72,7 +71,6 @@ public class MemasukanMinuman extends AppCompatActivity
       }
     });
 
-
     tambah.setOnClickListener (new View.OnClickListener()
     {
       @Override
@@ -81,35 +79,29 @@ public class MemasukanMinuman extends AppCompatActivity
         final String strnamaMinuman = namaMinuman.getText().toString().trim();
         final String strhargaMinuman = hargaMinuman.getText().toString().trim();
         boolean kirim = false;
-
         if (strnamaMinuman.isEmpty())
         {
           namaMinuman.requestFocus();
           namaMinuman.setError ("Isi terlebih dahulu");
           kirim = false;
         }
-        else
-         { kirim = true; }
-
+        else { kirim = true; }
         if (strhargaMinuman.isEmpty())
         {
           hargaMinuman.requestFocus();
           hargaMinuman.setError ("Isi terlebih dahulu");
           kirim = false;
         }
-        else
-          { kirim = true; }
+        else { kirim = true; }
 
         if (kirim)
         {
           if (mImageUri != null)
           {
-//                        final StorageReference fileReference = mStorageRef.child (System.currentTimeMillis() + "." + getFileExtension (mImageUri));
             final StorageReference fileReference = FirebaseStorage.getInstance().getReference ("fotoMakananMinuman").child (uriFoto.getLastPathSegment());
-
             UploadTask uploadFoto = fileReference.putFile (mImageUri);
-
-            Task<Uri> uploading = uploadFoto.continueWithTask (new Continuation<UploadTask.TaskSnapshot, Task<Uri>>()
+            Task<Uri> uploading = uploadFoto
+            .continueWithTask (new Continuation<UploadTask.TaskSnapshot, Task<Uri>>()
             {
               @Override
               public Task<Uri> then (@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception
@@ -120,7 +112,8 @@ public class MemasukanMinuman extends AppCompatActivity
                 }
                 return fileReference.getDownloadUrl();
               }
-            }).addOnCompleteListener (new OnCompleteListener<Uri>()
+            })
+            .addOnCompleteListener (new OnCompleteListener<Uri>()
             {
               @Override
               public void onComplete (@NonNull Task<Uri> task)
@@ -163,8 +156,7 @@ public class MemasukanMinuman extends AppCompatActivity
             });
           }
         }
-        else
-          { Log.w (TAG, "Gagal mengambil url admin"); }
+        else { Log.w (TAG, "Gagal mengambil url admin"); }
       }
     });
 

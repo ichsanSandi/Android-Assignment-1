@@ -21,12 +21,12 @@ import java.util.ArrayList;
 public class AdapterMenuMakanan extends RecyclerView.Adapter<AdapterMenuMakanan.ViewHolder>
 {
   private ArrayList<Food> foodArrayList;
-  private Context c;
+  private Context context1;
 
-  public AdapterMenuMakanan (ArrayList<Food> foodArrayList, Context c)
+  public AdapterMenuMakanan (ArrayList<Food> foodArrayList, Context context1)
   {
     this.foodArrayList = foodArrayList;
-    this.c = c;
+    this.context1 = context1;
   }
 
   class ViewHolder extends RecyclerView.ViewHolder
@@ -62,10 +62,7 @@ public class AdapterMenuMakanan extends RecyclerView.Adapter<AdapterMenuMakanan.
     final String uid = "";
     final String emailUser = auth.getCurrentUser ().getEmail ();
     final Button orderButton = viewHolder.orderButton;
-    final String orderAmountText = viewHolder.orderAmount.getText ().toString ();
     final DatabaseReference dbRef = FirebaseDatabase.getInstance ().getReference ();
-
-//      viewHolder.orderAmount.setText(orderAmountText);
     viewHolder.name.setText (name);
     viewHolder.price.setText (price);
 
@@ -74,7 +71,7 @@ public class AdapterMenuMakanan extends RecyclerView.Adapter<AdapterMenuMakanan.
       @Override
       public void onClick (View v)
       {
-        AlertDialog.Builder alertDialog = new AlertDialog.Builder (c);
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder (context1);
         alertDialog.setMessage ("Total Order: " + (Integer.valueOf (price) * Integer.valueOf (viewHolder.orderAmount.getText ().toString ())) );
         AlertDialog alert11 = alertDialog.create ();
         final String jumlah = viewHolder.orderAmount.getText ().toString ();
@@ -88,6 +85,5 @@ public class AdapterMenuMakanan extends RecyclerView.Adapter<AdapterMenuMakanan.
   }
 
   @Override
-  public int getItemCount ()
-    { return foodArrayList.size ();	}
+  public int getItemCount () { return foodArrayList.size ();	}
 }

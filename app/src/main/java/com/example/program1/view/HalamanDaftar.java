@@ -119,15 +119,12 @@ public class HalamanDaftar extends AppCompatActivity
                   if (task.isSuccessful())
                   {
                     Log.d(TAG, "createUserWithEmail:success");
-
                     FirebaseUser user = auth.getCurrentUser();
                     String email = user.getEmail();
                     final String uid = user.getUid();
-
                     Toast.makeText(HalamanDaftar.this, "email : " + email, Toast.LENGTH_LONG).show();
                     Pengguna daftar = new Pengguna(uid, strNama, email, Pengguna.Konsumen,strPassword,"0");
                     dbRef.child("pengguna").child(uid).push().setValue(daftar);
-
                     Toast.makeText(HalamanDaftar.this, "Pendaftaran Berhasil", Toast.LENGTH_LONG).show();
                     startActivity(new Intent(HalamanDaftar.this, HalamanMasuk.class));
                   }
@@ -160,7 +157,6 @@ public class HalamanDaftar extends AppCompatActivity
       }
 
     });
-
   }
 
   @Override

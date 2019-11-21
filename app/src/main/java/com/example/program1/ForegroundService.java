@@ -48,15 +48,15 @@ public class ForegroundService extends Service
     createNotificationChannel ();
     Intent notificationIntent = new Intent (this, HalamanMasuk.class);
     String textFromIntent = intentOperand1.getStringExtra ("inputExtra");
-    PendingIntent pendingIntent1 = PendingIntent.getActivity  (this,
-            0, notificationIntent, 0);
+    PendingIntent pendingIntent1 = PendingIntent.getActivity  (this, 0, notificationIntent, 0);
 
-    Notification foregroundNotification = new NotificationCompat.Builder (this, CHANNEL_ID)
-            .setContentTitle ("Foreground Service")
-            .setContentText (textFromIntent)
-            .setSmallIcon (R.drawable.ic_launcher_foreground)
-            .setContentIntent (pendingIntent1)
-            .build ();
+    Notification foregroundNotification =
+    new NotificationCompat.Builder (this, CHANNEL_ID)
+    .setContentTitle ("Foreground Service")
+    .setContentText (textFromIntent)
+    .setSmallIcon (R.drawable.ic_launcher_foreground)
+    .setContentIntent (pendingIntent1)
+    .build ();
 
     Toast.makeText (this, "Notification Service started by user.", Toast.LENGTH_LONG).show ();
 
@@ -86,8 +86,8 @@ public class ForegroundService extends Service
             TimeUnit.SECONDS.sleep (1);
             Log.w (TAG, String.valueOf (i));
           }
-          catch (InterruptedException e)
-          { e.printStackTrace ();  }
+          catch (InterruptedException errorInterupted)
+          { errorInterupted.printStackTrace ();  }
         }
         try
         {
@@ -110,8 +110,8 @@ public class ForegroundService extends Service
           foodsUnsyncDataArrayList = new ArrayList<>(foodsUnsyncDataList);
           Statement statement2 = dbConn.connection1 ().createStatement ();
         }
-        catch (SQLException e)
-        { e.printStackTrace (); }
+        catch (SQLException errorSQL)
+        { errorSQL.printStackTrace (); }
       }
     }
    ).start ();

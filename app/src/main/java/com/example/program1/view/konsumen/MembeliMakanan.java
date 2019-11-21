@@ -51,7 +51,6 @@ public class MembeliMakanan extends AppCompatActivity
           foodArrayList.add (makanan);
         }
         myRecyclerViewAdapter = new AdapterMenuMakanan (foodArrayList, MembeliMakanan.this);
-
         myRecyclerView.setAdapter (myRecyclerViewAdapter);
       }
 

@@ -1,6 +1,5 @@
 package com.example.program1.view.konsumen;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -14,7 +13,6 @@ import com.example.program1.R;
 import com.example.program1.adapter.AdapterKonfirmasiTransaksiMakanan;
 import com.example.program1.model.ModelTransaksiMakanan;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -25,14 +23,13 @@ import java.util.ArrayList;
 public class konfirmasiMembeliMakanan extends AppCompatActivity
 {
   FirebaseAuth auth;
-  FirebaseUser user;
   DatabaseReference dbRef;
   DatabaseReference databaseReference;
   RecyclerView myRecyclerView;
   RecyclerView.Adapter myRecyclerViewAdapter;
   RecyclerView.LayoutManager myRecyclerViewLayoutMgr;
   ArrayList<ModelTransaksiMakanan> foodArrayList;
-  Button but_pesan;
+  Button butPesan;
 
   @Override
   protected void onCreate (@Nullable Bundle savedInstanceState)
@@ -42,12 +39,11 @@ public class konfirmasiMembeliMakanan extends AppCompatActivity
     auth = FirebaseAuth.getInstance();
     final String emailUser = auth.getCurrentUser().getEmail();
     dbRef = FirebaseDatabase.getInstance().getReference();
-
     myRecyclerView = (RecyclerView) findViewById (R.id.transaksi_recyclerView_makanan);
     myRecyclerView.setHasFixedSize (true);
     myRecyclerViewLayoutMgr = new LinearLayoutManager (this);
     myRecyclerView.setLayoutManager (myRecyclerViewLayoutMgr);
-    but_pesan = findViewById (R.id.btn_beli_makanan);
+    butPesan = findViewById (R.id.btn_beli_makanan);
     databaseReference = FirebaseDatabase.getInstance().getReference();
     databaseReference.child ("transaksiMakanan").addValueEventListener (new ValueEventListener()
     {
@@ -73,13 +69,13 @@ public class konfirmasiMembeliMakanan extends AppCompatActivity
       }
 
       @Override
-      public void onCancelled (@NonNull DatabaseError databaseError)
+      public void onCancelled (@NonNull DatabaseError databaseError1)
       {
-        System.out.println (databaseError.getDetails()+" "+databaseError.getMessage());
+        System.out.println (databaseError1.getDetails()+" "+databaseError1.getMessage());
       }
     });
 
-    but_pesan.setOnClickListener (new View.OnClickListener()
+    butPesan.setOnClickListener (new View.OnClickListener()
     {
       @Override
       public void onClick (View v)
@@ -119,5 +115,4 @@ public class konfirmasiMembeliMakanan extends AppCompatActivity
       }
     });
   }
-
 }

@@ -20,14 +20,14 @@ import java.util.ArrayList;
 public class AdapterItemTestView extends RecyclerView.Adapter<AdapterItemTestView.ViewHolder>
 {
   private ArrayList<Foods> foodsList;
-  private Context c;
+  private Context context1;
   private FoodsDatabase foodsDatabase;
   private RecyclerView.Adapter recyclerAdapter;
 
-  public AdapterItemTestView (ArrayList<Foods> foodArrayList, Context c, FoodsDatabase foodsDatabase, RecyclerView.Adapter recyclerViewAdapter)
+  public AdapterItemTestView (ArrayList<Foods> foodArrayList, Context context1, FoodsDatabase foodsDatabase, RecyclerView.Adapter recyclerViewAdapter)
   {
     this.foodsList = foodArrayList;
-    this.c = c;
+    this.context1 = context1;
     this.foodsDatabase = foodsDatabase;
     this.recyclerAdapter =  recyclerViewAdapter;
   }
@@ -64,18 +64,17 @@ public class AdapterItemTestView extends RecyclerView.Adapter<AdapterItemTestVie
     final String id = String.valueOf (foodsList.get (position).getId ());
     final String price = String.valueOf (foodsList.get (position).getPrice ());
     final String name = foodsList.get (position).getName ();
-
     holder.price.setText (price);
     holder.id.setText (id);
     holder.name.setText (name);
-
     Button delBtn = holder.deleteBttn;
+    
     delBtn.setOnClickListener (new View.OnClickListener ()
     {
       @Override
       public void onClick (View v)
       {
-        AlertDialog.Builder builder = new AlertDialog.Builder (c);
+        AlertDialog.Builder builder = new AlertDialog.Builder (context1);
         builder.setCancelable (false);
         builder.setMessage ("Anda yakin ingin hapus?");
         builder.setPositiveButton ("Ya", new DialogInterface.OnClickListener ()
@@ -108,16 +107,15 @@ public class AdapterItemTestView extends RecyclerView.Adapter<AdapterItemTestVie
       @Override
       public void onClick (View v)
       {
-        Intent foodObj = new Intent (c.getApplicationContext (), UpdateFoodsItemTest.class);
+        Intent foodObj = new Intent (context1.getApplicationContext (), UpdateFoodsItemTest.class);
         foodObj.putExtra ("id", id);
         foodObj.putExtra ("name", name);
         foodObj.putExtra ("price", price);
-        c.startActivity (foodObj);
+        context1.startActivity (foodObj);
         AdapterItemTestView.this.notifyItemChanged (position);
       }
     });
   }
   @Override
-  public int getItemCount ()
-    { return foodsList.size (); }
+  public int getItemCount () { return foodsList.size (); }
 }

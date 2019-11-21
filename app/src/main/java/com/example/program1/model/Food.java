@@ -7,8 +7,7 @@ public class Food
 	private int price;
 	private String key;
 	
-	public Food ()
-		{	}
+	public Food () {	}
 	
 	public Food (String name, String id, int price)
 	{
@@ -16,27 +15,19 @@ public class Food
 		this.name = name;
 		this.price = price;
 	}
-	public void setId (String id)
-		{ this.id = id;	}
+	public void setId (String id) { this.id = id;	}
 	
-	public void setName (String name)
-		{ this.name = name;	}
+	public void setName (String name) { this.name = name;	}
 	
-	public void setPrice (int price)
-		{ this.price = price;	}
+	public void setPrice (int price) { this.price = price;	}
 	
-	public String getId ()
-		{ return id; }
+	public String getId () { return id; }
+
+	public String getName () { return name; }
 	
-	public String getName ()
-		{ return name; }
+	public int getPrice () { return price; }
 	
-	public int getPrice ()
-		{ return price; }
-	
-	public String getKey ()
-		{ return key; }
-	
-	public void setKey (String key)
-		{ this.key = key; }
+	public String getKey () { return key; }
+
+	public void setKey (String key) { this.key = key; }
 }

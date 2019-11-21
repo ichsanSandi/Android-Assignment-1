@@ -38,7 +38,8 @@ public class ExampleJobService extends JobService
     {
 
       @Override
-      protected void onPostExecute(String s) {
+      protected void onPostExecute(String s)
+      {
         doBackgroundWork(params);
         Toast.makeText(getApplicationContext(),s,Toast.LENGTH_LONG).show();
         jobFinished(params,false);
@@ -57,9 +58,11 @@ public class ExampleJobService extends JobService
     AppDatabase = Room.databaseBuilder(getApplicationContext(),AppDatabase.class,"userdb").allowMainThreadQueries().fallbackToDestructiveMigration().build();
 
     //food
-    dbRef.child("foods").addValueEventListener(new ValueEventListener() {
+    dbRef.child("foods").addValueEventListener(new ValueEventListener()
+    {
       @Override
-      public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+      public void onDataChange(@NonNull DataSnapshot dataSnapshot)
+      {
         foodArrayList = new ArrayList<>();
         int i = 0;
         int j = 0;

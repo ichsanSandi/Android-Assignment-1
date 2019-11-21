@@ -6,10 +6,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.room.Room;
-
 import com.example.program1.R;
 
 public class RoomUpdateDataUser extends AppCompatActivity {
@@ -18,7 +16,6 @@ public class RoomUpdateDataUser extends AppCompatActivity {
   TextView firstNameUbah, lastNameUbah, idUser;
   public static AppDatabase AppDatabase;
   String ubahIdUser = "", ubahFirstName = "",ubahLastname = "";
-
   AppDatabase db;
 
   @Override
@@ -37,7 +34,6 @@ public class RoomUpdateDataUser extends AppCompatActivity {
     idUser.setText(ubahIdUser);
     firstNameUbah.setText(ubahFirstName);
     lastNameUbah.setText(ubahLastname);
-
     AppDatabase = Room.databaseBuilder(getApplicationContext(),AppDatabase.class,"userdb").allowMainThreadQueries().build();
 
     ubahUserButton.setOnClickListener(new View.OnClickListener()
@@ -52,7 +48,6 @@ public class RoomUpdateDataUser extends AppCompatActivity {
         user.setUid(userId);
         user.setFirstName(first_name);
         user.setLastName(last_name);
-
         RoomUpdateDataUser.AppDatabase.userDao().update(user);
         Toast.makeText(getApplicationContext(),"berhasil boy",Toast.LENGTH_SHORT).show();
         startActivity(new Intent(RoomUpdateDataUser.this, RoomReadDataUser.class));

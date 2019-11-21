@@ -142,10 +142,7 @@ public class HomeKoki extends AppCompatActivity
           }
 
           @Override
-          public void onCancelled (@NonNull DatabaseError databaseError)
-          {
-
-          }
+          public void onCancelled (@NonNull DatabaseError databaseError1) { }
         });
         startActivity (new Intent (HomeKoki.this, HomeKoki.class));
       }

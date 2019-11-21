@@ -12,7 +12,6 @@ import com.example.program1.R;
 
 public class RoomInsertDataUser extends AppCompatActivity
 {
-
   Button tambahUserButton, lihatUserButton;
   TextView firstName, lastName, idUser;
   public static AppDatabase AppDatabase;
@@ -29,7 +28,6 @@ public class RoomInsertDataUser extends AppCompatActivity
     idUser = findViewById (R.id.idUserTambahText);
     firstName = findViewById (R.id.firstNameTambahText);
     lastName = findViewById (R.id.lastNameTambahText);
-
     AppDatabase = Room.databaseBuilder (getApplicationContext(),AppDatabase.class,"userdb").allowMainThreadQueries().build();
 
     tambahUserButton.setOnClickListener (new View.OnClickListener()
@@ -46,7 +44,6 @@ public class RoomInsertDataUser extends AppCompatActivity
         user.setLastName (last_name);
         RoomInsertDataUser.AppDatabase.userDao().addUser (user);
         Toast.makeText (getApplicationContext(),"berhasil boy",Toast.LENGTH_SHORT).show();
-        //
       }
     });
     lihatUserButton.setOnClickListener (new View.OnClickListener()

@@ -40,10 +40,11 @@ public class TestActivity extends AppCompatActivity
     foodsRecyclerViewLayoutMgr = new LinearLayoutManager (this);
     foodsRecyclerView.setLayoutManager (foodsRecyclerViewLayoutMgr);
 
-    FoodsDatabase foodDb = Room.databaseBuilder (getApplicationContext (), FoodsDatabase.class, "foods-database")
-            .allowMainThreadQueries ()
-            .addMigrations (MIGRATION_1_2)
-            .build ();
+    FoodsDatabase foodDb =
+    Room.databaseBuilder (getApplicationContext (), FoodsDatabase.class, "foods-database")
+    .allowMainThreadQueries ()
+    .addMigrations (MIGRATION_1_2)
+    .build ();
     foodsList = foodDb.FoodsDao ().getAll ();
     foodsArrayList = new ArrayList<> (foodsList);
     foodsRecyclerViewAdapter = new AdapterItemTestView(foodsArrayList, TestActivity.this, foodDb, foodsRecyclerViewAdapter);

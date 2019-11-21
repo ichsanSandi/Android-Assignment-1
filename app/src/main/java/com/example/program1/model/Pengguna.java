@@ -15,8 +15,7 @@ public class Pengguna
 	private String password;
 	private String ovo;
 	
-	public Pengguna ()
-		{	}
+	public Pengguna () {	}
 	
 	public Pengguna (String id, String nama, String email, String level, String password, String ovo)
 	{
@@ -28,39 +27,27 @@ public class Pengguna
 		this.ovo = ovo;
 	}
 	
-	public String getLevel ()
-		{ return level; }
+	public String getLevel () { return level; }
 	
-	public void setLevel (String level)
-		{ this.level = level; }
+	public void setLevel (String level) { this.level = level; }
 	
-	public String getId ()
-		{ return id; }
+	public String getId () { return id; }
 	
-	public void setId (String id)
-		{ this.id = id; }
+	public void setId (String id) { this.id = id; }
 	
-	public String getNama ()
-		{ return nama; }
+	public String getNama () { return nama; }
 	
-	public void setNama (String nama)
-		{ this.nama = nama; }
+	public void setNama (String nama) { this.nama = nama; }
 	
-	public String getEmail ()
-		{ return email; }
+	public String getEmail () { return email; }
 	
-	public void setEmail (String email)
-		{ this.email = email; }
+	public void setEmail (String email) { this.email = email; }
 	
-	public String getPassword ()
-		{ return password; }
+	public String getPassword () { return password; }
 	
-	public void setPassword (String password)
-		{ this.password = password; }
+	public void setPassword (String password) { this.password = password; }
 	
-	public String getOvo ()
-		{ return ovo; }
+	public String getOvo () { return ovo; }
 	
-	public void setOvo (String ovo)
-		{ this.ovo = ovo; }
+	public void setOvo (String ovo) { this.ovo = ovo; }
 }

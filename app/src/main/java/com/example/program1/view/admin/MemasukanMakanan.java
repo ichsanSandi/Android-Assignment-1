@@ -1,6 +1,5 @@
 package com.example.program1.view.admin;
 
-
 import android.app.AlertDialog;
 import android.content.ContentResolver;
 import android.content.DialogInterface;
@@ -49,7 +48,6 @@ public class MemasukanMakanan extends AppCompatActivity
   StorageReference mStorageRef;
   String uid;
   String namaMakanan1 = "", hargaMakanan1 = "";
-  static final String DIR_FOTO_MAKANAN = "FOTO_MAKANAN";
 
   @Nullable
   @Override
@@ -60,17 +58,14 @@ public class MemasukanMakanan extends AppCompatActivity
     auth = FirebaseAuth.getInstance();
     dbRef = FirebaseDatabase.getInstance().getReference();
     mStorageRef = FirebaseStorage.getInstance().getReference();
-
     namaMakanan = findViewById(R.id.input_namaMakanan);
     hargaMakanan = findViewById(R.id.input_hargaMakanan);
     fotoMakanan = findViewById(R.id.foto_admin_fotoMakanan);
     namaMakanan1 = getIntent().getStringExtra("namaMakanan");
     hargaMakanan1 = getIntent().getStringExtra("hargaMakanan");
-
     mProgressBar = findViewById(R.id.progress_bar);
     batal = findViewById(R.id.btn_batal);
     tambah = findViewById(R.id.btn_tambah);
-
     namaMakanan.setText(namaMakanan1);
     hargaMakanan.setText(hargaMakanan1);
     fotoMakanan.setOnClickListener(new View.OnClickListener()
@@ -81,117 +76,117 @@ public class MemasukanMakanan extends AppCompatActivity
       }
     });
 
-    tambah.setOnClickListener(new View.OnClickListener()
-    {
-      @Override
-      public void onClick(View v)
+    tambah.setOnClickListener
+     (
+      new View.OnClickListener()
       {
-        final String strnamaMakanan = namaMakanan.getText().toString().trim();
-        final String strhargaMakanan = hargaMakanan.getText().toString().trim();
-        boolean kirim = false;
-        if (strnamaMakanan.isEmpty())
+        @Override
+        public void onClick(View v)
         {
-          namaMakanan.requestFocus();
-          namaMakanan.setError("Isi terlebih dahulu");
-          kirim = false;
-        }
-        else
-          { kirim = true; }
-        if (strhargaMakanan.isEmpty())
-        {
-          hargaMakanan.requestFocus();
-          hargaMakanan.setError("Isi terlebih dahulu");
-          kirim = false;
-        }
-        else
-          { kirim = true; }
-        if (kirim)
-        {
-          if (mImageUri != null)
+          final String strnamaMakanan = namaMakanan.getText().toString().trim();
+          final String strhargaMakanan = hargaMakanan.getText().toString().trim();
+          boolean kirim = false;
+          if (strnamaMakanan.isEmpty())
           {
-            final StorageReference fileReference = mStorageRef.child(System.currentTimeMillis() + "." + getFileExtension(mImageUri));
-            UploadTask uploadFoto = fileReference.putFile(mImageUri);
-            Task<Uri> uploading = uploadFoto.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>()
+            namaMakanan.requestFocus();
+            namaMakanan.setError("Isi terlebih dahulu");
+            kirim = false;
+          }
+          else { kirim = true; }
+          if (strhargaMakanan.isEmpty())
+          {
+            hargaMakanan.requestFocus();
+            hargaMakanan.setError("Isi terlebih dahulu");
+            kirim = false;
+          }
+          else { kirim = true; }
+          if (kirim)
+          {
+            if (mImageUri != null)
             {
-              @Override
-              public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception
+              final StorageReference fileReference = mStorageRef.child(System.currentTimeMillis() + "." + getFileExtension(mImageUri));
+              UploadTask uploadFoto = fileReference.putFile(mImageUri);
+              Task<Uri> uploading = uploadFoto
+              .continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>()
               {
-                if (!task.isSuccessful())
+                @Override
+                public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception
                 {
-                  Log.w(TAG, "Gagal upload foto ktp:" + task.getException());
-                }
-                return fileReference.getDownloadUrl();
-              }
-            }).addOnCompleteListener(new OnCompleteListener<Uri>()
-            {
-              @Override
-              public void onComplete(@NonNull Task<Uri> task)
-              {
-                if (task.isSuccessful())
-                {
-                  String urlDownload = task.getResult().toString();
-                  System.out.println(mImageUri.toString());
-                  ModelMakanan dataMakanan = new ModelMakanan(uid, strnamaMakanan, strhargaMakanan, urlDownload);
-                  System.out.println(urlDownload + "coba2");
-                  final DatabaseReference pushId = dbRef.child("foods");
-                  pushId.push().setValue(dataMakanan);
-                  DatabaseReference getId = FirebaseDatabase.getInstance().getReference().child("foods");
-                  getId.addValueEventListener(new ValueEventListener()
+                  if (!task.isSuccessful())
                   {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot)
+                    Log.w(TAG, "Gagal upload foto ktp:" + task.getException());
+                  }
+                  return fileReference.getDownloadUrl();
+                }
+              })
+              .addOnCompleteListener(new OnCompleteListener<Uri>()
+              {
+                @Override
+                public void onComplete(@NonNull Task<Uri> task)
+                {
+                  if (task.isSuccessful())
+                  {
+                    String urlDownload = task.getResult().toString();
+                    System.out.println(mImageUri.toString());
+                    ModelMakanan dataMakanan = new ModelMakanan(uid, strnamaMakanan, strhargaMakanan, urlDownload);
+                    System.out.println(urlDownload + "coba2");
+                    final DatabaseReference pushId = dbRef.child("foods");
+                    pushId.push().setValue(dataMakanan);
+                    DatabaseReference getId = FirebaseDatabase.getInstance().getReference().child("foods");
+                    getId.addValueEventListener(new ValueEventListener()
                     {
-                      for (DataSnapshot perData : dataSnapshot.getChildren())
+                      @Override
+                      public void onDataChange(@NonNull DataSnapshot dataSnapshot)
                       {
-                        ModelMakanan model = perData.getValue(ModelMakanan.class);
-                        if (model.getNamaMakanan() != null)
+                        for (DataSnapshot perData : dataSnapshot.getChildren())
                         {
-                          if (model.getNamaMakanan().equalsIgnoreCase(strnamaMakanan))
+                          ModelMakanan model = perData.getValue(ModelMakanan.class);
+                          if (model.getNamaMakanan() != null)
                           {
-                            System.out.println(model.getNamaMakanan());
-                            String key = perData.getKey();
-                            pushId.child(key).child("idMakanan").setValue(key);
+                            if (model.getNamaMakanan().equalsIgnoreCase(strnamaMakanan))
+                            {
+                              System.out.println(model.getNamaMakanan());
+                              String key = perData.getKey();
+                              pushId.child(key).child("idMakanan").setValue(key);
+                            }
                           }
                         }
                       }
-                    }
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError)
-                    { }
-                  });
-                  System.out.println(urlDownload + "coba");
+                      @Override
+                      public void onCancelled(@NonNull DatabaseError databaseError) { }
+                    });
+                  }
                 }
-              }
-            });
+              });
+            }
           }
+          else { Log.w(TAG, "Gagal mengambil url admin"); }
         }
-        else
-          { Log.w(TAG, "Gagal mengambil url admin"); }
-      }
-    });
+      });
 
-    batal.setOnClickListener(new View.OnClickListener()
-    {
-      @Override
-      public void onClick(View v)
+      batal.setOnClickListener(new View.OnClickListener()
       {
-        AlertDialog.Builder builder = new AlertDialog.Builder(getApplicationContext());
-        builder.setTitle("ModelMakanan");
-        builder.setMessage("Batal menambahkan admin?");
-        builder.setCancelable(false);
-        builder.setPositiveButton("Ya", new DialogInterface.OnClickListener()
+        @Override
+        public void onClick(View v)
         {
-          @Override
-          public void onClick(DialogInterface dialog, int which)
+          AlertDialog.Builder builder = new AlertDialog.Builder(getApplicationContext());
+          builder.setTitle("ModelMakanan");
+          builder.setMessage("Batal menambahkan admin?");
+          builder.setCancelable(false);
+          builder.setPositiveButton("Ya", new DialogInterface.OnClickListener()
           {
-            dialog.cancel();
-            namaMakanan.setText("");
-            hargaMakanan.setText("");
-            fotoMakanan.setImageResource(R.drawable.bg_img_voucher);
-          }
-        });
+            @Override
+            public void onClick(DialogInterface dialog, int which)
+            {
+              dialog.cancel();
+              namaMakanan.setText("");
+              hargaMakanan.setText("");
+              fotoMakanan.setImageResource(R.drawable.bg_img_voucher);
+            }
+          });
+        }
       }
-    });
+     );
   }
 
   void openFileChooser()

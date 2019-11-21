@@ -55,13 +55,12 @@ public class LihatMenuMinuman extends AppCompatActivity
           foodArrayList.add (Minuman);
         }
         myRecyclerViewAdapter = new AdapterAdminMinuman (foodArrayList, LihatMenuMinuman.this);
-
         myRecyclerView.setAdapter (myRecyclerViewAdapter);
       }
       @Override
-      public void onCancelled (@NonNull DatabaseError databaseError)
+      public void onCancelled (@NonNull DatabaseError databaseError1)
       {
-        System.out.println (databaseError.getDetails()+" "+databaseError.getMessage());
+        System.out.println (databaseError1.getDetails()+" "+databaseError1.getMessage());
       }
     });
 

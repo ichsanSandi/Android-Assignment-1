@@ -14,12 +14,12 @@ import java.util.ArrayList;
 public class AdapterMeja extends RecyclerView.Adapter<AdapterMeja.ViewHolder>
 {
   private ArrayList<Pengguna> foodArrayList;
-  private Context c;
+  private Context context1;
 
-  public AdapterMeja (ArrayList<Pengguna> foodArrayList, Context c)
+  public AdapterMeja (ArrayList<Pengguna> foodArrayList, Context context1)
   {
     this.foodArrayList = foodArrayList;
-    this.c = c;
+    this.context1 = context1;
   }
 
   class ViewHolder extends RecyclerView.ViewHolder
@@ -46,6 +46,5 @@ public class AdapterMeja extends RecyclerView.Adapter<AdapterMeja.ViewHolder>
   }
 
   @Override
-  public int getItemCount ()
-    { return foodArrayList.size (); }
+  public int getItemCount () { return foodArrayList.size (); }
 }

@@ -20,16 +20,15 @@ public class AdapterMakanan extends RecyclerView.Adapter<AdapterMakanan.ViewHold
   private ImageView foto;
   private LinearLayout detail;
   private ArrayList<ModelMakanan> foodArrayList = new ArrayList<>();
-  private Context c;
+  private Context context1;
   private OnItemClickListener listenerDetail;
 
-  public interface OnItemClickListener
-    { void onItemClick (ModelMakanan model); }
+  public interface OnItemClickListener { void onItemClick (ModelMakanan model); }
 
-  public AdapterMakanan (ArrayList<ModelMakanan> foodArrayList, Context c, OnItemClickListener listenerDetail)
+  public AdapterMakanan (ArrayList<ModelMakanan> foodArrayList, Context context1, OnItemClickListener listenerDetail)
   {
     this.foodArrayList = foodArrayList;
-    this.c = c;
+    this.context1 = context1;
     this.listenerDetail = listenerDetail;
   }
 
@@ -49,8 +48,6 @@ public class AdapterMakanan extends RecyclerView.Adapter<AdapterMakanan.ViewHold
     {
       final String name1 = model.getNamaMakanan ();
       final String price1 = model.getHargaMakanan ();
-
-//            Glide.with(context).load(model.getFotoMakanan()).into(foto);
       name.setText (name1);
       price.setText (price1);
       detail.setOnClickListener (new View.OnClickListener ()
@@ -76,6 +73,5 @@ public class AdapterMakanan extends RecyclerView.Adapter<AdapterMakanan.ViewHold
     { viewHolder.bind (foodArrayList.get (position), listenerDetail); }
 
   @Override
-  public int getItemCount ()
-    {	return foodArrayList.size (); }
+  public int getItemCount () { return foodArrayList.size (); }
 }

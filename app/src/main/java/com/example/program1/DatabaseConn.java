@@ -19,9 +19,9 @@ public class DatabaseConn extends Application
     {
       return DriverManager.getConnection (connectionUrl, connectionUsername, connectionPassword);
     }
-    catch (SQLException e)
+    catch (SQLException errorSQL)
     {
-      e.printStackTrace ();
+      errorSQL.printStackTrace ();
     }
     return null;
   }

@@ -12,20 +12,17 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.program1.R;
 import com.example.program1.model.Drink;
 import com.example.program1.view.admin.MemasukanMinuman;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import java.util.ArrayList;
 
 public class AdapterAdminMinuman extends RecyclerView.Adapter<AdapterAdminMinuman.ViewHolder>
 {
   private ArrayList<Drink> foodArrayList;
-  private Context c;
+  private Context context1;
 
-  public AdapterAdminMinuman (ArrayList<Drink> foodArrayList, Context c)
+  public AdapterAdminMinuman (ArrayList<Drink> foodArrayList, Context context1)
   {
     this.foodArrayList = foodArrayList;
-    this.c = c;
+    this.context1 = context1;
   }
 
   class ViewHolder extends RecyclerView.ViewHolder
@@ -52,16 +49,9 @@ public class AdapterAdminMinuman extends RecyclerView.Adapter<AdapterAdminMinuma
 
   public void onBindViewHolder (final ViewHolder viewHolderOperand, final int position)
   {
-    FirebaseAuth auth;
-    auth = FirebaseAuth.getInstance ();
     final String name = foodArrayList.get (position).getName ();
     final String price = String.valueOf (foodArrayList.get (position).getPrice ());
-    final String uid = "";
-    final String emailUser = auth.getCurrentUser ().getEmail ();
     final Button orderButton = viewHolderOperand.orderButton;
-    final DatabaseReference dbRef = FirebaseDatabase.getInstance ().getReference ();
-
-//      viewHolder.orderAmount.setText(orderAmountText);
     viewHolderOperand.name.setText (name);
     viewHolderOperand.price.setText (price);
 
@@ -70,15 +60,14 @@ public class AdapterAdminMinuman extends RecyclerView.Adapter<AdapterAdminMinuma
       @Override
       public void onClick (View v)
       {
-        Intent data = new Intent (c.getApplicationContext (), MemasukanMinuman.class);
+        Intent data = new Intent (context1.getApplicationContext (), MemasukanMinuman.class);
         data.putExtra ("namaMinuman", name);
         data.putExtra ("hargaMinuman", price);
-        c.getApplicationContext ().startActivity (data);
+        context1.getApplicationContext ().startActivity (data);
       }
     });
   }
 
   @Override
-  public int getItemCount ()
-    { return foodArrayList.size (); }
+  public int getItemCount () { return foodArrayList.size (); }
 }

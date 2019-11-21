@@ -45,10 +45,11 @@ public class UpdateFoodsItemTest extends AppCompatActivity
         foodsObject.setName (nameEditText.getText ().toString ());
         foodsObject.setPrice (Integer.valueOf (priceEditText.getText ().toString ()));
 
-        FoodsDatabase foodDb = Room.databaseBuilder (getApplicationContext (), FoodsDatabase.class, "foods-database")
-            .allowMainThreadQueries ()
-            .addMigrations (MIGRATION_1_2)
-            .build ();
+        FoodsDatabase foodDb =
+        Room.databaseBuilder (getApplicationContext (), FoodsDatabase.class, "foods-database")
+        .allowMainThreadQueries ()
+        .addMigrations (MIGRATION_1_2)
+        .build ();
 
         foodDb.FoodsDao ().updateFood (foodsObject);
         Context toastContext = getApplicationContext ();

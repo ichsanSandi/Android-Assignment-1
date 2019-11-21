@@ -19,6 +19,7 @@ public class Foods
   public String priceFood;
 
   public String getUidFood() { return uid; }
+
   public void setUidFood(String uid)
   {
     this.uid = uid;
@@ -28,6 +29,7 @@ public class Foods
   {
     return nameFood;
   }
+
   public void setNameFood(String nameFood)
   {
     this.nameFood = nameFood;
@@ -37,6 +39,7 @@ public class Foods
   {
     return priceFood;
   }
+
   public void setPriceFood(String priceFood)
   {
     this.priceFood = priceFood;

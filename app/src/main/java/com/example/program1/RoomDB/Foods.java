@@ -20,27 +20,19 @@ public class Foods
   @ColumnInfo (name = "foods_server_id")
   private String server_id;
 
-  public void setId (int id)
-    { this.id = id; }
+  public void setId (int id) { this.id = id; }
 
-  public int getId ()
-    { return id; }
+  public int getId () { return id; }
 
-  public void setName (String name)
-    { this.name = name; }
+  public void setName (String name) { this.name = name; }
 
-  public String getName ()
-    { return name; }
+  public String getName () { return name; }
 
-  public void setPrice (int price)
-    { this.price = price; }
+  public void setPrice (int price) { this.price = price; }
 
-  public int getPrice ()
-    { return price; }
+  public int getPrice () { return price; }
 
-  public String getServer_id ()
-    { return server_id; }
+  public String getServer_id () { return server_id; }
 
-  public void setServer_id (String server_id)
-    { this.server_id = server_id; }
+  public void setServer_id (String server_id) { this.server_id = server_id; }
 }

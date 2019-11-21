@@ -26,7 +26,7 @@ public class LihatMenuMakanan extends AppCompatActivity
   RecyclerView.Adapter myRecyclerViewAdapter;
   RecyclerView.LayoutManager myRecyclerViewLayoutMgr;
   ArrayList<Food> foodArrayList;
-  Button but_pesan;
+  Button butPesan;
 
   @Override
   protected void onCreate (@Nullable Bundle savedInstanceState)
@@ -37,7 +37,7 @@ public class LihatMenuMakanan extends AppCompatActivity
     myRecyclerView.setHasFixedSize (true);
     myRecyclerViewLayoutMgr = new LinearLayoutManager (this);
     myRecyclerView.setLayoutManager (myRecyclerViewLayoutMgr);
-    but_pesan = findViewById (R.id.btn_pesan_makanan);
+    butPesan = findViewById (R.id.btn_pesan_makanan);
     databaseReference = FirebaseDatabase.getInstance().getReference();
 
     databaseReference.child ("foods").addValueEventListener (new ValueEventListener()
@@ -55,18 +55,17 @@ public class LihatMenuMakanan extends AppCompatActivity
           foodArrayList.add (makanan);
         }
         myRecyclerViewAdapter = new AdapterAdminMakanan (foodArrayList, LihatMenuMakanan.this);
-
         myRecyclerView.setAdapter (myRecyclerViewAdapter);
       }
 
       @Override
-      public void onCancelled (@NonNull DatabaseError databaseError)
+      public void onCancelled (@NonNull DatabaseError databaseError1)
       {
-        System.out.println (databaseError.getDetails()+" "+databaseError.getMessage());
+        System.out.println (databaseError1.getDetails()+" "+databaseError1.getMessage());
       }
     });
 
-    but_pesan.setOnClickListener (new View.OnClickListener()
+    butPesan.setOnClickListener (new View.OnClickListener()
     {
       @Override
       public void onClick (View v)

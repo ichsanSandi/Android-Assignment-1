@@ -18,7 +18,6 @@ public class HomeAdmin extends AppCompatActivity
   {
     super.onCreate (savedInstanceState);
     setContentView (R.layout.activity_admin);
-
     butMakanan = findViewById (R.id.btn_memasukan_makanan);
     butMinuman = findViewById (R.id.btn_memasukan_minuman);
     butBayar = findViewById (R.id.btn_bayar_pesanan);
@@ -32,6 +31,7 @@ public class HomeAdmin extends AppCompatActivity
         startActivity (new Intent (HomeAdmin.this, LihatMenuMakanan.class));
       }
     });
+
     butMinuman.setOnClickListener (new View.OnClickListener()
     {
       @Override

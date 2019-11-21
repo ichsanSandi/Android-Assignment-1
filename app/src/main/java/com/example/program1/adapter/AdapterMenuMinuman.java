@@ -21,12 +21,12 @@ import java.util.ArrayList;
 public class AdapterMenuMinuman extends RecyclerView.Adapter<AdapterMenuMinuman.ViewHolder>
 {
   private ArrayList<Drink> DrinkArrayList;
-  private Context c;
+  private Context context1;
 
-  public AdapterMenuMinuman (ArrayList<Drink> DrinkArrayList, Context c)
+  public AdapterMenuMinuman (ArrayList<Drink> DrinkArrayList, Context context1)
   {
     this.DrinkArrayList = DrinkArrayList;
-    this.c = c;
+    this.context1 = context1;
   }
 
   class ViewHolder extends RecyclerView.ViewHolder
@@ -65,8 +65,6 @@ public class AdapterMenuMinuman extends RecyclerView.Adapter<AdapterMenuMinuman.
     final String orderAmountText = viewHolder.orderAmount.getText ().toString ();
     final DatabaseReference dbRef = FirebaseDatabase.getInstance ().getReference ();
     System.out.println (emailUser + "email");
-
-//      viewHolder.orderAmount.setText(orderAmountText);
     viewHolder.name.setText (name);
     viewHolder.price.setText (price);
 
@@ -75,7 +73,7 @@ public class AdapterMenuMinuman extends RecyclerView.Adapter<AdapterMenuMinuman.
       @Override
       public void onClick (View v)
       {
-        AlertDialog.Builder alertDialog = new AlertDialog.Builder (c);
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder (context1);
         alertDialog.setMessage ("Total Order: " + (Integer.valueOf (price) * Integer.valueOf (viewHolder.orderAmount.getText ().toString ())) );
         AlertDialog alert11 = alertDialog.create ();
         String jumlah = viewHolder.orderAmount.getText ().toString ();
@@ -88,6 +86,5 @@ public class AdapterMenuMinuman extends RecyclerView.Adapter<AdapterMenuMinuman.
   }
 
   @Override
-  public int getItemCount ()
-    {	return DrinkArrayList.size (); }
+  public int getItemCount () {	return DrinkArrayList.size (); }
 }

@@ -31,7 +31,7 @@ public class konfirmasiMembeliMinuman extends AppCompatActivity
   RecyclerView.Adapter myRecyclerViewAdapter;
   RecyclerView.LayoutManager myRecyclerViewLayoutMgr;
   ArrayList<ModelTransaksiMinuman> drinkArrayList;
-  Button but_pesan;
+  Button butPesan;
 
   @Override
   protected void onCreate (@Nullable Bundle savedInstanceState)
@@ -45,7 +45,7 @@ public class konfirmasiMembeliMinuman extends AppCompatActivity
     myRecyclerView.setHasFixedSize (true);
     myRecyclerViewLayoutMgr = new LinearLayoutManager (this);
     myRecyclerView.setLayoutManager (myRecyclerViewLayoutMgr);
-    but_pesan = findViewById (R.id.btn_beli_minuman);
+    butPesan = findViewById (R.id.btn_beli_minuman);
     databaseReference = FirebaseDatabase.getInstance().getReference();
     databaseReference.child ("transaksiMinuman").addValueEventListener (new ValueEventListener()
     {
@@ -67,7 +67,6 @@ public class konfirmasiMembeliMinuman extends AppCompatActivity
           }
         }
         myRecyclerViewAdapter = new AdapterKonfirmasiTransaksiMinuman (drinkArrayList, konfirmasiMembeliMinuman.this);
-
         myRecyclerView.setAdapter (myRecyclerViewAdapter);
       }
 
@@ -78,7 +77,7 @@ public class konfirmasiMembeliMinuman extends AppCompatActivity
       }
     });
 
-    but_pesan.setOnClickListener (new View.OnClickListener()
+    butPesan.setOnClickListener (new View.OnClickListener()
     {
       @Override
       public void onClick (View v)
@@ -102,18 +101,13 @@ public class konfirmasiMembeliMinuman extends AppCompatActivity
                     System.out.println (model.getNamaMinuman());
                     String key = perData.getKey();
                     pushId.child (key).child ("statusMinuman").setValue ("beli");
-//                                        pushId.child (key).child ("timestamp").setValue (date.);
                   }
                 }
               }
             }
           }
-
           @Override
-          public void onCancelled (@NonNull DatabaseError databaseError)
-          {
-
-          }
+          public void onCancelled (@NonNull DatabaseError databaseError) { }
         });
         startActivity (new Intent (konfirmasiMembeliMinuman.this, HomeKonsumen.class));
       }

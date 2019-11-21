@@ -14,12 +14,12 @@ import java.util.ArrayList;
 public class AdapterKonfirmasiTransaksiMakanan extends RecyclerView.Adapter<AdapterKonfirmasiTransaksiMakanan.ViewHolder>
 {
   private ArrayList<ModelTransaksiMakanan> foodArrayList;
-  private Context c;
+  private Context context1;
 
-  public AdapterKonfirmasiTransaksiMakanan (ArrayList<ModelTransaksiMakanan> foodArrayList, Context c)
+  public AdapterKonfirmasiTransaksiMakanan (ArrayList<ModelTransaksiMakanan> foodArrayList, Context context1)
   {
     this.foodArrayList = foodArrayList;
-    this.c = c;
+    this.context1 = context1;
   }
 
   class ViewHolder extends RecyclerView.ViewHolder
@@ -53,16 +53,12 @@ public class AdapterKonfirmasiTransaksiMakanan extends RecyclerView.Adapter<Adap
     final String jumlah = String.valueOf (foodArrayList.get (position).getJumlahMakanan ());
     int totalMakanan = Integer.valueOf (jumlah) * Integer.valueOf (price);
     final String total = String.valueOf (totalMakanan);
-
     viewHolderOperand.name.setText (name);
     viewHolderOperand.price.setText (price);
     viewHolderOperand.jumlah.setText (jumlah);
     viewHolderOperand.total.setText (total);
-
-    System.out.println("berapa ");
   }
 
   @Override
-  public int getItemCount ()
-    { return foodArrayList.size (); }
+  public int getItemCount () { return foodArrayList.size (); }
 }

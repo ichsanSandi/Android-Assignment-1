@@ -25,6 +25,7 @@ public class User
   {
     this.uid = uid;
   }
+
   public String getFirstName()
   {
     return firstName;
@@ -34,6 +35,7 @@ public class User
   {
     this.firstName = firstName;
   }
+
   public String getLastName()
   {
     return lastName;

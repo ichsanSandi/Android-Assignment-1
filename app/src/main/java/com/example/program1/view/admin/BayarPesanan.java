@@ -23,15 +23,15 @@ import java.util.ArrayList;
 
 public class BayarPesanan extends AppCompatActivity
 {
-  private FirebaseAuth auth;
-  private FirebaseUser user;
-  private DatabaseReference dbRef;
+  FirebaseAuth auth;
+  FirebaseUser user;
+  DatabaseReference dbRef;
   DatabaseReference databaseReference;
   RecyclerView myRecyclerView;
   RecyclerView.Adapter myRecyclerViewAdapter;
   RecyclerView.LayoutManager myRecyclerViewLayoutMgr;
   ArrayList<ModelTransaksiMakanan> foodArrayList;
-  Button but_pesan;
+  Button butPesan;
 
   @Override
   protected void onCreate (@Nullable Bundle savedInstanceState)
@@ -41,12 +41,11 @@ public class BayarPesanan extends AppCompatActivity
     auth = FirebaseAuth.getInstance();
     final String emailUser = auth.getCurrentUser().getEmail();
     dbRef = FirebaseDatabase.getInstance().getReference();
-
     myRecyclerView =  (RecyclerView) findViewById (R.id.transaksi_recyclerView_makanan);
     myRecyclerView.setHasFixedSize (true);
     myRecyclerViewLayoutMgr = new LinearLayoutManager (this);
     myRecyclerView.setLayoutManager (myRecyclerViewLayoutMgr);
-    but_pesan = findViewById (R.id.btn_beli_makanan);
+    butPesan = findViewById (R.id.btn_beli_makanan);
     databaseReference = FirebaseDatabase.getInstance().getReference();
     databaseReference.child ("transaksiMakanan").addValueEventListener (new ValueEventListener()
     {
@@ -55,11 +54,11 @@ public class BayarPesanan extends AppCompatActivity
       {
         foodArrayList = new ArrayList<>();
         System.out.println (dataSnapshot.getChildren());
-        for  (DataSnapshot dataSnapshotIter : dataSnapshot.getChildren())
+        for (DataSnapshot dataSnapshotIter : dataSnapshot.getChildren())
         {
           String user = dataSnapshotIter.getValue (ModelTransaksiMakanan.class).getNamaKonsumen();
           ModelTransaksiMakanan makanan = dataSnapshotIter.getValue (ModelTransaksiMakanan.class);
-          if  (user.equalsIgnoreCase (emailUser))
+          if (user.equalsIgnoreCase (emailUser))
           {
             if ( (dataSnapshotIter.getValue (ModelTransaksiMakanan.class).getNamaKonsumen()).equalsIgnoreCase ("bayar"))
             {
@@ -68,18 +67,17 @@ public class BayarPesanan extends AppCompatActivity
           }
         }
         myRecyclerViewAdapter = new AdapterKonfirmasiTransaksiMakanan (foodArrayList, BayarPesanan.this);
-
         myRecyclerView.setAdapter (myRecyclerViewAdapter);
       }
 
       @Override
-      public void onCancelled (@NonNull DatabaseError databaseError)
+      public void onCancelled (@NonNull DatabaseError databaseError1)
       {
-        System.out.println (databaseError.getDetails()+" "+databaseError.getMessage());
+        System.out.println (databaseError1.getDetails()+" "+databaseError1.getMessage());
       }
     });
 
-    but_pesan.setOnClickListener (new View.OnClickListener()
+    butPesan.setOnClickListener (new View.OnClickListener()
     {
       @Override
       public void onClick (View v)
@@ -108,9 +106,7 @@ public class BayarPesanan extends AppCompatActivity
           }
 
           @Override
-          public void onCancelled (@NonNull DatabaseError databaseError)
-          {  }
-
+          public void onCancelled (@NonNull DatabaseError databaseError) {  }
         });
         startActivity (new Intent (BayarPesanan.this, BayarPesanan.class));
       }

@@ -1,6 +1,5 @@
 package com.example.program1.view;
 
-
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -13,12 +12,10 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.example.program1.R;
 import com.example.program1.Room.Percobaan;
 import com.example.program1.TestActivity;
@@ -58,8 +55,7 @@ public class HalamanMasuk extends AppCompatActivity
     {
       this.getSupportActionBar ().hide ();
     }
-    catch (NullPointerException e)
-      { }
+    catch (NullPointerException errorNullPointerException) { }
 
     setContentView (R.layout.activity_masuk);
     auth = FirebaseAuth.getInstance ();
@@ -99,29 +95,21 @@ public class HalamanMasuk extends AppCompatActivity
         strEmail = email.getText ().toString ();
         strPassword = password.getText ().toString ();
         boolean bolehMasuk = true;
-
         String emailValid = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
-
         if (strEmail.isEmpty ())
         {
           email.requestFocus ();
           bolehMasuk = false;
           email.setError ("Isi terlebih dahulu!");
         }
-        else
-        {
-          bolehMasuk = true;
-        }
+        else { bolehMasuk = true; }
         if (strPassword.isEmpty ())
         {
           password.requestFocus ();
           bolehMasuk = false;
           password.setError ("Isi terlebih dahulu!");
         }
-        else
-        {
-          bolehMasuk = true;
-        }
+        else { bolehMasuk = true; }
 
         if (bolehMasuk)
         {
@@ -154,14 +142,9 @@ public class HalamanMasuk extends AppCompatActivity
                       Log.w (TAG, "Login ERROR : " + databaseError.getDetails ());
                     }
                   });
-
                 }
                 else
                 {
-                  if (cekJaringan ())
-                  {
-
-                  }
                   Toast.makeText (HalamanMasuk.this, "Gagal Masuk", Toast.LENGTH_LONG).show ();
                   Log.w (TAG, "Gagal Masuk: " + task.getException ());
                 }
@@ -230,6 +213,5 @@ public class HalamanMasuk extends AppCompatActivity
     NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo ();
     return activeNetworkInfo != null && activeNetworkInfo.isConnected ();
   }
-
 }
 

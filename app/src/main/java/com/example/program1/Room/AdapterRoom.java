@@ -17,15 +17,14 @@ import java.util.ArrayList;
 
 public class AdapterRoom extends RecyclerView.Adapter<AdapterRoom.ViewHolder>
 {
-
   LayoutInflater mInflator;
   ArrayList<Foods> foodArrayList = new ArrayList<>();
-  Context c;
+  Context context1;
 
-  public AdapterRoom(ArrayList<Foods> foodArrayList, Context c)
+  public AdapterRoom(ArrayList<Foods> foodArrayList, Context context1)
   {
     this.foodArrayList = foodArrayList;
-    this.c = c;
+    this.context1 = context1;
   }
 
   class ViewHolder extends RecyclerView.ViewHolder
@@ -59,10 +58,8 @@ public class AdapterRoom extends RecyclerView.Adapter<AdapterRoom.ViewHolder>
     final String uid = foodArrayList.get(position).getUidFood();
     final String name1 = foodArrayList.get(position).getNameFood();
     final String name2 = foodArrayList.get(position).getPriceFood();
-
     final Button ubahBut = viewHolder.ubahBut;
     final Button hapusBut = viewHolder.hapusBut;
-
     viewHolder.id.setText(String.valueOf(uid));
     viewHolder.name.setText(name1);
     viewHolder.price.setText(name2);
@@ -72,13 +69,14 @@ public class AdapterRoom extends RecyclerView.Adapter<AdapterRoom.ViewHolder>
       @Override
       public void onClick(View v)
       {
-        Intent data = new Intent(c.getApplicationContext(), RoomUpdateDataUser.class);
+        Intent data = new Intent(context1.getApplicationContext(), RoomUpdateDataUser.class);
         data.putExtra("id", String.valueOf(uid));
         data.putExtra("firstName", name1);
         data.putExtra("lastName", name2);
-        c.getApplicationContext().startActivity(data);
+        context1.getApplicationContext().startActivity(data);
       }
     });
+
     hapusBut.setOnClickListener(new View.OnClickListener()
     {
       @Override
@@ -88,9 +86,8 @@ public class AdapterRoom extends RecyclerView.Adapter<AdapterRoom.ViewHolder>
         Foods user = new Foods();
         user.setUidFood(id);
         RoomReadDataUser.AppDatabase.foodDao().delete(user);
-
-        Intent data = new Intent(c.getApplicationContext(), RoomReadDataUser.class);
-        c.getApplicationContext().startActivity(data);
+        Intent data = new Intent(context1.getApplicationContext(), RoomReadDataUser.class);
+        context1.getApplicationContext().startActivity(data);
       }
     });
   }
@@ -100,5 +97,4 @@ public class AdapterRoom extends RecyclerView.Adapter<AdapterRoom.ViewHolder>
   {
     return foodArrayList.size();
   }
-
 }

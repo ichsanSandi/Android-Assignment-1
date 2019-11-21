@@ -22,17 +22,14 @@ public class Foreground extends AppCompatActivity
   {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_foreground);
-
     editTextInput = findViewById(R.id.edit_text_input);
   }
 
   public void startService(View v)
   {
     String input = editTextInput.getText().toString();
-
     Intent serviceIntent = new Intent(this, ExampleService.class);
     serviceIntent.putExtra("inputExtra", input);
-
     ContextCompat.startForegroundService(this, serviceIntent);
   }
 

@@ -14,8 +14,7 @@ public class ModelTransaksiMinuman
 	private String statusMinuman;
 	private int timestamp;
 	
-	public ModelTransaksiMinuman ()
-		{ }
+	public ModelTransaksiMinuman () { }
 	
 	public ModelTransaksiMinuman (String idTransaksiMinuman, String namaMinuman, String hargaMinuman, String namaKonsumen, String jumlahMinuman, String statusMinuman, int timestamp)
 	{
@@ -28,51 +27,35 @@ public class ModelTransaksiMinuman
 		this.timestamp = timestamp;
 	}
 	
-	public String getIdTransaksiMinuman ()
-		{ return idTransaksiMinuman; }
+	public String getIdTransaksiMinuman () { return idTransaksiMinuman; }
 	
-	public void setIdTransaksiMinuman (String idTransaksiMinuman)
-		{ this.idTransaksiMinuman = idTransaksiMinuman; }
+	public void setIdTransaksiMinuman (String idTransaksiMinuman) { this.idTransaksiMinuman = idTransaksiMinuman; }
 	
-	public String getNamaMinuman ()
-		{ return namaMinuman; }
+	public String getNamaMinuman () { return namaMinuman; }
 	
-	public void setNamaMinuman (String namaMinuman)
-		{ this.namaMinuman = namaMinuman; }
+	public void setNamaMinuman (String namaMinuman) { this.namaMinuman = namaMinuman; }
 		
-	public String getHargaMinuman ()
-		{ return hargaMinuman; }
+	public String getHargaMinuman () { return hargaMinuman; }
 	
-	public void setHargaMinuman (String hargaMinuman)
-		{ this.hargaMinuman = hargaMinuman; }
+	public void setHargaMinuman (String hargaMinuman) { this.hargaMinuman = hargaMinuman; }
 	
-	public String getNamaKonsumen ()
-		{ return namaKonsumen; }
+	public String getNamaKonsumen () { return namaKonsumen; }
 	
-	public void setNamaKonsumen (String namaKonsumen)
-		{ this.namaKonsumen = namaKonsumen; }
+	public void setNamaKonsumen (String namaKonsumen) { this.namaKonsumen = namaKonsumen; }
 	
-	public String getJumlahMinuman ()
-		{ return jumlahMinuman; }
+	public String getJumlahMinuman () { return jumlahMinuman; }
 	
-	public void setJumlahMinuman (String jumlahMinuman)
-		{ this.jumlahMinuman = jumlahMinuman; }
+	public void setJumlahMinuman (String jumlahMinuman) { this.jumlahMinuman = jumlahMinuman; }
 		
-	public String getStatusMinuman ()
-		{ return statusMinuman; }
+	public String getStatusMinuman () { return statusMinuman; }
 	
-	public void setStatusMinuman (String statusMinuman)
-		{ this.statusMinuman = statusMinuman; }
+	public void setStatusMinuman (String statusMinuman) { this.statusMinuman = statusMinuman; }
 	
-	public void setKey (String key)
-		{ this.key = key; }
+	public void setKey (String key) { this.key = key; }
 	
-	public int getTimestamp ()
-		{ return timestamp; }
+	public int getTimestamp () { return timestamp; }
 	
-	public void setTimestamp (int timestamp)
-		{ this.timestamp = timestamp; }
+	public void setTimestamp (int timestamp) { this.timestamp = timestamp; }
 	
-	public String getKey ()
-		{ return key; }
+	public String getKey () { return key; }
 }

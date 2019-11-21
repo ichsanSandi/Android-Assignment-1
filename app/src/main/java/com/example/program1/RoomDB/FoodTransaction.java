@@ -5,12 +5,24 @@ import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
 
-@Entity (foreignKeys = {@ForeignKey(entity = User.class,
-        parentColumns = "user_id",
-        childColumns = "foodTransaction_user_id"),
-        @ForeignKey (entity = Foods.class,
-                parentColumns = "foods_id",
-                childColumns = "foodTransaction_food_id")})
+@Entity
+ (
+  foreignKeys =
+  {
+    @ForeignKey
+     (
+      entity = User.class,
+      parentColumns = "user_id",
+      childColumns = "foodTransaction_user_id"
+     ),
+    @ForeignKey
+     (
+       entity = Foods.class,
+       parentColumns = "foods_id",
+       childColumns = "foodTransaction_food_id"
+     )
+  }
+ )
 
 public class FoodTransaction
 {

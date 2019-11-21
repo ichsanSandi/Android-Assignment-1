@@ -53,14 +53,13 @@ public class MembeliMinuman extends AppCompatActivity
           drinkArrayList.add (minuman);
         }
         myRecyclerViewAdapter = new AdapterMenuMinuman (drinkArrayList, MembeliMinuman.this);
-
         myRecyclerView.setAdapter (myRecyclerViewAdapter);
       }
 
       @Override
-      public void onCancelled (@NonNull DatabaseError databaseError)
+      public void onCancelled (@NonNull DatabaseError databaseError1)
       {
-        System.out.println (databaseError.getDetails() + " " + databaseError.getMessage());
+        System.out.println (databaseError1.getDetails() + " " + databaseError1.getMessage());
       }
     });
 

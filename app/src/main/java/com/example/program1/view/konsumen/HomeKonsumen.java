@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.program1.R;
 import com.example.program1.adapter.AdapterKonfirmasiTransaksiMakanan;
 import com.example.program1.model.ModelTransaksiMakanan;
-import com.example.program1.model.ModelTransaksiMinuman;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -25,17 +24,13 @@ import java.util.ArrayList;
 public class HomeKonsumen extends AppCompatActivity
 {
   Button butMakanan, butMinuman;
-  FragmentManager fm;
   FirebaseAuth auth;
-  FirebaseUser user;
   DatabaseReference dbRef;
-
   DatabaseReference databaseReference;
   RecyclerView myRecyclerView;
   RecyclerView.Adapter myRecyclerViewAdapter;
   RecyclerView.LayoutManager myRecyclerViewLayoutMgr;
   ArrayList<ModelTransaksiMakanan> foodArrayList = new ArrayList<>();
-  ArrayList<ModelTransaksiMinuman> drinkArrayList = new ArrayList<>();
 
   @Override
   protected void onCreate (Bundle savedInstanceState)
@@ -90,14 +85,13 @@ public class HomeKonsumen extends AppCompatActivity
           }
         }
         myRecyclerViewAdapter = new AdapterKonfirmasiTransaksiMakanan (foodArrayList, HomeKonsumen.this);
-
         myRecyclerView.setAdapter (myRecyclerViewAdapter);
       }
 
       @Override
-      public void onCancelled (@NonNull DatabaseError databaseError)
+      public void onCancelled (@NonNull DatabaseError databaseError1)
       {
-        System.out.println (databaseError.getDetails()+" "+databaseError.getMessage());
+        System.out.println (databaseError1.getDetails()+" "+databaseError1.getMessage());
       }
     });
   }

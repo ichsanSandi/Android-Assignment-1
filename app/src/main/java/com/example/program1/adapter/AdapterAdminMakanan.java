@@ -12,9 +12,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.program1.model.Food;
 import com.example.program1.R;
 import com.example.program1.view.admin.MemasukanMakanan;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import java.util.ArrayList;
 
 public class AdapterAdminMakanan extends RecyclerView.Adapter<AdapterAdminMakanan.ViewHolder>
@@ -32,9 +29,6 @@ public class AdapterAdminMakanan extends RecyclerView.Adapter<AdapterAdminMakana
   {
     TextView name;
     TextView price;
-    String uid;
-    String emailUser;
-    String harga;
     Button orderButton;
 
     ViewHolder (@NonNull View itemView)
@@ -55,15 +49,9 @@ public class AdapterAdminMakanan extends RecyclerView.Adapter<AdapterAdminMakana
 
   public void onBindViewHolder (final ViewHolder viewHolderOperand, final int position)
   {
-    FirebaseAuth auth;
-    auth = FirebaseAuth.getInstance ();
     final String name = foodArrayList.get (position).getName ();
     final String price = String.valueOf (foodArrayList.get (position).getPrice ());
-    final String uid = "";
-    final String emailUser = auth.getCurrentUser ().getEmail ();
     final Button orderButton = viewHolderOperand.orderButton;
-    final DatabaseReference dbRef = FirebaseDatabase.getInstance ().getReference ();
-
     viewHolderOperand.name.setText (name);
     viewHolderOperand.price.setText (price);
 
@@ -81,6 +69,5 @@ public class AdapterAdminMakanan extends RecyclerView.Adapter<AdapterAdminMakana
   }
 
   @Override
-  public int getItemCount ()
-    { return foodArrayList.size (); }
+  public int getItemCount () { return foodArrayList.size (); }
 }
