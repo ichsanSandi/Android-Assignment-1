@@ -82,6 +82,13 @@ public class TestActivity extends AppCompatActivity
     });
   }
 
+  @Override
+  protected void onRestart()
+  {
+    super.onRestart();
+
+  }
+
   private void startService ()
   {
     Intent foregroundServiceIntent = new Intent (TestActivity.this, ForegroundService.class);

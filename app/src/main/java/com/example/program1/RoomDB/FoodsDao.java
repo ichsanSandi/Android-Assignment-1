@@ -16,8 +16,14 @@ public interface FoodsDao
   @Query("SELECT foods_server_id FROM Foods")
   List<String> getFoodsServer_id ();
 
+  @Query("SELECT foods_id FROM Foods")
+  List<Integer> getFoods_id ();
+
   @Query("SELECT * FROM Foods WHERE foods_server_id IS null")
-  List<Foods> getUnsyncObject();
+  List<Foods> getLocalUnsyncObject ();
+
+  @Query("SELECT * FROM Foods WHERE foods_id IS NULL")
+  List<Foods> getServerUnsyncObject ();
 
   @Insert
   void insertFood (Foods foods);

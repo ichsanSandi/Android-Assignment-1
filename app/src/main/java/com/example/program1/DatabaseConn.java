@@ -13,7 +13,7 @@ public class DatabaseConn extends Application
   {
     String connectionUrl = "jdbc:postgresql://10.0.30.53:5432/";
     String connectionUsername = "db_exploration";
-    String connectionPassword = "123456";
+    String connectionPassword = "";
     
     try
     {

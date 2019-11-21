@@ -18,6 +18,7 @@ import com.example.program1.RoomDB.Foods;
 import com.example.program1.RoomDB.FoodsDatabase;
 import com.example.program1.view.HalamanMasuk;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -35,8 +36,13 @@ public class ForegroundService extends Service
   List<String> foodsServer_idList;
   ArrayList<String> foodsServer_idArrayList;
 
-  List<Foods> foodsUnsyncDataList;
-  ArrayList<Foods> foodsUnsyncDataArrayList;
+  List<Foods> foodsLocalUnsyncDataList;
+  ArrayList<Foods> foodsLocalUnsyncDataArrayList;
+
+  List<Integer> foods_idList;
+  ArrayList<Integer> foods_idListArrayList;
+
+  Thread syncThread;
 
   @Override
   public void onCreate ()
@@ -60,7 +66,7 @@ public class ForegroundService extends Service
 
     Toast.makeText (this, "Notification Service started by user.", Toast.LENGTH_LONG).show ();
 
-  new Thread
+  syncThread = new Thread
    (
     new Runnable ()
     {
@@ -91,37 +97,82 @@ public class ForegroundService extends Service
         }
         try
         {
+          foods_idList = foodsDatabase1.FoodsDao ().getFoods_id ();
+          foods_idListArrayList = new ArrayList<>(foods_idList);
+
+          foodsLocalUnsyncDataList = foodsDatabase1.FoodsDao ().getLocalUnsyncObject ();
+          foodsLocalUnsyncDataArrayList = new ArrayList<> (foodsLocalUnsyncDataList);
+
+          for (int i = 0; i < foodsLocalUnsyncDataArrayList.size();i++)
+          {
+            System.out.println(foodsLocalUnsyncDataArrayList.get(i).getServer_id());
+            System.out.println(foodsLocalUnsyncDataArrayList.get(i).getId());
+          }
+
+          PreparedStatement statement2 = dbConn.connection1 ().prepareStatement ("INSERT INTO Foods(\n" +
+                  "\t name, price, id)\n" +
+                  "\tVALUES (?, ?, ?);");
+          for (int i = 0; i < foodsLocalUnsyncDataArrayList.size(); i++)
+          {
+            if (foodsLocalUnsyncDataArrayList.get(i).getServer_id() == null)
+            {
+              statement2.setString (1, foodsLocalUnsyncDataArrayList.get (i).getName ());
+              statement2.setInt (2, foodsLocalUnsyncDataArrayList.get (i).getPrice ());
+              statement2.setString (3, String.valueOf(foodsLocalUnsyncDataList.get(i).getId ()));
+              statement2.addBatch ();
+            }
+            statement2.executeBatch ();
+          }
+          statement2.close ();
+
           foodsServer_idList = foodsDatabase1.FoodsDao ().getFoodsServer_id ();
           foodsServer_idArrayList = new ArrayList<> (foodsServer_idList);
           Statement statement1 = dbConn.connection1().createStatement ();
-          ResultSet cursor = statement1.executeQuery ("Select * from foods");
-          while (cursor.next ())
+          ResultSet cursor1 = statement1.executeQuery ("Select * from foods");
+          while (cursor1.next ())
           {
-            if (!foodsServer_idArrayList.contains(cursor.getString(1)))
+            if (!foodsServer_idArrayList.contains(cursor1.getString(1)))
             {
               Foods foodsObject = new Foods ();
-              foodsObject.setServer_id(cursor.getString(1));
-              foodsObject.setPrice (Integer.valueOf (cursor.getString(3)));
-              foodsObject.setName (cursor.getString (2));
+              foodsObject.setServer_id(cursor1.getString(1));
+              foodsObject.setPrice (Integer.valueOf (cursor1.getString(3)));
+              foodsObject.setName (cursor1.getString (2));
               foodsDatabase1.FoodsDao ().insertFood (foodsObject);
             }
           }
-          foodsUnsyncDataList = foodsDatabase1.FoodsDao ().getUnsyncObject ();
-          foodsUnsyncDataArrayList = new ArrayList<>(foodsUnsyncDataList);
-          Statement statement2 = dbConn.connection1 ().createStatement ();
+          statement1.close ();
+          for (int i = 0; i < foodsLocalUnsyncDataArrayList.size();i++)
+          {
+            PreparedStatement statement3 = dbConn.connection1 (). prepareStatement ("SELECT server_id FROM foods " +
+                    "WHERE id = (?)");
+            statement3.setString (1, String.valueOf(foodsLocalUnsyncDataArrayList.get (i).getId ()));
+            ResultSet cursor2 = statement3.executeQuery();
+            while (cursor2.next())
+            {
+              foodsLocalUnsyncDataArrayList.get(i).setServer_id(cursor2.getString(1));
+              foodsDatabase1.FoodsDao ().updateFood (foodsLocalUnsyncDataArrayList.get(i));
+            }
+            System.out.println(foodsLocalUnsyncDataArrayList.get(i).getServer_id());
+            System.out.println(foodsLocalUnsyncDataArrayList.get(i).getId());
+            statement3.close ();
+          }
         }
         catch (SQLException errorSQL)
         { errorSQL.printStackTrace (); }
       }
     }
-   ).start ();
+   );
+  syncThread.start();
     startForeground ( 1, foregroundNotification);
     return START_STICKY;
   }
 
   @Override
   public void onDestroy ()
-    { super.onDestroy (); }
+    { 
+      super.onDestroy ();
+      syncThread.interrupt();
+    }
 
   @Override
   public IBinder onBind (Intent intent)

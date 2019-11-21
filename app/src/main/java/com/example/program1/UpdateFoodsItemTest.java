@@ -32,7 +32,7 @@ public class UpdateFoodsItemTest extends AppCompatActivity
     updtBttn = (Button) findViewById (R.id.UpdateConfirmButton);
 
     nameEditText.setText (getIntent ().getStringExtra("name"));
-    priceEditText.setHint (getIntent ().getStringExtra ("price"));
+    priceEditText.setText (getIntent ().getStringExtra ("price"));
 
     updtBttn.setOnClickListener (new View.OnClickListener ()
     {
@@ -61,6 +61,8 @@ public class UpdateFoodsItemTest extends AppCompatActivity
 
         Intent returnIntent = new Intent (UpdateFoodsItemTest.this, TestActivity.class);
         startActivity (returnIntent);
+
+        finish();
       }
     });
   }
@@ -69,5 +71,6 @@ public class UpdateFoodsItemTest extends AppCompatActivity
   {
     Intent returnIntent = new Intent (UpdateFoodsItemTest.this, TestActivity.class);
     startActivity (returnIntent);
+    finish();
   }
 }

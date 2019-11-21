@@ -7,9 +7,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.room.Room;
+
 import com.example.program1.RoomDB.Foods;
 import com.example.program1.RoomDB.FoodsDatabase;
 
@@ -51,16 +53,19 @@ public class AddFoodsItemTest extends AppCompatActivity
         int duration = Toast.LENGTH_LONG;
         Toast toast = Toast.makeText (context1, appearedToastText, duration);
         toast.show ();
+
         Intent returnIntent = new Intent (AddFoodsItemTest.this, TestActivity.class);
         startActivity (returnIntent);
+        finish();
       }
     });
   }
 
   @Override
-  public void onBackPressed ()
+  public void onBackPressed()
   {
-    Intent returnIntent = new Intent (AddFoodsItemTest.this, TestActivity.class);
+    Intent returnIntent = new Intent(AddFoodsItemTest.this, TestActivity.class);
     startActivity (returnIntent);
+    finish();
   }
 }

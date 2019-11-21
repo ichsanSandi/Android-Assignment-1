@@ -61,11 +61,12 @@ public class AdapterItemTestView extends RecyclerView.Adapter<AdapterItemTestVie
 
   public void onBindViewHolder (@NonNull final AdapterItemTestView.ViewHolder holder, final int position)
   {
-    final String id = String.valueOf (foodsList.get (position).getId ());
+    final String server_id = foodsList.get (position).getServer_id ();
+    final String id = String.valueOf(foodsList.get (position).getId ());
     final String price = String.valueOf (foodsList.get (position).getPrice ());
     final String name = foodsList.get (position).getName ();
     holder.price.setText (price);
-    holder.id.setText (id);
+    holder.id.setText (server_id);
     holder.name.setText (name);
     Button delBtn = holder.deleteBttn;
     
