@@ -7,6 +7,7 @@ import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Intent;
 import android.os.Build;
+import android.os.Handler;
 import android.os.IBinder;
 import android.util.Log;
 import android.widget.Toast;
@@ -66,6 +67,7 @@ public class ForegroundService extends Service
 
     Toast.makeText (this, "Notification Service started by user.", Toast.LENGTH_LONG).show ();
 
+    final Handler handler1;
   syncThread = new Thread
    (
     new Runnable ()
@@ -85,7 +87,7 @@ public class ForegroundService extends Service
          .allowMainThreadQueries ()
          .build ();
 
-        for (int i = 0; i < 3; i++)
+        for (int i = 0; i < 4; i++)
         {
           try
           {
@@ -162,7 +164,7 @@ public class ForegroundService extends Service
       }
     }
    );
-  syncThread.start();
+    syncThread.start();
     startForeground ( 1, foregroundNotification);
     return START_STICKY;
   }
@@ -171,7 +173,6 @@ public class ForegroundService extends Service
   public void onDestroy ()
     { 
       super.onDestroy ();
-      syncThread.interrupt();
     }
 
   @Override

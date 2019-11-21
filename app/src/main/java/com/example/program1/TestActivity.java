@@ -22,13 +22,13 @@ import static com.example.program1.RoomDB.FoodsDatabase.MIGRATION_1_2;
 public class TestActivity extends AppCompatActivity
 {
   RecyclerView foodsRecyclerView;
-  RecyclerView.Adapter foodsRecyclerViewAdapter;
+  public static RecyclerView.Adapter foodsRecyclerViewAdapter;
   RecyclerView.LayoutManager foodsRecyclerViewLayoutMgr;
   Button backBttn;
   Button startServiceBttn;
   FloatingActionButton addBttn;
   List<Foods> foodsList;
-  ArrayList<Foods> foodsArrayList;
+  public static ArrayList<Foods> foodsArrayList;
 
   @Override
   protected void onCreate (@Nullable Bundle savedInstanceState)
