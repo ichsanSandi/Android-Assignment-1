@@ -8,13 +8,19 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.program1.DatabaseConn;
 import com.example.program1.R;
 import com.example.program1.RoomDB.Foods;
 import com.example.program1.RoomDB.FoodsDatabase;
 import com.example.program1.UpdateFoodsItemTest;
+
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class AdapterItemTestView extends RecyclerView.Adapter<AdapterItemTestView.ViewHolder>
@@ -83,10 +89,28 @@ public class AdapterItemTestView extends RecyclerView.Adapter<AdapterItemTestVie
           @Override
           public void onClick (DialogInterface dialog, int which)
           {
+            final String id = String.valueOf(foodsList.get(position).getId());
             foodsDatabase.FoodsDao ().deleteFood (foodsList.get (position));
             foodsList.remove (position);
             AdapterItemTestView.this.notifyItemRemoved (position);
             AdapterItemTestView.this.notifyDataSetChanged ();
+            new Thread(new Runnable() {
+              @Override
+              public void run()
+              {
+                DatabaseConn dbConn = new DatabaseConn();
+                try {
+                  PreparedStatement statement1 = dbConn.connection1().prepareStatement("DELETE FROM foods" +
+                          "WHERE id = (?)");
+                  statement1.setString(1, id);
+                  statement1.executeQuery();
+                  statement1.close();
+                  dbConn.connection1().close();
+                } catch (SQLException e) {
+                  e.printStackTrace();
+                }
+              }
+            }).start();
           }
         });
         builder.setNegativeButton ("Tidak", new DialogInterface.OnClickListener ()
@@ -108,11 +132,12 @@ public class AdapterItemTestView extends RecyclerView.Adapter<AdapterItemTestVie
       @Override
       public void onClick (View v)
       {
-        Intent foodObj = new Intent (context1.getApplicationContext (), UpdateFoodsItemTest.class);
-        foodObj.putExtra ("id", id);
-        foodObj.putExtra ("name", name);
-        foodObj.putExtra ("price", price);
-        context1.startActivity (foodObj);
+        Intent foodIntent = new Intent (context1.getApplicationContext (), UpdateFoodsItemTest.class);
+        foodIntent.putExtra ("id", id);
+        foodIntent.putExtra ("name", name);
+        foodIntent.putExtra ("price", price);
+        foodIntent.putExtra("server_id", server_id);
+        context1.startActivity (foodIntent);
         AdapterItemTestView.this.notifyItemChanged (position);
       }
     });
